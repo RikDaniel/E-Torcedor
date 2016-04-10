@@ -28,12 +28,11 @@ public class Jogo implements Serializable {
 	private Estadio estadio;
 
 	public Jogo() {
-		super();
+		
 	}
 
 	public Jogo(Long id, List<Time> times, Date data, int ingrecos_quantidade, int ingrecos_vendidos,
 			List<Ingreco> ingrecos, Estadio estadio) {
-		super();
 		this.id = id;
 		this.times = times;
 		this.data = data;
@@ -164,5 +163,4 @@ public class Jogo implements Serializable {
 		return "Jogo [id=" + id + ", times=" + times + ", data=" + data + ", ingrecos_quantidade=" + ingrecos_quantidade
 				+ ", ingrecos_vendidos=" + ingrecos_vendidos + ", ingrecos=" + ingrecos + ", estadio=" + estadio + "]";
 	}
-
 }

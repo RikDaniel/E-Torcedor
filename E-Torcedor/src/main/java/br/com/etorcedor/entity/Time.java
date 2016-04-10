@@ -24,11 +24,11 @@ public class Time implements Serializable{
 	private List<Jogo> jogos;
 	
 	public Time() {
-		super();
+		
 	}
 	
 	public Time(Long id, String nome, List<Torcida> torcidas, List<Jogo> jogos) {
-		super();
+		
 		this.id = id;
 		this.nome = nome;
 		this.torcidas = torcidas;
@@ -117,8 +117,5 @@ public class Time implements Serializable{
 	@Override
 	public String toString() {
 		return "Time [id=" + id + ", nome=" + nome + ", torcidas=" + torcidas + ", jogos=" + jogos + "]";
-	}
-	
-	
-	
+	}	
 }

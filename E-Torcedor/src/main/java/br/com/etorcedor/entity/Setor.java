@@ -24,11 +24,11 @@ public class Setor implements Serializable {
 	private List<Ingreco> ingrecos;
 
 	public Setor() {
-		super();
+		
 	}
 
 	public Setor(Long id, String nome, List<Integer> numero_cadeiras, Estadio estadio) {
-		super();
+		
 		this.id = id;
 		this.nome = nome;
 		this.numero_cadeiras = numero_cadeiras;
@@ -127,7 +127,4 @@ public class Setor implements Serializable {
 		return "Setor [id=" + id + ", nome=" + nome + ", numero_cadeiras=" + numero_cadeiras + ", estadio=" + estadio
 				+ "]";
 	}
-
-	
-
 }

@@ -31,12 +31,11 @@ public class Usuario implements Serializable{
 	private List<Ingreco> ingrecos;
 	
 	public Usuario() {
-		super();
+		
 	}
 
 	public Usuario(Long id, String cpf, String nome, Byte imagem, String genero, String telefone, String email,
 			Date data_nascimento, Torcida torcida, Time clube, List<Ingreco> ingrecos) {
-		super();
 		this.id = id;
 		this.cpf = cpf;
 		this.nome = nome;
@@ -236,8 +235,5 @@ public class Usuario implements Serializable{
 		return "Usuario [id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", imagem=" + imagem + ", genero=" + genero
 				+ ", telefone=" + telefone + ", email=" + email + ", data_nascimento=" + data_nascimento + ", torcida="
 				+ torcida + ", clube=" + clube + ", ingrecos=" + ingrecos + "]";
-	}
-	
-	
-	
+	}	
 }

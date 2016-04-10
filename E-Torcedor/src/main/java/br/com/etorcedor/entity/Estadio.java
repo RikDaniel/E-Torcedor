@@ -21,11 +21,10 @@ public class Estadio implements Serializable{
 	private List<Setor> setores;
 	
 	public Estadio() {
-		super();
+		
 	}
 
 	public Estadio(Long id, List<Jogo> jogos, List<Setor> setores) {
-		super();
 		this.id = id;
 		this.jogos = jogos;
 		this.setores = setores;
@@ -105,8 +104,4 @@ public class Estadio implements Serializable{
 	public String toString() {
 		return "Estadio [id=" + id + ", jogos=" + jogos + ", setores=" + setores + "]";
 	}
-	
-		
-	
-	
 }

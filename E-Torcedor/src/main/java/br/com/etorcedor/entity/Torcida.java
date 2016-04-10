@@ -24,11 +24,10 @@ public class Torcida implements Serializable{
 	private List<Usuario> torcedores;
 	
 	public Torcida() {
-		super();
+		
 	}
 	
 	public Torcida(Long id, int socios, String nome, Time time, List<Usuario> torcedores) {
-		super();
 		this.id = id;
 		this.socios = socios;
 		this.nome = nome;
@@ -135,7 +134,4 @@ public class Torcida implements Serializable{
 		return "Torcida [id=" + id + ", socios=" + socios + ", nome=" + nome + ", time=" + time + ", torcedores="
 				+ torcedores + "]";
 	}
-	
-
-	
 }
