@@ -33,9 +33,23 @@ public interface RepositorioUsuario extends CrudRepository<Usuario, Long> {
 	 * Procura todos os usuarios pelo seu nome, 
 	 * ordenando de forma ascendente.
 	 * @param nome
-	 * @return Uma coleção do tipo List<Usuario>
+	 * @return Uma coleção do tipo List de Usuario
 	 */
 	public List<Usuario> findByNomeOrderByNomeAsc(String nome);
+	
+	/**
+	 * Recupera uma lista de usuario contendo um nome.
+	 * @param nome
+	 * @return Uma coleção do tipo List de Usuario
+	 */
+	public List<Usuario> findByNomeContaining(String nome);
+	
+	/**
+	 * Recupera uma lista de usuario iniciado com um nome.
+	 * @param nome
+	 * @return Uma coleção do tipo List de Usuario
+	 */
+	public List<Usuario> findByNomeStartingWith(String nome);
 	
 	/**
 	 * 
@@ -43,7 +57,7 @@ public interface RepositorioUsuario extends CrudRepository<Usuario, Long> {
 	 * ordenando de forma ascendente, 
 	 * utilizando o nome como critério.
 	 * @param clube
-	 * @return Uma coleção do tipo List<Usuario>
+	 * @return Uma coleção do tipo List de Usuario
 	 */
 	public List<Usuario> findByClubeOrderByNomeAsc(Time clube);
 	
@@ -52,7 +66,7 @@ public interface RepositorioUsuario extends CrudRepository<Usuario, Long> {
 	 * Procura todos os usuarios que estejam em uma Torcida,
 	 * ordenando de forma ascendente, utilizando o nome como critério.
 	 * @param torcida
-	 * @return Uma coleção do tipo List<Usuario>
+	 * @return Uma coleção do tipo List de Usuario
 	 */
 	public List<Usuario> findByTorcidaOrderByNomeAsc(Torcida torcida );
 	
