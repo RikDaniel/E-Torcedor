@@ -12,7 +12,7 @@ import java.util.Date;
  * @author layon
  *
  */
-public interface RepositorioIngreco extends CrudRepository<Ingresso, Long>{
+public interface RepositorioIngresso extends CrudRepository<Ingresso, Long>{
 
 	/**
 	 * Recupera todos os ingressos de um determinado jogo.
