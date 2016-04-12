@@ -12,6 +12,8 @@ import br.com.etorcedor.exception.JogoInexistenteException;
 
 public interface ServiceJogo {
 	
+	
+	//JOGO
 	public void  adicionarJogo(Jogo j)throws JogoExistenteException;
 	public void atualizarJogo(Jogo j)throws JogoInexistenteException;
 	public void removerJogo(Jogo j)throws JogoInexistenteException;
@@ -19,6 +21,7 @@ public interface ServiceJogo {
 	public List<Jogo> buscarJogoNomeTime(String nomeTime);
 	public List<Jogo> buscarJogoData(Date data);
 	
+	//INGRESSO
 	public void adicionarIngreco(Ingresso i) throws IngrecoExistenteException;
 	public void atualizarIngreco(Ingresso i) throws IngrecoInexistenteException;
 	public void removerIngreco(Long i) throws IngrecoInexistenteException;
