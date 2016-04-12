@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Ingreco implements Serializable {
+public class Ingresso implements Serializable {
 
 	/**
 	 * 
@@ -21,22 +21,22 @@ public class Ingreco implements Serializable {
 	private Long id;
 	private Date data;
 	private Jogo jogo;
-	private int numero_acento;
-	private float valor_ingreco;
+	private int numeroAcento;
+	private float valorIngreco;
 	private Usuario usuario;
 	private Setor setor;
 
-	public Ingreco() {
+	public Ingresso() {
 		
 	}
 
-	public Ingreco(Long id, Date data, Jogo jogo, int numero_acento, float valor_ingreco, Usuario usuario,
+	public Ingresso(Long id, Date data, Jogo jogo, int numero_acento, float valor_ingreco, Usuario usuario,
 			Setor setor) {
 		this.id = id;
 		this.data = data;
 		this.jogo = jogo;
-		this.numero_acento = numero_acento;
-		this.valor_ingreco = valor_ingreco;
+		this.numeroAcento = numero_acento;
+		this.valorIngreco = valor_ingreco;
 		this.usuario = usuario;
 		this.setSetor(setor);
 	}
@@ -69,19 +69,19 @@ public class Ingreco implements Serializable {
 	}
 
 	public int getNumero_acento() {
-		return numero_acento;
+		return numeroAcento;
 	}
 
 	public void setNumero_acento(int numero_acento) {
-		this.numero_acento = numero_acento;
+		this.numeroAcento = numero_acento;
 	}
 
 	public float getValor_ingreco() {
-		return valor_ingreco;
+		return valorIngreco;
 	}
 
 	public void setValor_ingreco(float valor_ingreco) {
-		this.valor_ingreco = valor_ingreco;
+		this.valorIngreco = valor_ingreco;
 	}
 
 	@ManyToOne
@@ -113,10 +113,10 @@ public class Ingreco implements Serializable {
 		result = prime * result + ((data == null) ? 0 : data.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((jogo == null) ? 0 : jogo.hashCode());
-		result = prime * result + numero_acento;
+		result = prime * result + numeroAcento;
 		result = prime * result + ((setor == null) ? 0 : setor.hashCode());
 		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
-		result = prime * result + Float.floatToIntBits(valor_ingreco);
+		result = prime * result + Float.floatToIntBits(valorIngreco);
 		return result;
 	}
 
@@ -128,7 +128,7 @@ public class Ingreco implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Ingreco other = (Ingreco) obj;
+		Ingresso other = (Ingresso) obj;
 		if (data == null) {
 			if (other.data != null)
 				return false;
@@ -144,7 +144,7 @@ public class Ingreco implements Serializable {
 				return false;
 		} else if (!jogo.equals(other.jogo))
 			return false;
-		if (numero_acento != other.numero_acento)
+		if (numeroAcento != other.numeroAcento)
 			return false;
 		if (setor == null) {
 			if (other.setor != null)
@@ -156,14 +156,14 @@ public class Ingreco implements Serializable {
 				return false;
 		} else if (!usuario.equals(other.usuario))
 			return false;
-		if (Float.floatToIntBits(valor_ingreco) != Float.floatToIntBits(other.valor_ingreco))
+		if (Float.floatToIntBits(valorIngreco) != Float.floatToIntBits(other.valorIngreco))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Ingreco [id=" + id + ", data=" + data + ", jogo=" + jogo + ", numero_acento=" + numero_acento
-				+ ", valor_ingreco=" + valor_ingreco + ", usuario=" + usuario + ", setor=" + setor + "]";
+		return "Ingreco [id=" + id + ", data=" + data + ", jogo=" + jogo + ", numero_acento=" + numeroAcento
+				+ ", valor_ingreco=" + valorIngreco + ", usuario=" + usuario + ", setor=" + setor + "]";
 	}
 }

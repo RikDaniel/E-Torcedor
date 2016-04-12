@@ -21,7 +21,7 @@ public class Setor implements Serializable {
 	private String nome;
 	private List<Integer> numero_cadeiras;
 	private Estadio estadio;
-	private List<Ingreco> ingrecos;
+	private List<Ingresso> ingrecos;
 
 	public Setor() {
 		
@@ -71,11 +71,11 @@ public class Setor implements Serializable {
 	}
 	
 	@OneToMany
-	public List<Ingreco> getIngrecos() {
+	public List<Ingresso> getIngrecos() {
 		return ingrecos;
 	}
 
-	public void setIngrecos(List<Ingreco> ingrecos) {
+	public void setIngrecos(List<Ingresso> ingrecos) {
 		this.ingrecos = ingrecos;
 	}
 

@@ -9,7 +9,7 @@ import java.util.List;
  * @author layon
  *
  */
-public interface RepositorioSetor extends CrudRepository<Setor, Long>{
+public interface RepositorioSetor extends CrudRepository<Setor, Long> {
 	
 	/**
 	 * Recupera um setor pelo seu nome.
@@ -19,17 +19,17 @@ public interface RepositorioSetor extends CrudRepository<Setor, Long>{
 	public Setor findByNome(String nome);
 	
 	/**
-	 * Resupera uma lista de Setor começando pelo nome.
+	 * Recupera uma lista de Setor começando pelo nome.
 	 * @param nome
 	 * @return Uma coleção do tipo List de Setor.
 	 */
 	public List<Setor> findByNomeStartingWith(String nome);
 	
 	/**
-	 * 
+	 * Resupera um setor contendo um determinado nome.
 	 * @param nome
-	 * @return
+	 * @return Uma coleção do tipo List de Setor.
 	 */
-	public Setor findByNomeContaining(String nome);
+	public List<Setor> findByNomeContaining(String nome);
 	
 }

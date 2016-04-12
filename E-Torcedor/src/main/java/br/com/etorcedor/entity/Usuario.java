@@ -28,14 +28,14 @@ public class Usuario implements Serializable{
 	private Date data_nascimento;
 	private Torcida torcida;
 	private Time clube;
-	private List<Ingreco> ingrecos;
+	private List<Ingresso> ingrecos;
 	
 	public Usuario() {
 		
 	}
 
 	public Usuario(Long id, String cpf, String nome, Byte imagem, String genero, String telefone, String email,
-			Date data_nascimento, Torcida torcida, Time clube, List<Ingreco> ingrecos) {
+			Date data_nascimento, Torcida torcida, Time clube, List<Ingresso> ingrecos) {
 		this.id = id;
 		this.cpf = cpf;
 		this.nome = nome;
@@ -133,11 +133,11 @@ public class Usuario implements Serializable{
 	}
 
 	@OneToMany(mappedBy= "usuario")
-	public List<Ingreco> getIngrecos() {
+	public List<Ingresso> getIngrecos() {
 		return ingrecos;
 	}
 
-	public void setIngrecos(List<Ingreco> ingrecos) {
+	public void setIngrecos(List<Ingresso> ingrecos) {
 		this.ingrecos = ingrecos;
 	}
 

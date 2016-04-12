@@ -24,7 +24,7 @@ public class Jogo implements Serializable {
 	private Date data;
 	private int ingrecos_quantidade;
 	private int ingrecos_vendidos;
-	private List<Ingreco> ingrecos;
+	private List<Ingresso> ingrecos;
 	private Estadio estadio;
 
 	public Jogo() {
@@ -32,7 +32,7 @@ public class Jogo implements Serializable {
 	}
 
 	public Jogo(Long id, List<Time> times, Date data, int ingrecos_quantidade, int ingrecos_vendidos,
-			List<Ingreco> ingrecos, Estadio estadio) {
+			List<Ingresso> ingrecos, Estadio estadio) {
 		this.id = id;
 		this.times = times;
 		this.data = data;
@@ -86,11 +86,11 @@ public class Jogo implements Serializable {
 	}
 
 	@OneToMany(mappedBy = "jogo")
-	public List<Ingreco> getIngrecos() {
+	public List<Ingresso> getIngrecos() {
 		return ingrecos;
 	}
 
-	public void setIngrecos(List<Ingreco> ingrecos) {
+	public void setIngrecos(List<Ingresso> ingrecos) {
 		this.ingrecos = ingrecos;
 	}
 

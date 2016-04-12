@@ -3,7 +3,7 @@ package br.com.etorcedor.service;
 import java.util.Date;
 import java.util.List;
 
-import br.com.etorcedor.entity.Ingreco;
+import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.exception.IngrecoExistenteException;
 import br.com.etorcedor.exception.IngrecoInexistenteException;
@@ -19,11 +19,11 @@ public interface ServiceJogo {
 	public List<Jogo> buscarJogoNomeTime(String nomeTime);
 	public List<Jogo> buscarJogoData(Date data);
 	
-	public void adicionarIngreco(Ingreco i) throws IngrecoExistenteException;
-	public void atualizarIngreco(Ingreco i) throws IngrecoInexistenteException;
+	public void adicionarIngreco(Ingresso i) throws IngrecoExistenteException;
+	public void atualizarIngreco(Ingresso i) throws IngrecoInexistenteException;
 	public void removerIngreco(Long i) throws IngrecoInexistenteException;
-	public Ingreco buscarIngrego(Long id);
-	public List<Ingreco> listarIngrecos();
+	public Ingresso buscarIngrego(Long id);
+	public List<Ingresso> listarIngrecos();
 	
 
 }
