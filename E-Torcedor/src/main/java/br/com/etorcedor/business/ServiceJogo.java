@@ -8,8 +8,8 @@ import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.entity.Setor;
-import br.com.etorcedor.exception.IngrecoExistenteException;
-import br.com.etorcedor.exception.IngrecoInexistenteException;
+import br.com.etorcedor.exception.IngressoExistenteException;
+import br.com.etorcedor.exception.IngressoInexistenteException;
 import br.com.etorcedor.exception.JogoExistenteException;
 import br.com.etorcedor.exception.JogoInexistenteException;
 
@@ -97,44 +97,44 @@ public interface ServiceJogo extends Serializable{
 	/**
 	 * 
 	 * @param i
-	 * @throws IngrecoExistenteException
+	 * @throws IngressoExistenteException
 	 */
-	public void adicionarIngreco(Ingresso i) throws IngrecoExistenteException;
+	public void adicionarIngreco(Ingresso i) throws IngressoExistenteException;
 	
 	/**
 	 * 
 	 * @param i
-	 * @throws IngrecoInexistenteException
+	 * @throws IngressoInexistenteException
 	 */
-	public void atualizarIngreco(Ingresso i) throws IngrecoInexistenteException;
+	public void atualizarIngreco(Ingresso i) throws IngressoInexistenteException;
 	
 	/**
 	 * 
 	 * @param i
-	 * @throws IngrecoInexistenteException
+	 * @throws IngressoInexistenteException
 	 */
-	public void removerIngreco(Long i)throws IngrecoInexistenteException;
+	public void removerIngreco(Long i)throws IngressoInexistenteException;
 	
 	/**
 	 * Recupera todos os ingressos de um determinado jogo.
 	 * @param jogo
 	 * @return Uma coleção do tipo List de Ingresso.
 	 */
-	public List<Ingresso> findByJogo(Jogo jogo)throws IngrecoInexistenteException;
+	public List<Ingresso> findByJogo(Jogo jogo)throws IngressoInexistenteException;
 	
 	/**
 	 * Recupera todos os ingressos de uma data.
 	 * @param data
 	 * @return Uma coleção do tipo List de Ingresso.
 	 */
-	public List<Ingresso> findByDataIngresso(Date data)throws IngrecoInexistenteException;
+	public List<Ingresso> findByDataIngresso(Date data)throws IngressoInexistenteException;
 	
 	/**
 	 * Recupera todos os ingressos pelo numero do acento.
 	 * @param numeroAcento
 	 * @return Uma coleção do tipo List de Ingresso.
 	 */
-	public List<Ingresso> findByNumeroAcento(int numeroAcento)throws IngrecoInexistenteException;
+	public List<Ingresso> findByNumeroAcento(int numeroAcento)throws IngressoInexistenteException;
 	
 	/**
 	 * Recupera todos os ingressos pelo numero do acento e setor,
@@ -143,7 +143,7 @@ public interface ServiceJogo extends Serializable{
 	 * @param setor
 	 * @return Uma coleção do tipo List de Ingresso.
 	 */
-	public List<Ingresso> findByNumeroAcentoAndSetorOrderByDataAsc(int numeroAcento, Setor setor)throws IngrecoInexistenteException;
+	public List<Ingresso> findByNumeroAcentoAndSetorOrderByDataAsc(int numeroAcento, Setor setor)throws IngressoInexistenteException;
 	
 	/**
 	 * Recupera todos os ingressos pelo numero do acento, setor e Jogo,
@@ -153,7 +153,7 @@ public interface ServiceJogo extends Serializable{
 	 * @param jogo
 	 * @return Uma coleção do tipo List de Ingresso.
 	 */
-	public Ingresso findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(int numeroAcento, Setor setor, Jogo jogo)throws IngrecoInexistenteException;
+	public Ingresso findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(int numeroAcento, Setor setor, Jogo jogo)throws IngressoInexistenteException;
 	
 	/**
 	 * Recupera todos os ingressos pelo Jogo, ordenado por
@@ -161,7 +161,7 @@ public interface ServiceJogo extends Serializable{
 	 * @param jogo
 	 * @return Uma coleção do tipo List de Ingresso.
 	 */
-	public List<Ingresso> findByJogoOrderByDataAsc(Jogo jogo)throws IngrecoInexistenteException;
+	public List<Ingresso> findByJogoOrderByDataAsc(Jogo jogo)throws IngressoInexistenteException;
 
 	/**
 	 * Recupera todos os ingressos pelo Jogo, ordenado por
@@ -169,5 +169,5 @@ public interface ServiceJogo extends Serializable{
 	 * @param jogo
 	 * @return Uma coleção do tipo List de Ingresso.
 	 */
-	public List<Ingresso> findByJogoOrderByDataDesc(Jogo jogo)throws IngrecoInexistenteException;
+	public List<Ingresso> findByJogoOrderByDataDesc(Jogo jogo)throws IngressoInexistenteException;
 }

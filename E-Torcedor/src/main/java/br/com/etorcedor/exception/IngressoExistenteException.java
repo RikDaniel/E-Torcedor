@@ -1,6 +1,6 @@
 package br.com.etorcedor.exception;
 
-public class IngrecoInexistenteException extends Exception {
+public class IngressoExistenteException extends Exception {
 
 	/**
 	 * 
