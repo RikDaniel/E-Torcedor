@@ -1,4 +1,4 @@
-package br.com.etorcedor.service;
+package br.com.etorcedor.business;
 
 import java.util.List;
 import br.com.etorcedor.entity.Usuario;
