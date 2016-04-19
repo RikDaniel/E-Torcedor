@@ -31,6 +31,13 @@ public interface ServiceTime extends Serializable{
 	public void removerTime(Time t)throws TimeInexistenteException;
 	
 	/**
+	 * Recupera um time pelo seu identificador.
+	 * @param id
+	 * @return uma entidade do tipo Time.
+	 */
+	public Time findByOne(Long id)throws TimeInexistenteException;
+	
+	/**
 	 * Recupera um time pelo seu nome.
 	 * @param nome
 	 * @return uma entidade do tipo Time.

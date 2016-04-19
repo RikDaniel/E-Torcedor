@@ -1,5 +1,10 @@
 package br.com.etorcedor.persistence;
 
-public interface RepositorioEstadio {
+import org.springframework.data.repository.CrudRepository;
 
+import br.com.etorcedor.entity.Estadio;
+
+public interface RepositorioEstadio extends CrudRepository<Estadio, Long>{
+
+	
 }

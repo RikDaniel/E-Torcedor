@@ -43,7 +43,7 @@ public interface ServiceJogo extends Serializable{
 	 * @param id
 	 * @return
 	 */
-	public Jogo findOneJogo(Long id);
+	public Jogo findOneJogo(Long id)throws JogoInexistenteException;
 
 	/**
 	 * Recupera uma lista de Jogos em um determinada Data.
@@ -170,4 +170,7 @@ public interface ServiceJogo extends Serializable{
 	 * @return Uma coleção do tipo List de Ingresso.
 	 */
 	public List<Ingresso> findByJogoOrderByDataDesc(Jogo jogo)throws IngressoInexistenteException;
+
+
+	public Ingresso findOneIngresso(Long id)throws IngressoInexistenteException;
 }

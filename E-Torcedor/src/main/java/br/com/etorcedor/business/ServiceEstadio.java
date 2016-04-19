@@ -41,7 +41,7 @@ public interface ServiceEstadio extends Serializable {
 	 * @param id
 	 * @return
 	 */
-	public Estadio findOneEstadio(Long id);
+	public Estadio findOneEstadio(Long id)throws EstadioInexistenteException;
 	
 	//SETOR
 	
