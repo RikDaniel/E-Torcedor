@@ -4,8 +4,10 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.etorcedor.entity.Time;
+import br.com.etorcedor.exception.IngressoInexistenteException;
 import br.com.etorcedor.exception.TimeExistenteException;
 import br.com.etorcedor.exception.TimeInexistenteException;
 import br.com.etorcedor.persistence.RepositorioTime;
@@ -17,9 +19,11 @@ public class ServiceTimeImpl implements ServiceTime{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@Autowired
 	private RepositorioTime timeRep;
 
+	@Transactional(rollbackFor = TimeExistenteException.class)
 	public void adicionarTime(Time t) throws TimeExistenteException {
 		try {
 			findByOne(t.getId());
@@ -30,6 +34,7 @@ public class ServiceTimeImpl implements ServiceTime{
 		
 	}
 
+	@Transactional(rollbackFor = TimeInexistenteException.class)
 	public void atualizarTime(Time t) throws TimeInexistenteException {
 		Time old= findByOne(t.getId());
 			old.setJogos(t.getJogos());
@@ -38,6 +43,7 @@ public class ServiceTimeImpl implements ServiceTime{
 		timeRep.save(old);
 	}
 
+	@Transactional(rollbackFor = TimeInexistenteException.class)
 	public void removerTime(Time t) throws TimeInexistenteException {
 		// TODO Auto-generated method stub
 		

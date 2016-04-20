@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
+import br.com.etorcedor.exception.TimeInexistenteException;
 import br.com.etorcedor.exception.TorcidaExistenteException;
 import br.com.etorcedor.exception.TorcidaInexistenteException;
 import br.com.etorcedor.persistence.RepositorioTorcida;
@@ -18,19 +20,23 @@ public class ServiceTorcidaImpl implements ServiceTorcida{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+
 	@Autowired
 	private RepositorioTorcida torcidaRep;
 
+	@Transactional(rollbackFor = TorcidaExistenteException.class)
 	public void adicionarTorcida(Torcida t) throws TorcidaExistenteException {
 		// TODO Auto-generated method stub
 		
 	}
 
+	@Transactional(rollbackFor = TorcidaInexistenteException.class)
 	public void atualizarTorcida(Torcida t) throws TorcidaInexistenteException {
 		// TODO Auto-generated method stub
 		
 	}
 
+	@Transactional(rollbackFor = TorcidaInexistenteException.class)
 	public void removerTorcida(Long id) throws TorcidaInexistenteException {
 		// TODO Auto-generated method stub
 		

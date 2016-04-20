@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Setor;
@@ -17,9 +18,6 @@ import br.com.etorcedor.persistence.RepositorioSetor;
 @Service
 public class ServiceEstadioImpl implements ServiceEstadio {
 
-	/**
-	 * Falta adicionar os rollback da vida
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@Autowired
@@ -27,6 +25,7 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 	@Autowired
 	private RepositorioSetor setorRep;
 
+	@Transactional(rollbackFor = EstadioExistenteException.class)
 	public void adicionarEstadio(Estadio e) throws EstadioExistenteException {
 
 		try {
@@ -36,7 +35,8 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 			estadioRep.save(e);
 		}
 	}
-
+	
+	@Transactional(rollbackFor = EstadioInexistenteException.class)
 	public void atualizarEstadio(Estadio e) throws EstadioInexistenteException {
 		Estadio old = findOneEstadio(e.getId());
 		old.setJogos(e.getJogos());
@@ -44,6 +44,7 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 		estadioRep.save(old);
 	}
 
+	@Transactional(rollbackFor = EstadioInexistenteException.class)
 	public void removerEstadio(Estadio e) throws EstadioInexistenteException {
 		
 	}
@@ -57,6 +58,7 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 		return e;
 	}
 
+	@Transactional(rollbackFor = SetorExistenteException.class)
 	public void adicionarSetor(Setor e) throws SetorExistenteException {
 		try {
 			findOneSetor(e.getId());
@@ -67,6 +69,7 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 
 	}
 
+	@Transactional(rollbackFor = SetorInexistenteException.class)
 	public void atualizarSetor(Setor e) throws SetorInexistenteException {
 		Setor old = findOneSetor(e.getId());
 			old.setNome(e.getNome());
@@ -76,6 +79,7 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 			setorRep.save(old);
 	}
 
+	@Transactional(rollbackFor = SetorInexistenteException.class)
 	public void removerSetor(Setor e) throws SetorInexistenteException {
 		// TODO Auto-generated method stub
 

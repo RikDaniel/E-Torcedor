@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Ingresso;
@@ -23,14 +24,16 @@ import br.com.etorcedor.persistence.RepositorioJogo;
 public class ServiceJogoImpl implements ServiceJogo {
 
 	/**
-	 * Falta implementar as funções de remover
+	 * Falta implementar os metodos de remover
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@Autowired
 	private RepositorioJogo jogoRep;
 	@Autowired
 	private RepositorioIngresso ingressoRep;
 
+	@Transactional(rollbackFor = JogoExistenteException.class)
 	public void adicionarJogo(Jogo j) throws JogoExistenteException {
 		try {
 			findOneJogo(j.getId());
@@ -40,6 +43,7 @@ public class ServiceJogoImpl implements ServiceJogo {
 		}
 	}
 
+	@Transactional(rollbackFor = JogoInexistenteException.class)
 	public void atualizarJogo(Jogo j) throws JogoInexistenteException {
 		Jogo old = findOneJogo(j.getId());
 		old.setData(j.getData());
@@ -51,6 +55,7 @@ public class ServiceJogoImpl implements ServiceJogo {
 		jogoRep.save(old);
 	}
 
+	@Transactional(rollbackFor = JogoInexistenteException.class)
 	public void removerJogo(Jogo j) throws JogoInexistenteException {
 
 	}
@@ -92,6 +97,7 @@ public class ServiceJogoImpl implements ServiceJogo {
 		return jogoRep.findByEstadioOrderByDataDesc(estadio);
 	}
 
+	@Transactional(rollbackFor = IngressoExistenteException.class)
 	public void adicionarIngreco(Ingresso i) throws IngressoExistenteException {
 		try {
 			findOneIngresso(i.getId());
@@ -102,6 +108,7 @@ public class ServiceJogoImpl implements ServiceJogo {
 
 	}
 
+	@Transactional(rollbackFor = IngressoInexistenteException.class)
 	public void atualizarIngreco(Ingresso i) throws IngressoInexistenteException {
 		Ingresso old = ingressoRep.findOne(i.getId());
 		old.setData(i.getData());
@@ -114,6 +121,7 @@ public class ServiceJogoImpl implements ServiceJogo {
 
 	}
 
+	@Transactional(rollbackFor = IngressoInexistenteException.class)
 	public void removerIngreco(Long i) throws IngressoInexistenteException {
 
 	}
