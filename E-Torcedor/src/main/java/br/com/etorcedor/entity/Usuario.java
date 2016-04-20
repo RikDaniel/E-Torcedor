@@ -28,14 +28,14 @@ public class Usuario implements Serializable{
 	private Date data_nascimento;
 	private Torcida torcida;
 	private Time clube;
-	private List<Ingresso> ingrecos;
+	private List<Ingresso> ingressos;
 	
 	public Usuario() {
 		
 	}
 
 	public Usuario(Long id, String cpf, String nome, Byte imagem, String genero, String telefone, String email,
-			Date data_nascimento, Torcida torcida, Time clube, List<Ingresso> ingrecos) {
+			Date data_nascimento, Torcida torcida, Time clube, List<Ingresso> ingressos) {
 		this.id = id;
 		this.cpf = cpf;
 		this.nome = nome;
@@ -46,7 +46,7 @@ public class Usuario implements Serializable{
 		this.data_nascimento = data_nascimento;
 		this.torcida = torcida;
 		this.clube = clube;
-		this.ingrecos = ingrecos;
+		this.ingressos = ingressos;
 	}
 
 	@Id
@@ -133,12 +133,12 @@ public class Usuario implements Serializable{
 	}
 
 	@OneToMany(mappedBy= "usuario")
-	public List<Ingresso> getIngrecos() {
-		return ingrecos;
+	public List<Ingresso> getIngressos() {
+		return ingressos;
 	}
 
-	public void setIngrecos(List<Ingresso> ingrecos) {
-		this.ingrecos = ingrecos;
+	public void setIngressos(List<Ingresso> ingrecos) {
+		this.ingressos = ingrecos;
 	}
 
 	public static long getSerialversionuid() {
@@ -156,7 +156,7 @@ public class Usuario implements Serializable{
 		result = prime * result + ((genero == null) ? 0 : genero.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((imagem == null) ? 0 : imagem.hashCode());
-		result = prime * result + ((ingrecos == null) ? 0 : ingrecos.hashCode());
+		result = prime * result + ((ingressos == null) ? 0 : ingressos.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
 		result = prime * result + ((torcida == null) ? 0 : torcida.hashCode());
@@ -207,10 +207,10 @@ public class Usuario implements Serializable{
 				return false;
 		} else if (!imagem.equals(other.imagem))
 			return false;
-		if (ingrecos == null) {
-			if (other.ingrecos != null)
+		if (ingressos == null) {
+			if (other.ingressos != null)
 				return false;
-		} else if (!ingrecos.equals(other.ingrecos))
+		} else if (!ingressos.equals(other.ingressos))
 			return false;
 		if (nome == null) {
 			if (other.nome != null)
@@ -234,6 +234,6 @@ public class Usuario implements Serializable{
 	public String toString() {
 		return "Usuario [id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", imagem=" + imagem + ", genero=" + genero
 				+ ", telefone=" + telefone + ", email=" + email + ", data_nascimento=" + data_nascimento + ", torcida="
-				+ torcida + ", clube=" + clube + ", ingrecos=" + ingrecos + "]";
+				+ torcida + ", clube=" + clube + ", ingrecos=" + ingressos + "]";
 	}	
 }

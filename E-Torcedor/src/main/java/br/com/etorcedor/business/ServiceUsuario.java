@@ -39,7 +39,7 @@ public interface ServiceUsuario extends Serializable {
 	 * @param cpf
 	 * @return Uma entidade do tipo Usuario
 	 */
-	public Usuario findByCpf(String cpf)throws UsuarioExistenteException;
+	public Usuario findByCpf(String cpf)throws UsuarioInexistenteException;
 	
 	/**
 	 * 
@@ -47,7 +47,7 @@ public interface ServiceUsuario extends Serializable {
 	 * @param email
 	 * @return Uma entidade do tipo Usuario
 	 */
-	public Usuario findByEmail(String email)throws UsuarioExistenteException;
+	public Usuario findByEmail(String email)throws UsuarioInexistenteException;
 	
 	/**
 	 * Procura todos os usuarios pelo seu nome, 
@@ -55,21 +55,21 @@ public interface ServiceUsuario extends Serializable {
 	 * @param nome
 	 * @return Uma coleção do tipo List de Usuario
 	 */
-	public List<Usuario> findByNomeOrderByNomeAsc(String nome)throws UsuarioExistenteException;
+	public List<Usuario> findByNomeOrderByNomeAsc(String nome)throws UsuarioInexistenteException;
 	
 	/**
 	 * Recupera uma lista de usuario contendo um nome.
 	 * @param nome
 	 * @return Uma coleção do tipo List de Usuario
 	 */
-	public List<Usuario> findByNomeContaining(String nome)throws UsuarioExistenteException;
+	public List<Usuario> findByNomeContaining(String nome)throws UsuarioInexistenteException;
 	
 	/**
 	 * Recupera uma lista de usuario iniciado com um nome.
 	 * @param nome
 	 * @return Uma coleção do tipo List de Usuario
 	 */
-	public List<Usuario> findByNomeStartingWith(String nome)throws UsuarioExistenteException;
+	public List<Usuario> findByNomeStartingWith(String nome)throws UsuarioInexistenteException;
 	
 	/**
 	 * 
@@ -79,7 +79,7 @@ public interface ServiceUsuario extends Serializable {
 	 * @param clube
 	 * @return Uma coleção do tipo List de Usuario
 	 */
-	public List<Usuario> findByClubeOrderByNomeAsc(Time clube)throws UsuarioExistenteException;
+	public List<Usuario> findByClubeOrderByNomeAsc(Time clube)throws UsuarioInexistenteException;
 	
 	/**
 	 * 
@@ -88,6 +88,6 @@ public interface ServiceUsuario extends Serializable {
 	 * @param torcida
 	 * @return Uma coleção do tipo List de Usuario
 	 */
-	public List<Usuario> findByTorcidaOrderByNomeAsc(Torcida torcida )throws UsuarioExistenteException;
+	public List<Usuario> findByTorcidaOrderByNomeAsc(Torcida torcida )throws UsuarioInexistenteException;
 
 }
