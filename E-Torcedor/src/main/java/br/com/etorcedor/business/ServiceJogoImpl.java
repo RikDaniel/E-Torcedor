@@ -11,8 +11,6 @@ import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.entity.Setor;
-import br.com.etorcedor.exception.EstadioExistenteException;
-import br.com.etorcedor.exception.EstadioInexistenteException;
 import br.com.etorcedor.exception.IngressoExistenteException;
 import br.com.etorcedor.exception.IngressoInexistenteException;
 import br.com.etorcedor.exception.JogoExistenteException;

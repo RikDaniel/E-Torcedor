@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.etorcedor.entity.Time;
-import br.com.etorcedor.exception.IngressoInexistenteException;
 import br.com.etorcedor.exception.TimeExistenteException;
 import br.com.etorcedor.exception.TimeInexistenteException;
 import br.com.etorcedor.persistence.RepositorioTime;

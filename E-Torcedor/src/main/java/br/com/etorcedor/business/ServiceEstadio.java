@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import br.com.etorcedor.entity.Estadio;
-import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.entity.Setor;
 import br.com.etorcedor.exception.EstadioExistenteException;
 import br.com.etorcedor.exception.EstadioInexistenteException;
