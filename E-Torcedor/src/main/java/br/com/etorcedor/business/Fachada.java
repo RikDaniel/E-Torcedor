@@ -11,15 +11,11 @@ import br.com.etorcedor.entity.Setor;
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
-import br.com.etorcedor.exception.EstadioExistenteException;
 import br.com.etorcedor.exception.EstadioInexistenteException;
 import br.com.etorcedor.exception.IngressoExistenteException;
 import br.com.etorcedor.exception.IngressoInexistenteException;
-import br.com.etorcedor.exception.JogoExistenteException;
 import br.com.etorcedor.exception.JogoInexistenteException;
-import br.com.etorcedor.exception.SetorExistenteException;
 import br.com.etorcedor.exception.SetorInexistenteException;
-import br.com.etorcedor.exception.TimeExistenteException;
 import br.com.etorcedor.exception.TimeInexistenteException;
 import br.com.etorcedor.exception.TorcidaExistenteException;
 import br.com.etorcedor.exception.TorcidaInexistenteException;
@@ -193,32 +189,6 @@ public interface Fachada extends Serializable {
 	public List<Torcida> findByTimeOrderByNomeDesc(Time time)throws TorcidaExistenteException;
 	
 	//TIME
-	/**
-	 * 
-	 * @param t
-	 * @throws TimeExistenteException
-	 */
-	public void adicionarTime(Time t)throws TimeExistenteException;
-	
-	/**
-	 * 
-	 * @param t
-	 * @throws TimeInexistenteException
-	 */
-	public void atualizarTime(Time t)throws TimeInexistenteException;
-	
-	/**
-	 * 
-	 * @param t
-	 * @throws TimeInexistenteException
-	 */
-	public void removerTime(Time t)throws TimeInexistenteException;
-	
-	/**
-	 * Recupera um time pelo seu identificador.
-	 * @param id
-	 * @return uma entidade do tipo Time.
-	 */
 	public Time findByOne(Long id)throws TimeInexistenteException;
 	
 	/**
@@ -248,32 +218,6 @@ public interface Fachada extends Serializable {
 	public List<Time> timeFByNomeContaining(String nome)throws TimeInexistenteException;
 	
 	//JOGO
-	/**
-	 * 
-	 * @param j
-	 * @throws JogoExistenteException
-	 */
-	public void  adicionarJogo(Jogo j)throws JogoExistenteException;
-	
-	/**
-	 * 
-	 * @param j
-	 * @throws JogoInexistenteException
-	 */
-	public void atualizarJogo(Jogo j)throws JogoInexistenteException;
-	
-	/**
-	 * 
-	 * @param j
-	 * @throws JogoInexistenteException
-	 */
-	public void removerJogo(Jogo j)throws JogoInexistenteException;
-	
-	/**
-	 * 
-	 * @param id
-	 * @return
-	 */
 	public Jogo findOneJogo(Long id)throws JogoInexistenteException;
 
 	/**
@@ -407,63 +351,10 @@ public interface Fachada extends Serializable {
 	
 	//ESTADIO
 	
-		/**
-		 * 
-		 * @param e
-		 * @throws EstadioExistenteException
-		 */
-		public void adicionarEstadio(Estadio e) throws EstadioExistenteException;
-		
-		/**
-		 * 
-		 * @param e
-		 * @throws EstadioInexistenteException
-		 */
-		public void atualizarEstadio(Estadio e) throws EstadioInexistenteException;
-		
-		/**
-		 * 
-		 * @param e
-		 * @throws EstadioInexistenteException
-		 */
-		public void removerEstadio(Estadio e) throws EstadioInexistenteException;
-		
-		/**
-		 * 
-		 * @param id
-		 * @return
-		 */
 		public Estadio findOneEstadio(Long id)throws EstadioInexistenteException;
 		
 		//SETOR
 		
-		/**
-		 * 
-		 * @param e
-		 * @throws SetorExistenteException
-		 */
-		public void adicionarSetor(Setor e) throws SetorExistenteException;
-		
-		/**
-		 * 
-		 * @param e
-		 * @throws SetorInexistenteException
-		 */
-		public void atualizarSetor(Setor e)throws SetorInexistenteException;
-		
-		/**
-		 * 
-		 * @param e
-		 * @throws SetorInexistenteException
-		 */
-		public void removerSetor(Setor e)throws SetorInexistenteException;
-		
-		/**
-		 * 
-		 * @param id
-		 * @return
-		 * @throws SetorInexistenteException
-		 */
 		public Setor findOneSetor(Long id)throws SetorInexistenteException;
 		
 		/**
@@ -487,5 +378,3 @@ public interface Fachada extends Serializable {
 		 */
 		public List<Setor> findByNomeContaining(String nome)throws SetorInexistenteException;
 }
-
-
