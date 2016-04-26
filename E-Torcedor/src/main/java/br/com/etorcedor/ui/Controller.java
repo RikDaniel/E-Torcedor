@@ -23,7 +23,7 @@ import br.com.etorcedor.exception.TorcidaInexistenteException;
 
 @RestController
 @RequestMapping("/etorcedor")
-public class EtorcedorControlerInterface {
+public class Controller {
 
 	@Autowired
 	private Fachada fachada;
