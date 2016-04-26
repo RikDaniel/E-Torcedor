@@ -189,6 +189,7 @@ public interface Fachada extends Serializable {
 	public List<Torcida> findByTimeOrderByNomeDesc(Time time)throws TorcidaExistenteException;
 	
 	//TIME
+	
 	public Time findByOne(Long id)throws TimeInexistenteException;
 	
 	/**
