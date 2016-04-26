@@ -17,9 +17,7 @@ import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.entity.Setor;
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
-import br.com.etorcedor.entity.Usuario;
-import br.com.etorcedor.exception.TorcidaExistenteException;
-import br.com.etorcedor.exception.TorcidaInexistenteException;
+import br.com.etorcedor.entity.Usuario; 
 
 @RestController
 @RequestMapping("/etorcedor")
@@ -64,49 +62,49 @@ public class EtorcedorControlerInterface {
 	}
 
 	@RequestMapping("/usuario/find/cpf")
-	public ResponseEntity<?> findByCpf(String cpf) {
+	public Usuario findByCpf(String cpf) {
 
 		return this.fachada.findByCpf(cpf);
 
 	}
 
 	@RequestMapping("/usuario/find/email")
-	public ResponseEntity<?> findByEmail() {
+	public Usuario findByEmail() {
 
 		return this.fachada.findByEmail(email);
 
 	}
 
 	@RequestMapping("/usuario/find/nome/orderly")
-	public ResponseEntity<?> findByNomeOrderByNomeAsc(String nome) {
+	public List<Usuario> findByNomeOrderByNomeAsc(String nome) {
 
 		return this.fachada.findByNomeOrderByNomeAsc(nome);
 
 	}
 
 	@RequestMapping("/usuario/find/nome/contain")
-	public ResponseEntity<?> usuarioFindByNomeContaining(String nome) {
+	public List<Usuario> usuarioFindByNomeContaining(String nome) {
 
 		return this.fachada.usuarioFindByNomeContaining(nome);
 
 	}
 
 	@RequestMapping("/usuario/find/nome/start")
-	public ResponseEntity<?> usuarioFindByNomeStartingWith(String nome) {
+	public List<Usuario> usuarioFindByNomeStartingWith(String nome) {
 
 		return this.fachada.usuarioFindByNomeStartingWith(nome);
 
 	}
 
 	@RequestMapping("/usuario/find/clube")
-	public ResponseEntity<?> findByClubeOrderByNomeAsc(Time clube) {
+	public List<Usuario> findByClubeOrderByNomeAsc(Time clube) {
 
 		return this.fachada.findByClubeOrderByNomeAsc(clube);
 
 	}
 
 	@RequestMapping("/usuario/find/torcida")
-	public ResponseEntity<?> findByTorcidaOrderByNomeAsc(Torcida torcida) {
+	public List<Usuario> findByTorcidaOrderByNomeAsc(Torcida torcida) {
 
 		return this.fachada.findByTorcidaOrderByNomeAsc(torcida);
 
@@ -147,46 +145,41 @@ public class EtorcedorControlerInterface {
 	}
 
 	@RequestMapping("/torcida/find/nome")
-	public Torcida torcidaFindByNome(String nome) {
-		
-		try {
-			return this.fachada.torcidaFindByNome(nome);
-		} catch (TorcidaInexistenteException e) {
-			return null ;
-		}
-		
+	public ResponseEntity<?> torcidaFindByNome(String nome) {
+
+		return this.fachada.torcidaFindByNome(nome);
 
 	}
 
 	@RequestMapping("/torcida/find/nome/contain")
-	public List<Torcida> torcidaFindByNomeContaining(String nome) {
+	public ResponseEntity<?> torcidaFindByNomeContaining(String nome) {
 
 		return this.fachada.torcidaFindByNomeContaining(nome);
 
 	}
 
 	@RequestMapping("/torcida/find/nome/start")
-	public List<Torcida> torcidaFindByNomeStartingWith(String nome) {
+	public ResponseEntity<?> torcidaFindByNomeStartingWith(String nome) {
 
 		return this.fachada.torcidaFindByNomeStartingWith(nome);
 
 	}
 
 	@RequestMapping("/torcida/find/nome/orderly/asc")
-	public List<Torcida> torcidaFindByNomeOrderByNomeAsc(String nome) {
+	public ResponseEntity<?> torcidaFindByNomeOrderByNomeAsc(String nome) {
 
 		return this.fachada.torcidaFindByNomeOrderByNomeAsc(nome);
 	}
 
 	@RequestMapping("/torcida/find/nome/orderly/desc")
-	public List<Torcida> findByNomeOrderByNomeDesc(String nome) {
+	public ResponseEntity<?> findByNomeOrderByNomeDesc(String nome) {
 
 		return this.fachada.findByNomeOrderByNomeDesc(nome);
 
 	}
 
 	@RequestMapping("/torcida/find/time")
-	public Time findByTime(Time time) {
+	public ResponseEntity<?> findByTime(Time time) {
 
 		return this.fachada.findByTime(time);
 
@@ -209,28 +202,28 @@ public class EtorcedorControlerInterface {
 	// TIME
 
 	@RequestMapping("/time/find")
-	public ResponseEntity<?> findByOne(Long id) {
+	public Time findByOne(Long id) {
 
 		return this.fachada.findByOne(id);
 
 	}
 
 	@RequestMapping("/time/find/nome")
-	public ResponseEntity<?> timeFindByNome(String nome) {
+	public Time timeFindByNome(String nome) {
 
 		return this.fachada.timeFindByNome(nome);
 
 	}
 
 	@RequestMapping("/time/find/nome/start")
-	public ResponseEntity<?> timeFindByNomeStartingWith(String nome) {
+	public List<Time> timeFindByNomeStartingWith(String nome) {
 
 		return this.fachada.timeFindByNomeStartingWith(nome);
 
 	}
 
 	@RequestMapping("/time/find/nome/contain")
-	public ResponseEntity<?> timeFByNomeContaining(String nome) {
+	public List<Time> timeFByNomeContaining(String nome) {
 
 		return this.fachada.timeFByNomeContaining(nome);
 
@@ -239,70 +232,69 @@ public class EtorcedorControlerInterface {
 	// JOGO
 
 	@RequestMapping("/jogo/find")
-	public ResponseEntity<?> findOneJogo(Long id) {
+	public Jogo findOneJogo(Long id) {
 
 		return this.fachada.findOneJogo(id);
 
 	}
 
 	@RequestMapping("/jogo/find/data")
-	public ResponseEntity<?> findByDataJogo(Date data) {
+	public List<Jogo> findByDataJogo(Date data) {
 
 		return this.fachada.findByDataJogo(data);
 	}
 
 	@RequestMapping("/jogo/find/data/asc")
-	public ResponseEntity<?> findByDataOrderByDataAsc(Date data) {
+	public List<Jogo> findByDataOrderByDataAsc(Date data) {
 
 		return this.fachada.findByDataOrderByDataAsc(data);
 	}
 
 	@RequestMapping("/jogo/find/data/desc")
-	public RequestEntity<?> findByDataOrderByDataDesc(Date data) {
+	public List<Jogo> findByDataOrderByDataDesc(Date data) {
 
 		return this.fachada.findByDataOrderByDataDesc(data);
 
 	}
 
 	@RequestMapping("/jogo/find/estadio")
-	public ResponseEntity<?> findByEstadio(Estadio estadio) {
+	public List<Jogo> findByEstadio(Estadio estadio) {
 
 		return this.fachada.findByEstadio(estadio);
 
 	}
 
 	@RequestMapping("/jogo/find/estadio/data/asc")
-	public ResponseEntity<?> findByEstadioOrderByDataAsc(Estadio estadio) {
+	public List<Jogo> findByEstadioOrderByDataAsc(Estadio estadio) {
 
 		return this.fachada.findByEstadioOrderByDataAsc(estadio);
 
 	}
 
 	@RequestMapping("/jogo/find/estadio/data/desc")
-	public ResponseEntity<?> findByEstadioOrderByDataDesc(Estadio estadio) {
+	public List<Jogo> findByEstadioOrderByDataDesc(Estadio estadio) {
 
 		return this.fachada.findByEstadioOrderByDataDesc(estadio);
 
 	}
 
-	
-	//INGRESSO
-	
+	// INGRESSO
+
 	@RequestMapping("/ingresso/add")
-	public ResponseEntity<?> adicionarIngreco(Ingresso i){
-		
+	public ResponseEntity<?> adicionarIngreco(Ingresso i) {
+
 		try {
 			this.fachada.adicionarIngreco(i);
 		} catch (Exception e) {
 			return new ResponseEntity<Exception>(e, HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<String>(HttpStatus.OK);
-		
+
 	}
-	
+
 	@RequestMapping("/ingresso/att")
-	public ResponseEntity<?> atualizarIngreco(Ingresso i){
-		
+	public ResponseEntity<?> atualizarIngreco(Ingresso i) {
+
 		try {
 			this.fachada.atualizarIngreco(i);
 		} catch (Exception e) {
@@ -310,10 +302,10 @@ public class EtorcedorControlerInterface {
 		}
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
-	
+
 	@RequestMapping("/ingresso/remov")
-	public ResponseEntity<?> removerIngreco(Ingresso i){
-		
+	public ResponseEntity<?> removerIngreco(Ingresso i) {
+
 		try {
 			this.fachada.removerIngreco(i);
 		} catch (Exception e) {
@@ -321,114 +313,98 @@ public class EtorcedorControlerInterface {
 		}
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
-	
+
 	@RequestMapping("/ingresso/find/jogo")
-	public ResponseEntity<?> findByJogo(Jogo jogo){
-		
+	public List<Ingresso> findByJogo(Jogo jogo) {
+
 		return this.fachada.findByJogo(jogo);
-	
+
 	}
-	
+
 	@RequestMapping("/ingresso/find/data")
-	public ResponseEntity<?> findByDataIngresso(Date data){
-		
+	public List<Ingresso> findByDataIngresso(Date data) {
+
 		return this.fachada.findByDataIngresso(data);
-		
+
 	}
-	
+
 	@RequestMapping("/ingresso/find/acento")
-	public ResponseEntity<?> findByNumeroAcento(int numeroAcento){
-		
+	public List<Ingresso> findByNumeroAcento(int numeroAcento) {
+
 		return this.fachada.findByNumeroAcento(numeroAcento);
-		
+
 	}
-	
+
 	@RequestMapping("/ingresso/find/acento/setor/ordely/asc")
-	public ResponseEntity<?> findByNumeroAcentoAndSetorOrderByDataAsc(int numeroAcento, Setor setor){
-		
+	public List<Ingresso> findByNumeroAcentoAndSetorOrderByDataAsc(int numeroAcento, Setor setor) {
+
 		return this.fachada.findByNumeroAcentoAndSetorOrderByDataAsc(numeroAcento, setor);
-		
+
 	}
-	
+
 	@RequestMapping("/ingresso/find/acento/setor/jogo/ordely/asc")
-	public ResponseEntity<?> findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(int numeroAcento, Setor setor, Jogo jogo){
-		
+	public Ingresso findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(int numeroAcento, Setor setor, Jogo jogo) {
+
 		return this.fachada.findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(numeroAcento, setor, jogo);
-		
+
 	}
-	
+
 	@RequestMapping("/ingresso/find/jogo/ordely/asc")
-	public ResponseEntity<?> findByJogoOrderByDataAsc(Jogo jogo){
-		
+	public List<Ingresso> findByJogoOrderByDataAsc(Jogo jogo) {
+
 		return this.fachada.findByJogoOrderByDataAsc(jogo);
-		
+
 	}
-	
+
 	@RequestMapping("/ingresso/find/jogo/ordely/desc")
-	public ResponseEntity<?> findByJogoOrderByDataDesc(Jogo jogo){
-		
+	public List<Ingresso> findByJogoOrderByDataDesc(Jogo jogo) {
+
 		return this.fachada.findByJogoOrderByDataDesc(jogo);
-		
+
 	}
- 	
+
 	@RequestMapping("/ingresso/find")
-	public ResponseEntity<?> findOneIngresso(){
-		
+	public Ingresso findOneIngresso() {
+
 		return this.fachada.findOneIngresso(id);
-		
+
 	}
-	
-	//Estadio
-	
+
+	// Estadio
+
 	@RequestMapping("/estadio/find")
-	public ResponseEntity<?> findOneEstadio(Long id){
-		
+	public Estadio findOneEstadio(Long id) {
+
 		return this.fachada.findOneEstadio(id);
 	}
-	
-	
-	//Setor
-	
+
+	// Setor
+
 	@RequestMapping("/setor/find")
-	public ResponseEntity<?> findOneSetor(Long id){
-		
+	public Setor findOneSetor(Long id) {
+
 		return this.fachada.findOneSetor(id);
 	}
-	
+
 	@RequestMapping("/setor/find/nome")
-	public ResponseEntity<?> findByNome(String nome){
-		
+	public Setor findByNome(String nome) {
+
 		return this.fachada.findByNome(nome);
-		
+
 	}
- 	
+
 	@RequestMapping("/setor/find/nome/start")
-	public ResponseEntity<?> findByNomeStartingWith(){
-		
+	public List<Setor> findByNomeStartingWith() {
+
 		return this.fachada.findByNomeStartingWith(nome);
-		
+
 	}
-	
+
 	@RequestMapping("/setor/find/nome/contain")
-	public ResponseEntity<?> findByNomeContaining(){
-		
+	public List<Setor> findByNomeContaining() {
+
 		return this.fachada.findByNomeContaining(nome);
-		
+
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
