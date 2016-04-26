@@ -57,6 +57,10 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 		}
 		return e;
 	}
+	
+	public List<Estadio> findAllEstadio() {
+		return (List<Estadio>) this.estadioRep.findAll();
+	}
 
 	@Transactional(rollbackFor = SetorExistenteException.class)
 	public void adicionarSetor(Setor e) throws SetorExistenteException {
@@ -102,12 +106,12 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 		return s;
 	}
 
-	public List<Setor> findByNomeStartingWith(String nome) throws SetorInexistenteException {
+	public List<Setor> findByNomeStartingWith(String nome) {
 	
 		return setorRep.findByNomeStartingWith(nome);
 	}
 
-	public List<Setor> findByNomeContaining(String nome) throws SetorInexistenteException {
+	public List<Setor> findByNomeContaining(String nome) {
 		
 		return setorRep.findByNomeContaining(nome);
 	}

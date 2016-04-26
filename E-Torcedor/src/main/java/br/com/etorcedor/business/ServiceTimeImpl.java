@@ -65,13 +65,21 @@ public class ServiceTimeImpl implements ServiceTime{
 		return t;
 	}
 
-	public List<Time> findByNomeStartingWith(String nome) throws TimeInexistenteException {
-
+	public List<Time> findByNomeStartingWith(String nome) {
 		return timeRep.findByNomeStartingWith(nome);
 	}
-
-	public List<Time> findByNomeContaining(String nome) throws TimeInexistenteException {
-		
+	
+	/**
+	 * Retorna uma lista com todos os times
+	 */
+	public List<Time> findAll() {
+		return (List<Time>) this.timeRep.findAll();
+	}
+	
+	/**
+	 * 
+	 */
+	public List<Time> findByNomeContaining(String nome) {
 		return timeRep.findByNomeContaining(nome);
 	}
 

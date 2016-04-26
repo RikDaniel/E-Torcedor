@@ -50,7 +50,7 @@ public interface ServiceJogo extends Serializable{
 	 * @param data
 	 * @return Uma coleção do tipo List de Jogo
 	 */
-	public List<Jogo> findByDataJogo(Date data)throws JogoInexistenteException;
+	public List<Jogo> findByDataJogo(Date data);
 	
 	/**
 	 * Recupera uma lista de Jogos em um determinada Data,
@@ -58,7 +58,7 @@ public interface ServiceJogo extends Serializable{
 	 * @param data
 	 * @return Uma coleção do tipo List de Jogo
 	 */
-	public List<Jogo> findByDataOrderByDataAsc(Date data)throws JogoInexistenteException;
+	public List<Jogo> findByDataOrderByDataAsc(Date data);
 	
 	/**
 	 * Recupera uma lista de Jogos em um determinada Data,
@@ -66,14 +66,14 @@ public interface ServiceJogo extends Serializable{
 	 * @param data
 	 * @return Uma coleção do tipo List de Jogo
 	 */
-	public List<Jogo> findByDataOrderByDataDesc(Date data)throws JogoInexistenteException;
+	public List<Jogo> findByDataOrderByDataDesc(Date data);
 	
 	/**
 	 * Recupera uma lista de Jogos em um estadio.
 	 * @param estadio
 	 * @return Uma coleção do tipo List de Jogo
 	 */
-	public List<Jogo> findByEstadio(Estadio estadio)throws JogoInexistenteException;
+	public List<Jogo> findByEstadio(Estadio estadio);
 	
 	/**
 	 * Recupera uma lista de Jogos em um estadio,
@@ -81,7 +81,7 @@ public interface ServiceJogo extends Serializable{
 	 * @param estadio
 	 * @return Uma coleção do tipo List de Jogo
 	 */
-	public List<Jogo> findByEstadioOrderByDataAsc(Estadio estadio)throws JogoInexistenteException;
+	public List<Jogo> findByEstadioOrderByDataAsc(Estadio estadio);
 
 	/**
 	 * Recupera uma lista de Jogos em um estadio,
@@ -89,8 +89,13 @@ public interface ServiceJogo extends Serializable{
 	 * @param estadio
 	 * @return Uma coleção do tipo List de Jogo
 	 */
-	public List<Jogo> findByEstadioOrderByDataDesc(Estadio estadio)throws JogoInexistenteException;
+	public List<Jogo> findByEstadioOrderByDataDesc(Estadio estadio);
 	
+	/**
+	 * Retorna uma lista com todos os jogos
+	 * @return
+	 */
+	public List<Jogo> findAllJogo();
 	
 	//INGRESSO
 	
@@ -120,21 +125,21 @@ public interface ServiceJogo extends Serializable{
 	 * @param jogo
 	 * @return Uma coleção do tipo List de Ingresso.
 	 */
-	public List<Ingresso> findByJogo(Jogo jogo)throws IngressoInexistenteException;
+	public List<Ingresso> findByJogo(Jogo jogo);
 	
 	/**
 	 * Recupera todos os ingressos de uma data.
 	 * @param data
 	 * @return Uma coleção do tipo List de Ingresso.
 	 */
-	public List<Ingresso> findByDataIngresso(Date data)throws IngressoInexistenteException;
+	public List<Ingresso> findByDataIngresso(Date data);
 	
 	/**
 	 * Recupera todos os ingressos pelo numero do acento.
 	 * @param numeroAcento
 	 * @return Uma coleção do tipo List de Ingresso.
 	 */
-	public List<Ingresso> findByNumeroAcento(int numeroAcento)throws IngressoInexistenteException;
+	public List<Ingresso> findByNumeroAcento(int numeroAcento);
 	
 	/**
 	 * Recupera todos os ingressos pelo numero do acento e setor,
@@ -143,7 +148,7 @@ public interface ServiceJogo extends Serializable{
 	 * @param setor
 	 * @return Uma coleção do tipo List de Ingresso.
 	 */
-	public List<Ingresso> findByNumeroAcentoAndSetorOrderByDataAsc(int numeroAcento, Setor setor)throws IngressoInexistenteException;
+	public List<Ingresso> findByNumeroAcentoAndSetorOrderByDataAsc(int numeroAcento, Setor setor);
 	
 	/**
 	 * Recupera todos os ingressos pelo numero do acento, setor e Jogo,
@@ -161,7 +166,7 @@ public interface ServiceJogo extends Serializable{
 	 * @param jogo
 	 * @return Uma coleção do tipo List de Ingresso.
 	 */
-	public List<Ingresso> findByJogoOrderByDataAsc(Jogo jogo)throws IngressoInexistenteException;
+	public List<Ingresso> findByJogoOrderByDataAsc(Jogo jogo);
 
 	/**
 	 * Recupera todos os ingressos pelo Jogo, ordenado por
@@ -169,8 +174,15 @@ public interface ServiceJogo extends Serializable{
 	 * @param jogo
 	 * @return Uma coleção do tipo List de Ingresso.
 	 */
-	public List<Ingresso> findByJogoOrderByDataDesc(Jogo jogo)throws IngressoInexistenteException;
+	public List<Ingresso> findByJogoOrderByDataDesc(Jogo jogo);
 
-
+	/**
+	 * 
+	 * @param id
+	 * @return
+	 * @throws IngressoInexistenteException
+	 */
 	public Ingresso findOneIngresso(Long id)throws IngressoInexistenteException;
+	
+	public List<Ingresso> findAllIngresso();
 }

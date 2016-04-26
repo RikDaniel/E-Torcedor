@@ -34,21 +34,21 @@ public class FachadaImpl implements Fachada {
 
 	@Autowired
 	private ServiceUsuario usuarioServ;
-	
+
 	@Autowired
 	private ServiceTorcida torcidaServ;
-	
+
 	@Autowired
 	private ServiceTime timeServ;
-	
+
 	@Autowired
 	private ServiceJogo jogoServ;
-	
+
 	@Autowired
 	private ServiceEstadio estadioServ;
-	
+
 	//Usuario
-	
+
 	public void adicionarUsuario(Usuario u) throws UsuarioExistenteException {
 		this.usuarioServ.adicionarUsuario(u);
 	}
@@ -69,28 +69,35 @@ public class FachadaImpl implements Fachada {
 		return this.usuarioServ.findByEmail(email);
 	}
 
-	public List<Usuario> findByNomeOrderByNomeAsc(String nome) throws UsuarioInexistenteException {
+	public List<Usuario> findByNomeOrderByNomeAsc(String nome) {
 		return this.usuarioServ.findByNomeOrderByNomeAsc(nome);
 	}
 
-	public List<Usuario> usuarioFindByNomeContaining(String nome) throws UsuarioInexistenteException {
+	public List<Usuario> usuarioFindByNomeContaining(String nome) {
 		return this.usuarioServ.findByNomeContaining(nome);
 	}
 
-	public List<Usuario> usuarioFindByNomeStartingWith(String nome) throws UsuarioInexistenteException {
+	public List<Usuario> usuarioFindByNomeStartingWith(String nome) {
 		return this.usuarioServ.findByNomeStartingWith(nome);
 	}
 
-	public List<Usuario> findByClubeOrderByNomeAsc(Time clube) throws UsuarioInexistenteException {
+	public List<Usuario> findByClubeOrderByNomeAsc(Time clube) {
 		return this.usuarioServ.findByClubeOrderByNomeAsc(clube);
 	}
 
-	public List<Usuario> findByTorcidaOrderByNomeAsc(Torcida torcida) throws UsuarioInexistenteException {
+	public List<Usuario> findByTorcidaOrderByNomeAsc(Torcida torcida) {
 		return this.usuarioServ.findByTorcidaOrderByNomeAsc(torcida);
 	}
 
+	/**
+	 * Retorna todos os usuarios do sistema
+	 * @return
+	 */
+	public List<Usuario> findAllUsuario() {
+		return this.usuarioServ.findAll();
+	}
 	//TORCIDA
-	
+
 	public void adicionarTorcida(Torcida t) throws TorcidaExistenteException {
 		this.torcidaServ.adicionarTorcida(t);
 	}
@@ -103,40 +110,44 @@ public class FachadaImpl implements Fachada {
 		this.torcidaServ.removerTorcida(id);
 	}
 
-	public Torcida torcidaFindByNome(String nome) throws TorcidaExistenteException {
+	public Torcida torcidaFindByNome(String nome) throws TorcidaInexistenteException {
 		return this.torcidaServ.findByNome(nome);
 	}
 
-	public List<Torcida> torcidaFindByNomeContaining(String nome) throws TorcidaExistenteException {
+	public List<Torcida> torcidaFindByNomeContaining(String nome) {
 		return this.torcidaServ.findByNomeContaining(nome);
 	}
 
-	public List<Torcida> torcidaFindByNomeStartingWith(String nome) throws TorcidaExistenteException {
+	public List<Torcida> torcidaFindByNomeStartingWith(String nome) {
 		return this.torcidaServ.findByNomeStartingWith(nome);
 	}
 
-	public List<Torcida> torcidaFindByNomeOrderByNomeAsc(String nome) throws TorcidaExistenteException {
+	public List<Torcida> torcidaFindByNomeOrderByNomeAsc(String nome) {
 		return this.torcidaServ.findByNomeOrderByNomeAsc(nome);
 	}
 
-	public List<Torcida> findByNomeOrderByNomeDesc(String nome) throws TorcidaExistenteException {
+	public List<Torcida> findByNomeOrderByNomeDesc(String nome) {
 		return this.torcidaServ.findByNomeOrderByNomeDesc(nome);
 	}
 
-	public List<Torcida> findByTime(Time time) throws TorcidaExistenteException {
+	public List<Torcida> findByTime(Time time) {
 		return this.torcidaServ.findByTime(time);
 	}
 
-	public List<Torcida> findByTimeOrderByNomeAsc(Time time) throws TorcidaExistenteException {
+	public List<Torcida> findByTimeOrderByNomeAsc(Time time) {
 		return this.torcidaServ.findByTimeOrderByNomeAsc(time);
 	}
 
-	public List<Torcida> findByTimeOrderByNomeDesc(Time time) throws TorcidaExistenteException {
+	public List<Torcida> findByTimeOrderByNomeDesc(Time time) {
 		return this.torcidaServ.findByTimeOrderByNomeDesc(time);
 	}
 
+	public List<Torcida> findAllTorcida() {
+		return this.torcidaServ.findAllTorcida();
+	}
+
 	//TIME
-	
+
 	public Time findByOne(Long id) throws TimeInexistenteException {
 		return this.timeServ.findByOne(id);
 	}
@@ -145,42 +156,53 @@ public class FachadaImpl implements Fachada {
 		return this.timeServ.findByNome(nome);
 	}
 
-	public List<Time> timeFindByNomeStartingWith(String nome) throws TimeInexistenteException {
+	public List<Time> timeFindByNomeStartingWith(String nome) {
 		return this.timeServ.findByNomeStartingWith(nome);
 	}
 
-	public List<Time> timeFByNomeContaining(String nome) throws TimeInexistenteException {
+	public List<Time> timeFByNomeContaining(String nome) {
 		return this.timeServ.findByNomeContaining(nome);
 	}
 
+	/**
+	 * Retorna uma lista com todos os times
+	 */
+	public List<Time> findAllTime() {
+		return this.timeServ.findAll();
+	}
+
 	//JOGO
-	
+
 	public Jogo findOneJogo(Long id) throws JogoInexistenteException {
 		return this.jogoServ.findOneJogo(id);
 	}
 
-	public List<Jogo> findByDataJogo(Date data) throws JogoInexistenteException {
+	public List<Jogo> findByDataJogo(Date data) {
 		return this.jogoServ.findByDataJogo(data);
 	}
 
-	public List<Jogo> findByDataOrderByDataAsc(Date data) throws JogoInexistenteException {
+	public List<Jogo> findByDataOrderByDataAsc(Date data) {
 		return this.jogoServ.findByDataOrderByDataAsc(data);
 	}
 
-	public List<Jogo> findByDataOrderByDataDesc(Date data) throws JogoInexistenteException {
+	public List<Jogo> findByDataOrderByDataDesc(Date data) {
 		return this.jogoServ.findByDataOrderByDataDesc(data);
 	}
 
-	public List<Jogo> findByEstadio(Estadio estadio) throws JogoInexistenteException {
+	public List<Jogo> findByEstadio(Estadio estadio) {
 		return this.jogoServ.findByEstadio(estadio);
 	}
 
-	public List<Jogo> findByEstadioOrderByDataAsc(Estadio estadio) throws JogoInexistenteException {
+	public List<Jogo> findByEstadioOrderByDataAsc(Estadio estadio) {
 		return this.jogoServ.findByEstadioOrderByDataAsc(estadio);
 	}
 
-	public List<Jogo> findByEstadioOrderByDataDesc(Estadio estadio) throws JogoInexistenteException {
+	public List<Jogo> findByEstadioOrderByDataDesc(Estadio estadio) {
 		return this.jogoServ.findByEstadioOrderByDataDesc(estadio);
+	}
+
+	public List<Jogo> findAllJogo() {
+		return this.jogoServ.findAllJogo();
 	}
 
 	//INGRESSO
@@ -196,20 +218,19 @@ public class FachadaImpl implements Fachada {
 		this.jogoServ.removerIngreco(i);
 	}
 
-	public List<Ingresso> findByJogo(Jogo jogo) throws IngressoInexistenteException {
+	public List<Ingresso> findByJogo(Jogo jogo) {
 		return this.jogoServ.findByJogo(jogo);
 	}
 
-	public List<Ingresso> findByDataIngresso(Date data) throws IngressoInexistenteException {
+	public List<Ingresso> findByDataIngresso(Date data) {
 		return this.jogoServ.findByDataIngresso(data);
 	}
 
-	public List<Ingresso> findByNumeroAcento(int numeroAcento) throws IngressoInexistenteException {
+	public List<Ingresso> findByNumeroAcento(int numeroAcento) {
 		return this.jogoServ.findByNumeroAcento(numeroAcento);
 	}
 
-	public List<Ingresso> findByNumeroAcentoAndSetorOrderByDataAsc(int numeroAcento, Setor setor)
-			throws IngressoInexistenteException {
+	public List<Ingresso> findByNumeroAcentoAndSetorOrderByDataAsc(int numeroAcento, Setor setor) {
 		return this.jogoServ.findByNumeroAcentoAndSetorOrderByDataAsc(numeroAcento, setor);
 	}
 
@@ -218,11 +239,11 @@ public class FachadaImpl implements Fachada {
 		return this.jogoServ.findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(numeroAcento,setor,jogo);
 	}
 
-	public List<Ingresso> findByJogoOrderByDataAsc(Jogo jogo) throws IngressoInexistenteException {
+	public List<Ingresso> findByJogoOrderByDataAsc(Jogo jogo) {
 		return this.jogoServ.findByJogoOrderByDataAsc(jogo);
 	}
 
-	public List<Ingresso> findByJogoOrderByDataDesc(Jogo jogo) throws IngressoInexistenteException {
+	public List<Ingresso> findByJogoOrderByDataDesc(Jogo jogo) {
 		return this.jogoServ.findByJogoOrderByDataDesc(jogo);
 	}
 
@@ -230,15 +251,23 @@ public class FachadaImpl implements Fachada {
 		return this.jogoServ.findOneIngresso(id);
 	}
 
+	public List<Ingresso> findAllIngresso() {
+		return this.jogoServ.findAllIngresso();
+	}
+
 	//ESTADIO
-	
+
 	public Estadio findOneEstadio(Long id) throws EstadioInexistenteException {
 		return this.estadioServ.findOneEstadio(id);
 	}
 
+	public List<Estadio> findAllEstadio() {
+		return this.estadioServ.findAllEstadio();
+	}
+
 	//Setor
-	
-		public Setor findOneSetor(Long id) throws SetorInexistenteException {
+
+	public Setor findOneSetor(Long id) throws SetorInexistenteException {
 		return this.estadioServ.findOneSetor(id);
 	}
 
@@ -246,11 +275,11 @@ public class FachadaImpl implements Fachada {
 		return this.estadioServ.findByNome(nome);
 	}
 
-	public List<Setor> findByNomeStartingWith(String nome) throws SetorInexistenteException {
+	public List<Setor> findByNomeStartingWith(String nome) {
 		return this.estadioServ.findByNomeStartingWith(nome);
 	}
 
-	public List<Setor> findByNomeContaining(String nome) throws SetorInexistenteException {
+	public List<Setor> findByNomeContaining(String nome) {
 		return this.estadioServ.findByNomeContaining(nome);
 	}
 }

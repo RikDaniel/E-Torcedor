@@ -36,21 +36,21 @@ public interface ServiceTorcida extends Serializable {
 	 * @param nome
 	 * @return uma entidade do tipo Torcida
 	 */
-	public Torcida findByNome(String nome)throws TorcidaExistenteException;
+	public Torcida findByNome(String nome)throws TorcidaInexistenteException;
 	
 	/**
 	 * Recupera todas as torcidas contendo um nome. 
 	 * @param nome
 	 * @return uma coleção do tipo List de Torcida
 	 */
-	public List<Torcida> findByNomeContaining(String nome)throws TorcidaExistenteException;
+	public List<Torcida> findByNomeContaining(String nome);
 	
 	/**
 	 * Recupera todas as torcidas começando com um nome. 
 	 * @param nome
 	 * @return uma coleção do tipo List de Torcida
 	 */
-	public List<Torcida> findByNomeStartingWith(String nome)throws TorcidaExistenteException;
+	public List<Torcida> findByNomeStartingWith(String nome);
 	
 	/**
 	 * Recupera todas as torcidas pelo seu nome, ordenado de forma ascendente,
@@ -58,7 +58,7 @@ public interface ServiceTorcida extends Serializable {
 	 * @param nome
 	 * @return uma coleção de Torcida do tipo List
 	 */
-	public List<Torcida> findByNomeOrderByNomeAsc(String nome)throws TorcidaExistenteException;
+	public List<Torcida> findByNomeOrderByNomeAsc(String nome);
 	
 	/**
 	 * Recupera todas as torcidas pelo seu nome, ordenado de forma descendente,
@@ -66,14 +66,14 @@ public interface ServiceTorcida extends Serializable {
 	 * @param nome
 	 * @return uma coleção de Torcida do tipo List 
 	 */
-	public List<Torcida> findByNomeOrderByNomeDesc(String nome)throws TorcidaExistenteException;
+	public List<Torcida> findByNomeOrderByNomeDesc(String nome);
 	
 	/**
 	 * Recupera todas as torcida pelo Time
 	 * @param time
 	 * @return uma coleção de Torcida do tipo List
 	 */
-	public List<Torcida> findByTime(Time time)throws TorcidaExistenteException;
+	public List<Torcida> findByTime(Time time);
 	
 	/**
 	 * Recupera todas as torcida pelo Time, ordenando de forma ascendente,
@@ -81,7 +81,7 @@ public interface ServiceTorcida extends Serializable {
 	 * @param time
 	 * @return
 	 */
-	public List<Torcida> findByTimeOrderByNomeAsc(Time time)throws TorcidaExistenteException;
+	public List<Torcida> findByTimeOrderByNomeAsc(Time time);
 	
 	/**
 	 * Recupera todas as torcida pelo Time, ordenando de forma descendente,
@@ -89,5 +89,10 @@ public interface ServiceTorcida extends Serializable {
 	 * @param time
 	 * @return
 	 */
-	public List<Torcida> findByTimeOrderByNomeDesc(Time time)throws TorcidaExistenteException;
+	public List<Torcida> findByTimeOrderByNomeDesc(Time time);
+	
+	/**
+	 * Retorna uma lista com todos os times
+	 */
+	public List<Torcida> findAllTorcida();
 }

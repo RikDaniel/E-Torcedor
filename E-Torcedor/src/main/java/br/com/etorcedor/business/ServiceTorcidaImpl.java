@@ -42,44 +42,51 @@ public class ServiceTorcidaImpl implements ServiceTorcida{
 		
 	}
 
-	public Torcida findByNome(String nome) throws TorcidaExistenteException {
+	public Torcida findByNome(String nome) throws TorcidaInexistenteException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<Torcida> findByNomeContaining(String nome) throws TorcidaExistenteException {
+	public List<Torcida> findByNomeContaining(String nome) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<Torcida> findByNomeStartingWith(String nome) throws TorcidaExistenteException {
+	public List<Torcida> findByNomeStartingWith(String nome)  {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<Torcida> findByNomeOrderByNomeAsc(String nome) throws TorcidaExistenteException {
+	public List<Torcida> findByNomeOrderByNomeAsc(String nome) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<Torcida> findByNomeOrderByNomeDesc(String nome) throws TorcidaExistenteException {
+	public List<Torcida> findByNomeOrderByNomeDesc(String nome) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<Torcida> findByTime(Time time) throws TorcidaExistenteException {
+	public List<Torcida> findByTime(Time time) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<Torcida> findByTimeOrderByNomeAsc(Time time) throws TorcidaExistenteException {
+	public List<Torcida> findByTimeOrderByNomeAsc(Time time) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public List<Torcida> findByTimeOrderByNomeDesc(Time time) throws TorcidaExistenteException {
+	public List<Torcida> findByTimeOrderByNomeDesc(Time time) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	/**
+	 * Retorna uma lista com todos os times
+	 */
+	public List<Torcida> findAllTorcida() {
+		return (List<Torcida>) this.torcidaRep.findAll();
 	}
 
 }

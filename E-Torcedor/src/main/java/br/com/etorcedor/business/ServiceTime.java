@@ -49,7 +49,7 @@ public interface ServiceTime extends Serializable{
 	 * @param nome
 	 * @return uma List do tipo Time.
 	 */
-	public List<Time> findByNomeStartingWith(String nome)throws TimeInexistenteException;
+	public List<Time> findByNomeStartingWith(String nome);
 	
 	/*
 	 * Não sei se esse metodo funciona, Verificar com o Prof Thiago
@@ -61,5 +61,11 @@ public interface ServiceTime extends Serializable{
 	 * @param nome
 	 * @return uma List do tipo Time.
 	 */
-	public List<Time> findByNomeContaining(String nome)throws TimeInexistenteException;
+	public List<Time> findByNomeContaining(String nome);
+	
+	/**
+	 * Retorna uma lista com todos os times
+	 */
+	public List<Time> findAll();
+	
 }

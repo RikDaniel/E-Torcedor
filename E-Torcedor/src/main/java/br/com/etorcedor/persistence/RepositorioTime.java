@@ -37,5 +37,5 @@ public interface RepositorioTime extends CrudRepository<Time, Long> {
 	 * @return uma List do tipo Time.
 	 */
 	public List<Time> findByNomeContaining(String nome);
-	
+		
 }

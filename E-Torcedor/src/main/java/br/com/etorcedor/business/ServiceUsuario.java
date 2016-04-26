@@ -12,21 +12,21 @@ import br.com.etorcedor.exception.UsuarioInexistenteException;
 public interface ServiceUsuario extends Serializable {
 
 	/**
-	 * 
+	 * Adiciona um usuario
 	 * @param u
 	 * @throws UsuarioExistenteException
 	 */
 	public void adicionarUsuario(Usuario u)throws UsuarioExistenteException;
 	
 	/**
-	 * 
+	 * Atualiza um usuario
 	 * @param u
 	 * @throws UsuarioInexistenteException
 	 */
 	public void atualizarUsuario(Usuario u)throws UsuarioInexistenteException;
 	
 	/**
-	 * 
+	 * Remove um usuario
 	 * @param id
 	 * @throws UsuarioInexistenteException
 	 */
@@ -55,21 +55,21 @@ public interface ServiceUsuario extends Serializable {
 	 * @param nome
 	 * @return Uma coleção do tipo List de Usuario
 	 */
-	public List<Usuario> findByNomeOrderByNomeAsc(String nome)throws UsuarioInexistenteException;
+	public List<Usuario> findByNomeOrderByNomeAsc(String nome);
 	
 	/**
 	 * Recupera uma lista de usuario contendo um nome.
 	 * @param nome
 	 * @return Uma coleção do tipo List de Usuario
 	 */
-	public List<Usuario> findByNomeContaining(String nome)throws UsuarioInexistenteException;
+	public List<Usuario> findByNomeContaining(String nome);
 	
 	/**
 	 * Recupera uma lista de usuario iniciado com um nome.
 	 * @param nome
 	 * @return Uma coleção do tipo List de Usuario
 	 */
-	public List<Usuario> findByNomeStartingWith(String nome)throws UsuarioInexistenteException;
+	public List<Usuario> findByNomeStartingWith(String nome);
 	
 	/**
 	 * 
@@ -79,7 +79,7 @@ public interface ServiceUsuario extends Serializable {
 	 * @param clube
 	 * @return Uma coleção do tipo List de Usuario
 	 */
-	public List<Usuario> findByClubeOrderByNomeAsc(Time clube)throws UsuarioInexistenteException;
+	public List<Usuario> findByClubeOrderByNomeAsc(Time clube);
 	
 	/**
 	 * 
@@ -88,6 +88,11 @@ public interface ServiceUsuario extends Serializable {
 	 * @param torcida
 	 * @return Uma coleção do tipo List de Usuario
 	 */
-	public List<Usuario> findByTorcidaOrderByNomeAsc(Torcida torcida )throws UsuarioInexistenteException;
+	public List<Usuario> findByTorcidaOrderByNomeAsc(Torcida torcida );
 
+	/**
+	 * Retorna todos os usuarios do sistema
+	 * @return
+	 */
+	public List<Usuario> findAll();
 }

@@ -63,45 +63,35 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 		return usuario;
 	}
 
-	public Usuario findByEmail(String email) throws UsuarioInexistenteException {
-		Usuario usuario = usuarioRep.findByEmail(email);
-		if(usuario == null)
-			throw new UsuarioInexistenteException();
-		return usuario;
+	public Usuario findByEmail(String email) {
+		return usuarioRep.findByEmail(email);
 	}
 
-	public List<Usuario> findByNomeOrderByNomeAsc(String nome) throws UsuarioInexistenteException {
-		List<Usuario> usuarios = usuarioRep.findByNomeOrderByNomeAsc(nome);
-		if(usuarios == null)
-			throw new UsuarioInexistenteException();
-		return usuarios;
+	public List<Usuario> findByNomeOrderByNomeAsc(String nome) {
+		return usuarioRep.findByNomeContaining(nome);
 	}
 
-	public List<Usuario> findByNomeContaining(String nome) throws UsuarioInexistenteException {
-		List<Usuario> usuarios = usuarioRep.findByNomeContaining(nome);
-		if(usuarios == null)
-			throw new UsuarioInexistenteException();
-		return usuarios;
+	public List<Usuario> findByNomeContaining(String nome) {
+		return usuarioRep.findByNomeContaining(nome);
 	}
 
-	public List<Usuario> findByNomeStartingWith(String nome) throws UsuarioInexistenteException {
-		List<Usuario> usuarios = usuarioRep.findByNomeStartingWith(nome);
-		if(usuarios == null)
-			throw new UsuarioInexistenteException();
-		return usuarios;
+	public List<Usuario> findByNomeStartingWith(String nome) {
+		return usuarioRep.findByNomeStartingWith(nome);
 	}
 
-	public List<Usuario> findByClubeOrderByNomeAsc(Time clube) throws UsuarioInexistenteException {
-		List<Usuario> usuarios = usuarioRep.findByClubeOrderByNomeAsc(clube);
-		if(usuarios == null)
-			throw new UsuarioInexistenteException();
-		return usuarios;
+	public List<Usuario> findByClubeOrderByNomeAsc(Time clube) {
+		return usuarioRep.findByClubeOrderByNomeAsc(clube);
 	}
 
-	public List<Usuario> findByTorcidaOrderByNomeAsc(Torcida torcida) throws UsuarioInexistenteException {
-		List<Usuario> usuarios = usuarioRep.findByTorcidaOrderByNomeAsc(torcida);
-		if(usuarios == null)
-			throw new UsuarioInexistenteException();
-		return usuarios;
+	public List<Usuario> findByTorcidaOrderByNomeAsc(Torcida torcida) {
+		return this.usuarioRep.findByTorcidaOrderByNomeAsc(torcida);
+	}
+	
+	/**
+	 * Retorna todos os usuarios do sistema
+	 * @return
+	 */
+	public List<Usuario> findAll() {
+		return (List<Usuario>) this.usuarioRep.findAll();
 	}
 }

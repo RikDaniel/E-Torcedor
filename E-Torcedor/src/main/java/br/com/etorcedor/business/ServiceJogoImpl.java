@@ -67,32 +67,31 @@ public class ServiceJogoImpl implements ServiceJogo {
 		return j;
 	}
 
-	public List<Jogo> findByDataJogo(Date data) throws JogoInexistenteException {
+	public List<Jogo> findByDataJogo(Date data) {
 		return jogoRep.findByData(data);
 	}
 
-	public List<Jogo> findByDataOrderByDataAsc(Date data) throws JogoInexistenteException {
-
+	public List<Jogo> findByDataOrderByDataAsc(Date data) {
 		return jogoRep.findByDataOrderByDataAsc(data);
 	}
 
-	public List<Jogo> findByDataOrderByDataDesc(Date data) throws JogoInexistenteException {
-
+	public List<Jogo> findByDataOrderByDataDesc(Date data) {
 		return jogoRep.findByDataOrderByDataDesc(data);
 	}
 
-	public List<Jogo> findByEstadio(Estadio estadio) throws JogoInexistenteException {
+	public List<Jogo> findByEstadio(Estadio estadio) {
 		return jogoRep.findByEstadio(estadio);
 	}
 
-	public List<Jogo> findByEstadioOrderByDataAsc(Estadio estadio) throws JogoInexistenteException {
-
+	public List<Jogo> findByEstadioOrderByDataAsc(Estadio estadio) {
 		return jogoRep.findByEstadioOrderByDataAsc(estadio);
 	}
 
-	public List<Jogo> findByEstadioOrderByDataDesc(Estadio estadio) throws JogoInexistenteException {
-
+	public List<Jogo> findByEstadioOrderByDataDesc(Estadio estadio) {
 		return jogoRep.findByEstadioOrderByDataDesc(estadio);
+	}
+	public List<Jogo> findAllJogo() {
+		return (List<Jogo>) this.jogoRep.findAll();
 	}
 
 	@Transactional(rollbackFor = IngressoExistenteException.class)
@@ -133,37 +132,36 @@ public class ServiceJogoImpl implements ServiceJogo {
 
 	}
 
-	public List<Ingresso> findByJogo(Jogo jogo) throws IngressoInexistenteException {
-
+	public List<Ingresso> findByJogo(Jogo jogo) {
 		return ingressoRep.findByJogo(jogo);
 	}
 
-	public List<Ingresso> findByDataIngresso(Date data) throws IngressoInexistenteException {
-
+	public List<Ingresso> findByDataIngresso(Date data) {
 		return ingressoRep.findByData(data);
 	}
 
-	public List<Ingresso> findByNumeroAcento(int numeroAcento) throws IngressoInexistenteException {
+	public List<Ingresso> findByNumeroAcento(int numeroAcento) {
 		return ingressoRep.findByNumeroAcento(numeroAcento);
 	}
 
-	public List<Ingresso> findByNumeroAcentoAndSetorOrderByDataAsc(int numeroAcento, Setor setor)
-			throws IngressoInexistenteException {
+	public List<Ingresso> findByNumeroAcentoAndSetorOrderByDataAsc(int numeroAcento, Setor setor) {
 		return ingressoRep.findByNumeroAcentoAndSetorOrderByDataAsc(numeroAcento, setor);
 	}
 
 	public Ingresso findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(int numeroAcento, Setor setor, Jogo jogo)
 			throws IngressoInexistenteException {
-
 		return ingressoRep.findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(numeroAcento, setor, jogo);
 	}
 
-	public List<Ingresso> findByJogoOrderByDataAsc(Jogo jogo) throws IngressoInexistenteException {
+	public List<Ingresso> findByJogoOrderByDataAsc(Jogo jogo) {
 		return ingressoRep.findByJogoOrderByDataAsc(jogo);
 	}
 
-	public List<Ingresso> findByJogoOrderByDataDesc(Jogo jogo) throws IngressoInexistenteException {
+	public List<Ingresso> findByJogoOrderByDataDesc(Jogo jogo) {
 		return ingressoRep.findByJogoOrderByDataDesc(jogo);
 	}
-
+	
+	public List<Ingresso> findAllIngresso() {
+		return (List<Ingresso>) this.ingressoRep.findAll();
+	}
 }

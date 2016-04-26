@@ -69,5 +69,4 @@ public interface RepositorioUsuario extends CrudRepository<Usuario, Long> {
 	 * @return Uma coleção do tipo List de Usuario
 	 */
 	public List<Usuario> findByTorcidaOrderByNomeAsc(Torcida torcida );
-	
 }

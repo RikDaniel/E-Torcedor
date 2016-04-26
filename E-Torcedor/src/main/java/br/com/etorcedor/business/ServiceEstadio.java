@@ -42,6 +42,12 @@ public interface ServiceEstadio extends Serializable {
 	 */
 	public Estadio findOneEstadio(Long id)throws EstadioInexistenteException;
 	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<Estadio> findAllEstadio();
+	
 	//SETOR
 	
 	/**
@@ -85,12 +91,12 @@ public interface ServiceEstadio extends Serializable {
 	 * @param nome
 	 * @return Uma coleção do tipo List de Setor.
 	 */
-	public List<Setor> findByNomeStartingWith(String nome)throws SetorInexistenteException;
+	public List<Setor> findByNomeStartingWith(String nome);
 	
 	/**
 	 * Resupera um setor contendo um determinado nome.
 	 * @param nome
 	 * @return Uma coleção do tipo List de Setor.
 	 */
-	public List<Setor> findByNomeContaining(String nome)throws SetorInexistenteException;
+	public List<Setor> findByNomeContaining(String nome);
 }
