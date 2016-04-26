@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +19,14 @@ import br.com.etorcedor.entity.Setor;
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.exception.EstadioInexistenteException;
+import br.com.etorcedor.exception.IngressoInexistenteException;
+import br.com.etorcedor.exception.JogoInexistenteException;
+import br.com.etorcedor.exception.SetorInexistenteException;
+import br.com.etorcedor.exception.TimeInexistenteException;
 import br.com.etorcedor.exception.TorcidaExistenteException;
 import br.com.etorcedor.exception.TorcidaInexistenteException;
+import br.com.etorcedor.exception.UsuarioInexistenteException;
 
 @RestController
 @RequestMapping("/etorcedor")
@@ -63,59 +70,52 @@ public class Controller {
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
-	@RequestMapping("/usuario/find/cpf")
-	public ResponseEntity<?> findByCpf(String cpf) {
-
-		return this.fachada.findByCpf(cpf);
-
+	@RequestMapping(value = "/usuario/find/cpf", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Usuario findByCpf(String cpf) {
+		try {
+			return this.fachada.findByCpf(cpf);
+		} catch (UsuarioInexistenteException e) {
+			return null;
+		}
 	}
 
-	@RequestMapping("/usuario/find/email")
-	public ResponseEntity<?> findByEmail() {
-
-		return this.fachada.findByEmail(email);
-
+	@RequestMapping(value = "/usuario/find/email", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Usuario findByEmail(String email) {
+		try {
+			return this.fachada.findByEmail(email);
+		} catch (UsuarioInexistenteException e) {
+			return null;
+		}
 	}
 
-	@RequestMapping("/usuario/find/nome/orderly")
-	public ResponseEntity<?> findByNomeOrderByNomeAsc(String nome) {
-
+	@RequestMapping(value = "/usuario/find/nome/orderly", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Usuario> findByNomeOrderByNomeAsc(String nome) {
 		return this.fachada.findByNomeOrderByNomeAsc(nome);
-
 	}
 
-	@RequestMapping("/usuario/find/nome/contain")
-	public ResponseEntity<?> usuarioFindByNomeContaining(String nome) {
-
+	@RequestMapping(value = "/usuario/find/nome/contain", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Usuario> usuarioFindByNomeContaining(String nome) {
 		return this.fachada.usuarioFindByNomeContaining(nome);
-
 	}
 
-	@RequestMapping("/usuario/find/nome/start")
-	public ResponseEntity<?> usuarioFindByNomeStartingWith(String nome) {
-
+	@RequestMapping(value = "/usuario/find/nome/start", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Usuario> usuarioFindByNomeStartingWith(String nome) {
 		return this.fachada.usuarioFindByNomeStartingWith(nome);
-
 	}
 
-	@RequestMapping("/usuario/find/clube")
-	public ResponseEntity<?> findByClubeOrderByNomeAsc(Time clube) {
-
+	@RequestMapping(value = "/usuario/find/clube", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Usuario> findByClubeOrderByNomeAsc(Time clube) {
 		return this.fachada.findByClubeOrderByNomeAsc(clube);
-
 	}
 
 	@RequestMapping("/usuario/find/torcida")
-	public ResponseEntity<?> findByTorcidaOrderByNomeAsc(Torcida torcida) {
-
+	public List<Usuario> findByTorcidaOrderByNomeAsc(Torcida torcida) {
 		return this.fachada.findByTorcidaOrderByNomeAsc(torcida);
-
 	}
 
 	// TORCIDA
 	@RequestMapping("/torcida/add")
 	public ResponseEntity<?> adicionarTorcida(Torcida t) {
-
 		try {
 			this.fachada.adicionarTorcida(t);
 		} catch (Exception e) {
@@ -126,7 +126,6 @@ public class Controller {
 
 	@RequestMapping("/torcida/att")
 	public ResponseEntity<?> atualizarTorcida(Torcida t) {
-
 		try {
 			this.fachada.atualizarTorcida(t);
 		} catch (Exception e) {
@@ -146,163 +145,135 @@ public class Controller {
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 
-	@RequestMapping("/torcida/find/nome")
+	@RequestMapping(value = "/torcida/find/nome", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Torcida torcidaFindByNome(String nome) {
-		
 		try {
 			return this.fachada.torcidaFindByNome(nome);
 		} catch (TorcidaInexistenteException e) {
 			return null ;
 		}
-		
-
 	}
 
-	@RequestMapping("/torcida/find/nome/contain")
+	@RequestMapping(value = "/torcida/find/nome/contain", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Torcida> torcidaFindByNomeContaining(String nome) {
-
 		return this.fachada.torcidaFindByNomeContaining(nome);
-
 	}
 
-	@RequestMapping("/torcida/find/nome/start")
+	@RequestMapping(value = "/torcida/find/nome/start", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Torcida> torcidaFindByNomeStartingWith(String nome) {
-
 		return this.fachada.torcidaFindByNomeStartingWith(nome);
-
 	}
 
-	@RequestMapping("/torcida/find/nome/orderly/asc")
+	@RequestMapping(value = "/torcida/find/nome/orderly/asc", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Torcida> torcidaFindByNomeOrderByNomeAsc(String nome) {
-
 		return this.fachada.torcidaFindByNomeOrderByNomeAsc(nome);
 	}
 
-	@RequestMapping("/torcida/find/nome/orderly/desc")
+	@RequestMapping(value = "/torcida/find/nome/orderly/desc", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Torcida> findByNomeOrderByNomeDesc(String nome) {
-
 		return this.fachada.findByNomeOrderByNomeDesc(nome);
-
 	}
 
-	@RequestMapping("/torcida/find/time")
-	public Torcida findByTime(Time time) {
-
+	@RequestMapping(value = "/torcida/find/time", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Torcida> findByTime(Time time) {
 		return this.fachada.findByTime(time);
-
 	}
 
-	@RequestMapping("/torcida/find/time/ordely/asc")
-	public ResponseEntity<?> findByTimeOrderByNomeAsc(Time time) {
-
+	@RequestMapping(value = "/torcida/find/time/ordely/asc", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Torcida> findByTimeOrderByNomeAsc(Time time) {
 		return this.fachada.findByTimeOrderByNomeAsc(time);
-
 	}
 
-	@RequestMapping("/torcida/find/time/ordely/desc")
-	public ResponseEntity<?> findByTimeOrderByNomeDesc(Time time) {
-
+	@RequestMapping(value = "/torcida/find/time/ordely/desc", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Torcida> findByTimeOrderByNomeDesc(Time time) {
 		return this.fachada.findByTimeOrderByNomeDesc(time);
-
 	}
 
 	// TIME
 
-	@RequestMapping("/time/find")
-	public ResponseEntity<?> findByOne(Long id) {
-
-		return this.fachada.findByOne(id);
-
+	@RequestMapping(value = "/time/find", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Time findByOne(Long id) {
+		try {
+			return this.fachada.findByOne(id);
+		} catch (TimeInexistenteException e) {
+			return null;
+		}
 	}
 
-	@RequestMapping("/time/find/nome")
-	public ResponseEntity<?> timeFindByNome(String nome) {
-
-		return this.fachada.timeFindByNome(nome);
-
+	@RequestMapping(value = "/time/find/nome", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Time timeFindByNome(String nome) {
+		try {
+			return this.fachada.timeFindByNome(nome);
+		} catch (TimeInexistenteException e) {
+			return null;
+		}
 	}
 
-	@RequestMapping("/time/find/nome/start")
-	public ResponseEntity<?> timeFindByNomeStartingWith(String nome) {
-
+	@RequestMapping(value = "/time/find/nome/start", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Time> timeFindByNomeStartingWith(String nome) {
 		return this.fachada.timeFindByNomeStartingWith(nome);
-
 	}
 
-	@RequestMapping("/time/find/nome/contain")
-	public ResponseEntity<?> timeFByNomeContaining(String nome) {
-
+	@RequestMapping(value = "/time/find/nome/contain", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Time> timeFByNomeContaining(String nome) {
 		return this.fachada.timeFByNomeContaining(nome);
-
 	}
 
 	// JOGO
 
-	@RequestMapping("/jogo/find")
-	public ResponseEntity<?> findOneJogo(Long id) {
-
-		return this.fachada.findOneJogo(id);
-
+	@RequestMapping(value = "/jogo/find", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Jogo findOneJogo(Long id) {
+		try {
+			return this.fachada.findOneJogo(id);
+		} catch (JogoInexistenteException e) {
+			return null;
+		}
 	}
 
-	@RequestMapping("/jogo/find/data")
-	public ResponseEntity<?> findByDataJogo(Date data) {
-
+	@RequestMapping(value = "/jogo/find/data", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Jogo> findByDataJogo(Date data) {
 		return this.fachada.findByDataJogo(data);
 	}
 
-	@RequestMapping("/jogo/find/data/asc")
-	public ResponseEntity<?> findByDataOrderByDataAsc(Date data) {
-
+	@RequestMapping(value = "/jogo/find/data/asc", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Jogo> findByDataOrderByDataAsc(Date data) {
 		return this.fachada.findByDataOrderByDataAsc(data);
 	}
 
-	@RequestMapping("/jogo/find/data/desc")
-	public RequestEntity<?> findByDataOrderByDataDesc(Date data) {
-
+	@RequestMapping(value = "/jogo/find/data/desc", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Jogo> findByDataOrderByDataDesc(Date data) {
 		return this.fachada.findByDataOrderByDataDesc(data);
-
 	}
 
-	@RequestMapping("/jogo/find/estadio")
-	public ResponseEntity<?> findByEstadio(Estadio estadio) {
-
+	@RequestMapping(value = "/jogo/find/estadio", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Jogo> findByEstadio(Estadio estadio) {
 		return this.fachada.findByEstadio(estadio);
-
 	}
 
-	@RequestMapping("/jogo/find/estadio/data/asc")
-	public ResponseEntity<?> findByEstadioOrderByDataAsc(Estadio estadio) {
-
+	@RequestMapping(value = "/jogo/find/estadio/data/asc", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Jogo> findByEstadioOrderByDataAsc(Estadio estadio) {
 		return this.fachada.findByEstadioOrderByDataAsc(estadio);
-
 	}
 
-	@RequestMapping("/jogo/find/estadio/data/desc")
-	public ResponseEntity<?> findByEstadioOrderByDataDesc(Estadio estadio) {
-
+	@RequestMapping(value = "/jogo/find/estadio/data/desc", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Jogo> findByEstadioOrderByDataDesc(Estadio estadio) {
 		return this.fachada.findByEstadioOrderByDataDesc(estadio);
-
 	}
 
-	
 	//INGRESSO
 	
 	@RequestMapping("/ingresso/add")
-	public ResponseEntity<?> adicionarIngreco(Ingresso i){
-		
+	public ResponseEntity<?> adicionarIngreco(Ingresso i){		
 		try {
 			this.fachada.adicionarIngreco(i);
 		} catch (Exception e) {
 			return new ResponseEntity<Exception>(e, HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<String>(HttpStatus.OK);
-		
 	}
 	
 	@RequestMapping("/ingresso/att")
 	public ResponseEntity<?> atualizarIngreco(Ingresso i){
-		
 		try {
 			this.fachada.atualizarIngreco(i);
 		} catch (Exception e) {
@@ -313,122 +284,101 @@ public class Controller {
 	
 	@RequestMapping("/ingresso/remov")
 	public ResponseEntity<?> removerIngreco(Ingresso i){
-		
 		try {
-			this.fachada.removerIngreco(i);
+			this.fachada.removerIngreco(i.getId());
 		} catch (Exception e) {
 			return new ResponseEntity<Exception>(e, HttpStatus.BAD_REQUEST);
 		}
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
 	
-	@RequestMapping("/ingresso/find/jogo")
-	public ResponseEntity<?> findByJogo(Jogo jogo){
-		
+	@RequestMapping(value = "/ingresso/find/jogo", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Ingresso> findByJogo(Jogo jogo){
 		return this.fachada.findByJogo(jogo);
-	
 	}
 	
-	@RequestMapping("/ingresso/find/data")
-	public ResponseEntity<?> findByDataIngresso(Date data){
-		
+	@RequestMapping(value = "/ingresso/find/data", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Ingresso> findByDataIngresso(Date data){
 		return this.fachada.findByDataIngresso(data);
-		
 	}
 	
-	@RequestMapping("/ingresso/find/acento")
-	public ResponseEntity<?> findByNumeroAcento(int numeroAcento){
-		
+	@RequestMapping(value = "/ingresso/find/acento", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Ingresso> findByNumeroAcento(int numeroAcento){
 		return this.fachada.findByNumeroAcento(numeroAcento);
-		
 	}
 	
-	@RequestMapping("/ingresso/find/acento/setor/ordely/asc")
-	public ResponseEntity<?> findByNumeroAcentoAndSetorOrderByDataAsc(int numeroAcento, Setor setor){
-		
+	@RequestMapping(value = "/ingresso/find/acento/setor/ordely/asc", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Ingresso> findByNumeroAcentoAndSetorOrderByDataAsc(int numeroAcento, Setor setor){
 		return this.fachada.findByNumeroAcentoAndSetorOrderByDataAsc(numeroAcento, setor);
-		
 	}
 	
-	@RequestMapping("/ingresso/find/acento/setor/jogo/ordely/asc")
-	public ResponseEntity<?> findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(int numeroAcento, Setor setor, Jogo jogo){
-		
-		return this.fachada.findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(numeroAcento, setor, jogo);
-		
+	@RequestMapping(value = "/ingresso/find/acento/setor/jogo/ordely/asc", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Ingresso findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(int numeroAcento, Setor setor, Jogo jogo){
+		try {
+			return this.fachada.findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(numeroAcento, setor, jogo);
+		} catch (IngressoInexistenteException e) {
+			return null;
+		}
 	}
 	
-	@RequestMapping("/ingresso/find/jogo/ordely/asc")
-	public ResponseEntity<?> findByJogoOrderByDataAsc(Jogo jogo){
-		
+	@RequestMapping(value = "/ingresso/find/jogo/ordely/asc", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Ingresso> findByJogoOrderByDataAsc(Jogo jogo){
 		return this.fachada.findByJogoOrderByDataAsc(jogo);
-		
 	}
 	
-	@RequestMapping("/ingresso/find/jogo/ordely/desc")
-	public ResponseEntity<?> findByJogoOrderByDataDesc(Jogo jogo){
-		
+	@RequestMapping(value = "/ingresso/find/jogo/ordely/desc", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Ingresso> findByJogoOrderByDataDesc(Jogo jogo){
 		return this.fachada.findByJogoOrderByDataDesc(jogo);
-		
 	}
  	
-	@RequestMapping("/ingresso/find")
-	public ResponseEntity<?> findOneIngresso(){
-		
-		return this.fachada.findOneIngresso(id);
-		
+	@RequestMapping(value = "/ingresso/find", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Ingresso findOneIngresso(Long id){
+		try {
+			return this.fachada.findOneIngresso(id);
+		} catch (IngressoInexistenteException e) {
+			return null;
+		}		
 	}
 	
 	//Estadio
 	
-	@RequestMapping("/estadio/find")
-	public ResponseEntity<?> findOneEstadio(Long id){
-		
-		return this.fachada.findOneEstadio(id);
+	@RequestMapping(value = "/estadio/find", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Estadio findOneEstadio(Long id){
+		try {
+			return this.fachada.findOneEstadio(id);
+		} catch (EstadioInexistenteException e) {
+			return null;
+		}
 	}
 	
 	
 	//Setor
 	
-	@RequestMapping("/setor/find")
-	public ResponseEntity<?> findOneSetor(Long id){
-		
-		return this.fachada.findOneSetor(id);
+	@RequestMapping(value = "/setor/find", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Setor findOneSetor(Long id){
+		try {
+			return this.fachada.findOneSetor(id);
+		} catch (SetorInexistenteException e) {
+			return null;
+		}
 	}
 	
-	@RequestMapping("/setor/find/nome")
-	public ResponseEntity<?> findByNome(String nome){
-		
-		return this.fachada.findByNome(nome);
-		
+	@RequestMapping(value = "/setor/find/nome",  produces = MediaType.APPLICATION_JSON_VALUE)
+	public Setor findByNome(String nome){
+		try {
+			return this.fachada.findByNome(nome);
+		} catch (SetorInexistenteException e) {
+			return null;
+		}
 	}
  	
-	@RequestMapping("/setor/find/nome/start")
-	public ResponseEntity<?> findByNomeStartingWith(){
-		
+	@RequestMapping(value = "/setor/find/nome/start", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Setor> findByNomeStartingWith(String nome){
 		return this.fachada.findByNomeStartingWith(nome);
-		
 	}
 	
-	@RequestMapping("/setor/find/nome/contain")
-	public ResponseEntity<?> findByNomeContaining(){
-		
+	@RequestMapping(value = "/setor/find/nome/contain", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Setor> findByNomeContaining(String nome){
 		return this.fachada.findByNomeContaining(nome);
-		
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 }
