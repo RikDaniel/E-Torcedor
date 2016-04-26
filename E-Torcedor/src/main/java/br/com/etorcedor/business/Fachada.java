@@ -133,21 +133,21 @@ public interface Fachada extends Serializable {
 	 * @param nome
 	 * @return uma entidade do tipo Torcida
 	 */
-	public Torcida torcidaFindByNome(String nome)throws TorcidaExistenteException;
+	public Torcida torcidaFindByNome(String nome)throws TorcidaInexistenteException;
 	
 	/**
 	 * Recupera todas as torcidas contendo um nome. 
 	 * @param nome
 	 * @return uma coleção do tipo List de Torcida
 	 */
-	public List<Torcida> torcidaFindByNomeContaining(String nome)throws TorcidaExistenteException;
+	public List<Torcida> torcidaFindByNomeContaining(String nome);
 	
 	/**
 	 * Recupera todas as torcidas começando com um nome. 
 	 * @param nome
 	 * @return uma coleção do tipo List de Torcida
 	 */
-	public List<Torcida> torcidaFindByNomeStartingWith(String nome)throws TorcidaExistenteException;
+	public List<Torcida> torcidaFindByNomeStartingWith(String nome);
 	
 	/**
 	 * Recupera todas as torcidas pelo seu nome, ordenado de forma ascendente,
@@ -155,7 +155,7 @@ public interface Fachada extends Serializable {
 	 * @param nome
 	 * @return uma coleção de Torcida do tipo List
 	 */
-	public List<Torcida> torcidaFindByNomeOrderByNomeAsc(String nome)throws TorcidaExistenteException;
+	public List<Torcida> torcidaFindByNomeOrderByNomeAsc(String nome);
 	
 	/**
 	 * Recupera todas as torcidas pelo seu nome, ordenado de forma descendente,
@@ -163,14 +163,14 @@ public interface Fachada extends Serializable {
 	 * @param nome
 	 * @return uma coleção de Torcida do tipo List 
 	 */
-	public List<Torcida> findByNomeOrderByNomeDesc(String nome)throws TorcidaExistenteException;
+	public List<Torcida> findByNomeOrderByNomeDesc(String nome);
 	
 	/**
 	 * Recupera todas as torcida pelo Time
 	 * @param time
 	 * @return uma coleção de Torcida do tipo List
 	 */
-	public List<Torcida> findByTime(Time time)throws TorcidaExistenteException;
+	public List<Torcida> findByTime(Time time);
 	
 	/**
 	 * Recupera todas as torcida pelo Time, ordenando de forma ascendente,
@@ -178,7 +178,7 @@ public interface Fachada extends Serializable {
 	 * @param time
 	 * @return
 	 */
-	public List<Torcida> findByTimeOrderByNomeAsc(Time time)throws TorcidaExistenteException;
+	public List<Torcida> findByTimeOrderByNomeAsc(Time time);
 	
 	/**
 	 * Recupera todas as torcida pelo Time, ordenando de forma descendente,
@@ -186,7 +186,7 @@ public interface Fachada extends Serializable {
 	 * @param time
 	 * @return
 	 */
-	public List<Torcida> findByTimeOrderByNomeDesc(Time time)throws TorcidaExistenteException;
+	public List<Torcida> findByTimeOrderByNomeDesc(Time time);
 	
 	//TIME
 	
@@ -204,7 +204,7 @@ public interface Fachada extends Serializable {
 	 * @param nome
 	 * @return uma List do tipo Time.
 	 */
-	public List<Time> timeFindByNomeStartingWith(String nome)throws TimeInexistenteException;
+	public List<Time> timeFindByNomeStartingWith(String nome);
 	
 	/*
 	 * Não sei se esse metodo funciona, Verificar com o Prof Thiago
@@ -216,7 +216,7 @@ public interface Fachada extends Serializable {
 	 * @param nome
 	 * @return uma List do tipo Time.
 	 */
-	public List<Time> timeFByNomeContaining(String nome)throws TimeInexistenteException;
+	public List<Time> timeFByNomeContaining(String nome);
 	
 	//JOGO
 	public Jogo findOneJogo(Long id)throws JogoInexistenteException;
@@ -226,7 +226,7 @@ public interface Fachada extends Serializable {
 	 * @param data
 	 * @return Uma coleção do tipo List de Jogo
 	 */
-	public List<Jogo> findByDataJogo(Date data)throws JogoInexistenteException;
+	public List<Jogo> findByDataJogo(Date data);
 	
 	/**
 	 * Recupera uma lista de Jogos em um determinada Data,
@@ -234,7 +234,7 @@ public interface Fachada extends Serializable {
 	 * @param data
 	 * @return Uma coleção do tipo List de Jogo
 	 */
-	public List<Jogo> findByDataOrderByDataAsc(Date data)throws JogoInexistenteException;
+	public List<Jogo> findByDataOrderByDataAsc(Date data);
 	
 	/**
 	 * Recupera uma lista de Jogos em um determinada Data,
@@ -242,14 +242,14 @@ public interface Fachada extends Serializable {
 	 * @param data
 	 * @return Uma coleção do tipo List de Jogo
 	 */
-	public List<Jogo> findByDataOrderByDataDesc(Date data)throws JogoInexistenteException;
+	public List<Jogo> findByDataOrderByDataDesc(Date data);
 	
 	/**
 	 * Recupera uma lista de Jogos em um estadio.
 	 * @param estadio
 	 * @return Uma coleção do tipo List de Jogo
 	 */
-	public List<Jogo> findByEstadio(Estadio estadio)throws JogoInexistenteException;
+	public List<Jogo> findByEstadio(Estadio estadio);
 	
 	/**
 	 * Recupera uma lista de Jogos em um estadio,
@@ -257,7 +257,7 @@ public interface Fachada extends Serializable {
 	 * @param estadio
 	 * @return Uma coleção do tipo List de Jogo
 	 */
-	public List<Jogo> findByEstadioOrderByDataAsc(Estadio estadio)throws JogoInexistenteException;
+	public List<Jogo> findByEstadioOrderByDataAsc(Estadio estadio);
 
 	/**
 	 * Recupera uma lista de Jogos em um estadio,
@@ -265,7 +265,7 @@ public interface Fachada extends Serializable {
 	 * @param estadio
 	 * @return Uma coleção do tipo List de Jogo
 	 */
-	public List<Jogo> findByEstadioOrderByDataDesc(Estadio estadio)throws JogoInexistenteException;
+	public List<Jogo> findByEstadioOrderByDataDesc(Estadio estadio);
 	
 	
 	//INGRESSO

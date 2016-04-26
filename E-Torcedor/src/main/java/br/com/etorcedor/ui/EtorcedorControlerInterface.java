@@ -1,6 +1,7 @@
 package br.com.etorcedor.ui;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,8 @@ import br.com.etorcedor.entity.Setor;
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.exception.TorcidaExistenteException;
+import br.com.etorcedor.exception.TorcidaInexistenteException;
 
 @RestController
 @RequestMapping("/etorcedor")
@@ -144,41 +147,46 @@ public class EtorcedorControlerInterface {
 	}
 
 	@RequestMapping("/torcida/find/nome")
-	public ResponseEntity<?> torcidaFindByNome(String nome) {
-
-		return this.fachada.torcidaFindByNome(nome);
+	public Torcida torcidaFindByNome(String nome) {
+		
+		try {
+			return this.fachada.torcidaFindByNome(nome);
+		} catch (TorcidaInexistenteException e) {
+			return null ;
+		}
+		
 
 	}
 
 	@RequestMapping("/torcida/find/nome/contain")
-	public ResponseEntity<?> torcidaFindByNomeContaining(String nome) {
+	public List<Torcida> torcidaFindByNomeContaining(String nome) {
 
 		return this.fachada.torcidaFindByNomeContaining(nome);
 
 	}
 
 	@RequestMapping("/torcida/find/nome/start")
-	public ResponseEntity<?> torcidaFindByNomeStartingWith(String nome) {
+	public List<Torcida> torcidaFindByNomeStartingWith(String nome) {
 
 		return this.fachada.torcidaFindByNomeStartingWith(nome);
 
 	}
 
 	@RequestMapping("/torcida/find/nome/orderly/asc")
-	public ResponseEntity<?> torcidaFindByNomeOrderByNomeAsc(String nome) {
+	public List<Torcida> torcidaFindByNomeOrderByNomeAsc(String nome) {
 
 		return this.fachada.torcidaFindByNomeOrderByNomeAsc(nome);
 	}
 
 	@RequestMapping("/torcida/find/nome/orderly/desc")
-	public ResponseEntity<?> findByNomeOrderByNomeDesc(String nome) {
+	public List<Torcida> findByNomeOrderByNomeDesc(String nome) {
 
 		return this.fachada.findByNomeOrderByNomeDesc(nome);
 
 	}
 
 	@RequestMapping("/torcida/find/time")
-	public ResponseEntity<?> findByTime(Time time) {
+	public Time findByTime(Time time) {
 
 		return this.fachada.findByTime(time);
 
