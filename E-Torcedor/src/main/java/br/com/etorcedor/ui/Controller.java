@@ -71,20 +71,22 @@ public class Controller {
 	}
 
 	@RequestMapping(value = "/usuario/find/cpf", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Usuario findByCpf(String cpf) {
+	public ResponseEntity<?> findByCpf(String cpf) {
 		try {
-			return this.fachada.findByCpf(cpf);
+			Usuario usuario = this.fachada.findByCpf(cpf);
+			return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
 		} catch (UsuarioInexistenteException e) {
-			return null;
+			return new ResponseEntity<UsuarioInexistenteException>(e, HttpStatus.BAD_REQUEST);
 		}
 	}
 
 	@RequestMapping(value = "/usuario/find/email", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Usuario findByEmail(String email) {
+	public ResponseEntity<?> findByEmail(String email) {
 		try {
-			return this.fachada.findByEmail(email);
+			Usuario usuario =  this.fachada.findByEmail(email);
+			return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
 		} catch (UsuarioInexistenteException e) {
-			return null;
+			return new ResponseEntity<UsuarioInexistenteException>(e, HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -146,11 +148,12 @@ public class Controller {
 	}
 
 	@RequestMapping(value = "/torcida/find/nome", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Torcida torcidaFindByNome(String nome) {
+	public ResponseEntity<?> torcidaFindByNome(String nome) {
 		try {
-			return this.fachada.torcidaFindByNome(nome);
+			Torcida torcida = this.fachada.torcidaFindByNome(nome);
+			return new ResponseEntity<Torcida>(torcida, HttpStatus.OK);
 		} catch (TorcidaInexistenteException e) {
-			return null ;
+			return new ResponseEntity<TorcidaInexistenteException>(e, HttpStatus.BAD_REQUEST);
 		}
 	}
 
@@ -313,11 +316,12 @@ public class Controller {
 	}
 	
 	@RequestMapping(value = "/ingresso/find/acento/setor/jogo/ordely/asc", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Ingresso findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(int numeroAcento, Setor setor, Jogo jogo){
+	public ResponseEntity<?> findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(int numeroAcento, Setor setor, Jogo jogo){
 		try {
-			return this.fachada.findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(numeroAcento, setor, jogo);
+			Ingresso ingresso = this.fachada.findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(numeroAcento, setor, jogo);
+			return new ResponseEntity<Ingresso>(ingresso, HttpStatus.OK);
 		} catch (IngressoInexistenteException e) {
-			return null;
+			return new ResponseEntity<IngressoInexistenteException>(e, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -332,22 +336,24 @@ public class Controller {
 	}
  	
 	@RequestMapping(value = "/ingresso/find", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Ingresso findOneIngresso(Long id){
+	public ResponseEntity<?> findOneIngresso(Long id){
 		try {
-			return this.fachada.findOneIngresso(id);
+			Ingresso ingresso = this.fachada.findOneIngresso(id);
+			return new ResponseEntity<Ingresso>(ingresso, HttpStatus.OK);
 		} catch (IngressoInexistenteException e) {
-			return null;
+			return new ResponseEntity<IngressoInexistenteException>(e, HttpStatus.BAD_REQUEST);
 		}		
 	}
 	
 	//Estadio
 	
 	@RequestMapping(value = "/estadio/find", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Estadio findOneEstadio(Long id){
+	public ResponseEntity<?> findOneEstadio(Long id){
 		try {
-			return this.fachada.findOneEstadio(id);
+			Estadio estadio = this.fachada.findOneEstadio(id);
+			return new ResponseEntity<Estadio>(estadio, HttpStatus.OK);
 		} catch (EstadioInexistenteException e) {
-			return null;
+			return new ResponseEntity<EstadioInexistenteException>(e, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -355,20 +361,22 @@ public class Controller {
 	//Setor
 	
 	@RequestMapping(value = "/setor/find", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Setor findOneSetor(Long id){
+	public ResponseEntity<?> findOneSetor(Long id){
 		try {
-			return this.fachada.findOneSetor(id);
+			Setor setor = this.fachada.findOneSetor(id);
+			return new ResponseEntity<Setor>(setor, HttpStatus.OK);
 		} catch (SetorInexistenteException e) {
-			return null;
+			return new ResponseEntity<SetorInexistenteException>(e, HttpStatus.BAD_REQUEST);
 		}
 	}
 	
 	@RequestMapping(value = "/setor/find/nome",  produces = MediaType.APPLICATION_JSON_VALUE)
-	public Setor findByNome(String nome){
+	public ResponseEntity<?> findByNome(String nome){
 		try {
-			return this.fachada.findByNome(nome);
+			Setor setor = this.fachada.findByNome(nome);
+			return new ResponseEntity<Setor>(setor, HttpStatus.OK);
 		} catch (SetorInexistenteException e) {
-			return null;
+			return new ResponseEntity<SetorInexistenteException>(e, HttpStatus.BAD_REQUEST);
 		}
 	}
  	
