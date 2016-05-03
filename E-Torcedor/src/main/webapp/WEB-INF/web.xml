@@ -21,7 +21,7 @@
  
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/mvc-ddispatcher-servlet.xml, 
+		<param-value>/WEB-INF/mvc-dispatcher-servlet.xml, 
 					/WEB-INF/spring-data-jpa-config.xml
 		</param-value>
 	</context-param>
