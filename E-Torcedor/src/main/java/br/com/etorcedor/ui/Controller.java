@@ -286,9 +286,9 @@ public class Controller {
 	}
 	
 	@RequestMapping("/ingresso/remov")
-	public ResponseEntity<?> removerIngreco(Ingresso i){
+	public ResponseEntity<?> removerIngreco(Long i){
 		try {
-			this.fachada.removerIngreco(i.getId());
+			this.fachada.removerIngreco(i);
 		} catch (Exception e) {
 			return new ResponseEntity<Exception>(e, HttpStatus.BAD_REQUEST);
 		}
