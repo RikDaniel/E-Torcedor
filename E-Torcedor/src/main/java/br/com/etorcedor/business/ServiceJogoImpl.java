@@ -60,7 +60,7 @@ public class ServiceJogoImpl implements ServiceJogo {
 			List<Ingresso> i = old.getIngrecos();
 			try {
 				for(Ingresso n:i)
-					removerIngreco(n);
+					removerIngreco(n.getId());
 				jogoRep.delete(old);	
 			} catch (Exception e) {
 				throw new JogoInexistenteException();
@@ -128,8 +128,8 @@ public class ServiceJogoImpl implements ServiceJogo {
 	}
 
 	@Transactional(rollbackFor = IngressoInexistenteException.class)
-	public void removerIngreco(Ingresso i) throws IngressoInexistenteException {
-		Ingresso old = findOneIngresso(i.getId());
+	public void removerIngreco(Long i) throws IngressoInexistenteException {
+		Ingresso old = findOneIngresso(i);
 		ingressoRep.delete(old);
 			
 	}
