@@ -46,6 +46,18 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 
 	@Transactional(rollbackFor = EstadioInexistenteException.class)
 	public void removerEstadio(Estadio e) throws EstadioInexistenteException {
+		Estadio old= this.estadioRep.findOne(e.getId());
+		
+		try {
+			List<Setor> s= old.getSetores();
+			
+			for(Setor r:s){
+				this.removerSetor(r);
+			}
+			estadioRep.delete(old);
+		} catch (Exception e2) {
+			throw new EstadioInexistenteException();
+		}
 		
 	}
 
@@ -85,8 +97,8 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 
 	@Transactional(rollbackFor = SetorInexistenteException.class)
 	public void removerSetor(Setor e) throws SetorInexistenteException {
-		// TODO Auto-generated method stub
-
+		Setor old = findOneSetor(e.getId());
+		setorRep.delete(old);
 	}
 
 	public Setor findOneSetor(Long id) throws SetorInexistenteException {

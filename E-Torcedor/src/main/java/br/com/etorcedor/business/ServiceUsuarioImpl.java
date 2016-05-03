@@ -6,11 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.exception.IngressoInexistenteException;
 import br.com.etorcedor.exception.UsuarioExistenteException;
 import br.com.etorcedor.exception.UsuarioInexistenteException;
+import br.com.etorcedor.persistence.RepositorioIngresso;
 import br.com.etorcedor.persistence.RepositorioUsuario;
 
 @Service
@@ -23,6 +26,8 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 
 	@Autowired
 	private RepositorioUsuario usuarioRep;
+	@Autowired
+	private ServiceJogo ingressoServ;
 
 	@Transactional(rollbackFor = UsuarioExistenteException.class)
 	public void adicionarUsuario(Usuario u) throws UsuarioExistenteException {
@@ -36,24 +41,34 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 
 	@Transactional(rollbackFor = UsuarioInexistenteException.class)
 	public void atualizarUsuario(Usuario u) throws UsuarioInexistenteException {
-		Usuario old = this.findByCpf(u.getCpf());
-		old.setCpf(u.getCpf());
-		old.setNome(u.getNome());
-		old.setImagem(u.getImagem());
-		old.setGenero(u.getGenero());
-		old.setTelefone(u.getTelefone());
-		old.setEmail(u.getEmail());
-		old.setData_nascimento(u.getData_nascimento());
-		old.setTorcida(u.getTorcida());
-		old.setClube(u.getClube());
-		old.setIngressos(u.getIngressos());
-		this.usuarioRep.save(old);
+			Usuario old = this.findByCpf(u.getCpf());
+			old.setCpf(u.getCpf());
+			old.setNome(u.getNome());
+			old.setImagem(u.getImagem());
+			old.setGenero(u.getGenero());
+			old.setTelefone(u.getTelefone());
+			old.setEmail(u.getEmail());
+			old.setData_nascimento(u.getData_nascimento());
+			old.setTorcida(u.getTorcida());
+			old.setClube(u.getClube());
+			old.setIngressos(u.getIngressos());
+			this.usuarioRep.save(old);
+			
 	}
 
 	@Transactional(rollbackFor = UsuarioInexistenteException.class)
 	public void removerUsuario(Long id) throws UsuarioInexistenteException {
-		// TODO Auto-generated method stub
+		Usuario old = usuarioRep.findOne(id);
 
+		List<Ingresso> i= old.getIngressos();
+			try {
+				for(Ingresso e:i){
+					ingressoServ.removerIngreco(e.getId());
+				}
+				usuarioRep.delete(old);
+			} catch (IngressoInexistenteException e1) {
+				throw new UsuarioInexistenteException();
+			}
 	}
 
 	public Usuario findByCpf(String cpf) throws UsuarioInexistenteException {

@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.List;
 
 import br.com.etorcedor.entity.Time;
+import br.com.etorcedor.exception.JogoInexistenteException;
 import br.com.etorcedor.exception.TimeExistenteException;
 import br.com.etorcedor.exception.TimeInexistenteException;
+import br.com.etorcedor.exception.TorcidaInexistenteException;
 
 public interface ServiceTime extends Serializable{
 
@@ -28,7 +30,7 @@ public interface ServiceTime extends Serializable{
 	 * @param t
 	 * @throws TimeInexistenteException
 	 */
-	public void removerTime(Time t)throws TimeInexistenteException;
+	public void removerTime(Time t)throws TimeInexistenteException,TorcidaInexistenteException,JogoInexistenteException;
 	
 	/**
 	 * Recupera um time pelo seu identificador.

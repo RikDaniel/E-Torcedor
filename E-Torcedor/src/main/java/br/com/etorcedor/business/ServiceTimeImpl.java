@@ -6,10 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.entity.Time;
+import br.com.etorcedor.entity.Torcida;
+import br.com.etorcedor.exception.JogoInexistenteException;
 import br.com.etorcedor.exception.TimeExistenteException;
 import br.com.etorcedor.exception.TimeInexistenteException;
+import br.com.etorcedor.exception.TorcidaInexistenteException;
+import br.com.etorcedor.persistence.RepositorioJogo;
 import br.com.etorcedor.persistence.RepositorioTime;
+import br.com.etorcedor.persistence.RepositorioTorcida;
 
 @Service
 public class ServiceTimeImpl implements ServiceTime{
@@ -21,7 +27,11 @@ public class ServiceTimeImpl implements ServiceTime{
 	
 	@Autowired
 	private RepositorioTime timeRep;
-
+	@Autowired
+	private ServiceTorcida torcidaSer;
+	@Autowired
+	private ServiceJogo jogoSer;
+	
 	@Transactional(rollbackFor = TimeExistenteException.class)
 	public void adicionarTime(Time t) throws TimeExistenteException {
 		try {
@@ -43,9 +53,21 @@ public class ServiceTimeImpl implements ServiceTime{
 	}
 
 	@Transactional(rollbackFor = TimeInexistenteException.class)
-	public void removerTime(Time t) throws TimeInexistenteException {
-		// TODO Auto-generated method stub
+	public void removerTime(Time t) throws TimeInexistenteException,TorcidaInexistenteException,JogoInexistenteException{
+		Time old = findByOne(t.getId());
 		
+		List<Torcida> a =old.getTorcidas();
+		List<Jogo> j = old.getJogos();
+		try {
+			for(Torcida to:a)
+				torcidaSer.removerTorcida(to.getId());
+			for(Jogo jo:j)
+				jogoSer.removerJogo(jo);
+			timeRep.delete(old);
+		} catch (Exception e) {
+			throw new TimeInexistenteException();
+		}		
+			
 	}
 	
 	public Time findByOne(Long id) throws TimeInexistenteException {

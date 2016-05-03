@@ -91,6 +91,9 @@ public interface ServiceTorcida extends Serializable {
 	 */
 	public List<Torcida> findByTimeOrderByNomeDesc(Time time);
 	
+	
+	public Torcida findOneTorcida(Long id)throws TorcidaInexistenteException;
+	
 	/**
 	 * Retorna uma lista com todos os times
 	 */
