@@ -310,7 +310,7 @@ public interface Fachada extends Serializable {
 	 * @param i
 	 * @throws IngressoInexistenteException
 	 */
-	public void removerIngreco(Long i)throws IngressoInexistenteException;
+	public void removerIngreco(Ingresso i)throws IngressoInexistenteException;
 
 	/**
 	 * Recupera todos os ingressos de um determinado jogo.

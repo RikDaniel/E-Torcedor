@@ -214,7 +214,7 @@ public class FachadaImpl implements Fachada {
 		this.jogoServ.atualizarIngreco(i);
 	}
 
-	public void removerIngreco(Long i) throws IngressoInexistenteException {
+	public void removerIngreco(Ingresso i) throws IngressoInexistenteException {
 		this.jogoServ.removerIngreco(i);
 	}
 
