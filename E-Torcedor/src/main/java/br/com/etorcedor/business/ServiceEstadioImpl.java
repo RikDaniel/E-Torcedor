@@ -35,7 +35,7 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 			estadioRep.save(e);
 		}
 	}
-	
+
 	@Transactional(rollbackFor = EstadioInexistenteException.class)
 	public void atualizarEstadio(Estadio e) throws EstadioInexistenteException {
 		Estadio old = findOneEstadio(e.getId());
@@ -47,10 +47,10 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 	@Transactional(rollbackFor = EstadioInexistenteException.class)
 	public void removerEstadio(Estadio e) throws EstadioInexistenteException {
 		Estadio old= this.estadioRep.findOne(e.getId());
-		
+
 		try {
 			List<Setor> s= old.getSetores();
-			
+
 			for(Setor r:s){
 				this.removerSetor(r);
 			}
@@ -58,7 +58,6 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 		} catch (Exception e2) {
 			throw new EstadioInexistenteException();
 		}
-		
 	}
 
 	public Estadio findOneEstadio(Long id) throws EstadioInexistenteException {
@@ -69,7 +68,7 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 		}
 		return e;
 	}
-	
+
 	public List<Estadio> findAllEstadio() {
 		return (List<Estadio>) this.estadioRep.findAll();
 	}
@@ -82,17 +81,16 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 		} catch (SetorInexistenteException ei) {
 			setorRep.save(e);
 		}
-
 	}
 
 	@Transactional(rollbackFor = SetorInexistenteException.class)
 	public void atualizarSetor(Setor e) throws SetorInexistenteException {
 		Setor old = findOneSetor(e.getId());
-			old.setNome(e.getNome());
-			old.setEstadio(e.getEstadio());
-			old.setIngrecos(e.getIngrecos());
-			old.setNumero_cadeiras(e.getNumero_cadeiras());
-			setorRep.save(old);
+		old.setNome(e.getNome());
+		old.setEstadio(e.getEstadio());
+		old.setIngrecos(e.getIngrecos());
+		old.setNumero_cadeiras(e.getNumero_cadeiras());
+		setorRep.save(old);
 	}
 
 	@Transactional(rollbackFor = SetorInexistenteException.class)
@@ -107,7 +105,6 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 			throw new SetorInexistenteException();
 		}
 		return s;
-		
 	}
 
 	public Setor findByNome(String nome) throws SetorInexistenteException {
@@ -117,15 +114,4 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 		}
 		return s;
 	}
-
-	public List<Setor> findByNomeStartingWith(String nome) {
-	
-		return setorRep.findByNomeStartingWith(nome);
-	}
-
-	public List<Setor> findByNomeContaining(String nome) {
-		
-		return setorRep.findByNomeContaining(nome);
-	}
-
 }

@@ -63,48 +63,7 @@ public interface Fachada extends Serializable {
 	 * @return Uma entidade do tipo Usuario
 	 */
 	public Usuario findByEmail(String email)throws UsuarioInexistenteException;
-
-	/**
-	 * Procura todos os usuarios pelo seu nome, 
-	 * ordenando de forma ascendente.
-	 * @param nome
-	 * @return Uma coleção do tipo List de Usuario
-	 */
-	public List<Usuario> findByNomeOrderByNomeAsc(String nome);
-
-	/**
-	 * Recupera uma lista de usuario contendo um nome.
-	 * @param nome
-	 * @return Uma coleção do tipo List de Usuario
-	 */
-	public List<Usuario> usuarioFindByNomeContaining(String nome);
-
-	/**
-	 * Recupera uma lista de usuario iniciado com um nome.
-	 * @param nome
-	 * @return Uma coleção do tipo List de Usuario
-	 */
-	public List<Usuario> usuarioFindByNomeStartingWith(String nome);
-
-	/**
-	 * 
-	 * Procura todos os usuário que estejam em um Time,
-	 * ordenando de forma ascendente, 
-	 * utilizando o nome como critério.
-	 * @param clube
-	 * @return Uma coleção do tipo List de Usuario
-	 */
-	public List<Usuario> findByClubeOrderByNomeAsc(Time clube);
-
-	/**
-	 * 
-	 * Procura todos os usuarios que estejam em uma Torcida,
-	 * ordenando de forma ascendente, utilizando o nome como critério.
-	 * @param torcida
-	 * @return Uma coleção do tipo List de Usuario
-	 */
-	public List<Usuario> findByTorcidaOrderByNomeAsc(Torcida torcida );
-
+	
 	/**
 	 * Retorna todos os usuarios do sistema
 	 * @return
@@ -140,35 +99,6 @@ public interface Fachada extends Serializable {
 	 */
 	public Torcida torcidaFindByNome(String nome)throws TorcidaInexistenteException;
 
-	/**
-	 * Recupera todas as torcidas contendo um nome. 
-	 * @param nome
-	 * @return uma coleção do tipo List de Torcida
-	 */
-	public List<Torcida> torcidaFindByNomeContaining(String nome);
-
-	/**
-	 * Recupera todas as torcidas começando com um nome. 
-	 * @param nome
-	 * @return uma coleção do tipo List de Torcida
-	 */
-	public List<Torcida> torcidaFindByNomeStartingWith(String nome);
-
-	/**
-	 * Recupera todas as torcidas pelo seu nome, ordenado de forma ascendente,
-	 * usando o nome como critério.
-	 * @param nome
-	 * @return uma coleção de Torcida do tipo List
-	 */
-	public List<Torcida> torcidaFindByNomeOrderByNomeAsc(String nome);
-
-	/**
-	 * Recupera todas as torcidas pelo seu nome, ordenado de forma descendente,
-	 * usando o nome como critério.
-	 * @param nome
-	 * @return uma coleção de Torcida do tipo List 
-	 */
-	public List<Torcida> findByNomeOrderByNomeDesc(String nome);
 
 	/**
 	 * Recupera todas as torcida pelo Time
@@ -176,22 +106,6 @@ public interface Fachada extends Serializable {
 	 * @return uma coleção de Torcida do tipo List
 	 */
 	public List<Torcida> findByTime(Time time);
-
-	/**
-	 * Recupera todas as torcida pelo Time, ordenando de forma ascendente,
-	 * utilizando o nome da torcida como critério.
-	 * @param time
-	 * @return
-	 */
-	public List<Torcida> findByTimeOrderByNomeAsc(Time time);
-
-	/**
-	 * Recupera todas as torcida pelo Time, ordenando de forma descendente,
-	 * utilizando o nome da torcida como critério.
-	 * @param time
-	 * @return
-	 */
-	public List<Torcida> findByTimeOrderByNomeDesc(Time time);
 
 	/**
 	 * Retorna uma lista com todas as torcidas.
@@ -211,25 +125,6 @@ public interface Fachada extends Serializable {
 	public Time timeFindByNome(String nome)throws TimeInexistenteException;
 
 	/**
-	 * Recupera uma lista de times, começando com um nome.
-	 * @param nome
-	 * @return uma List do tipo Time.
-	 */
-	public List<Time> timeFindByNomeStartingWith(String nome);
-
-	/*
-	 * Não sei se esse metodo funciona, Verificar com o Prof Thiago
-	 * public List<Time> findByNomeStartingWithOrderByNomeAsc(String nome);
-	 */
-
-	/**
-	 * Recupera uma Lista de time contendo um nome.
-	 * @param nome
-	 * @return uma List do tipo Time.
-	 */
-	public List<Time> timeFByNomeContaining(String nome);
-
-	/**
 	 * Retorna uma lista com todos os times
 	 */
 	public List<Time> findAllTime();
@@ -245,43 +140,11 @@ public interface Fachada extends Serializable {
 	public List<Jogo> findByDataJogo(Date data);
 
 	/**
-	 * Recupera uma lista de Jogos em um determinada Data,
-	 * ordenado de forma ascendente por data.
-	 * @param data
-	 * @return Uma coleção do tipo List de Jogo
-	 */
-	public List<Jogo> findByDataOrderByDataAsc(Date data);
-
-	/**
-	 * Recupera uma lista de Jogos em um determinada Data,
-	 * ordenado de forma descendente por data.
-	 * @param data
-	 * @return Uma coleção do tipo List de Jogo
-	 */
-	public List<Jogo> findByDataOrderByDataDesc(Date data);
-
-	/**
 	 * Recupera uma lista de Jogos em um estadio.
 	 * @param estadio
 	 * @return Uma coleção do tipo List de Jogo
 	 */
 	public List<Jogo> findByEstadio(Estadio estadio);
-
-	/**
-	 * Recupera uma lista de Jogos em um estadio,
-	 * ordenado de forma ascendente por data.
-	 * @param estadio
-	 * @return Uma coleção do tipo List de Jogo
-	 */
-	public List<Jogo> findByEstadioOrderByDataAsc(Estadio estadio);
-
-	/**
-	 * Recupera uma lista de Jogos em um estadio,
-	 * ordenado de forma descendente por data.
-	 * @param estadio
-	 * @return Uma coleção do tipo List de Jogo
-	 */
-	public List<Jogo> findByEstadioOrderByDataDesc(Estadio estadio);
 
 	/**
 	 * 
@@ -334,41 +197,6 @@ public interface Fachada extends Serializable {
 	public List<Ingresso> findByNumeroAcento(int numeroAcento);
 
 	/**
-	 * Recupera todos os ingressos pelo numero do acento e setor,
-	 * ordenado por data de forma ascendente.
-	 * @param numeroAcento
-	 * @param setor
-	 * @return Uma coleção do tipo List de Ingresso.
-	 */
-	public List<Ingresso> findByNumeroAcentoAndSetorOrderByDataAsc(int numeroAcento, Setor setor);
-
-	/**
-	 * Recupera todos os ingressos pelo numero do acento, setor e Jogo,
-	 * ordenado por data de forma ascendente.
-	 * @param numeroAcento
-	 * @param setor
-	 * @param jogo
-	 * @return Uma coleção do tipo List de Ingresso.
-	 */
-	public Ingresso findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(int numeroAcento, Setor setor, Jogo jogo)throws IngressoInexistenteException;
-
-	/**
-	 * Recupera todos os ingressos pelo Jogo, ordenado por
-	 * data de forma ascendente.
-	 * @param jogo
-	 * @return Uma coleção do tipo List de Ingresso.
-	 */
-	public List<Ingresso> findByJogoOrderByDataAsc(Jogo jogo);
-
-	/**
-	 * Recupera todos os ingressos pelo Jogo, ordenado por
-	 * data de forma descendente.
-	 * @param jogo
-	 * @return Uma coleção do tipo List de Ingresso.
-	 */
-	public List<Ingresso> findByJogoOrderByDataDesc(Jogo jogo);
-
-	/**
 	 * 
 	 * @param id
 	 * @return
@@ -394,18 +222,4 @@ public interface Fachada extends Serializable {
 	 * @return Uma entidade do tipo Setor.
 	 */
 	public Setor findByNome(String nome)throws SetorInexistenteException;
-
-	/**
-	 * Recupera uma lista de Setor começando pelo nome.
-	 * @param nome
-	 * @return Uma coleção do tipo List de Setor.
-	 */
-	public List<Setor> findByNomeStartingWith(String nome);
-
-	/**
-	 * Resupera um setor contendo um determinado nome.
-	 * @param nome
-	 * @return Uma coleção do tipo List de Setor.
-	 */
-	public List<Setor> findByNomeContaining(String nome);
 }

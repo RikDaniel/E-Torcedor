@@ -73,14 +73,6 @@ public class FachadaImpl implements Fachada {
 		return this.usuarioServ.findByNomeOrderByNomeAsc(nome);
 	}
 
-	public List<Usuario> usuarioFindByNomeContaining(String nome) {
-		return this.usuarioServ.findByNomeContaining(nome);
-	}
-
-	public List<Usuario> usuarioFindByNomeStartingWith(String nome) {
-		return this.usuarioServ.findByNomeStartingWith(nome);
-	}
-
 	public List<Usuario> findByClubeOrderByNomeAsc(Time clube) {
 		return this.usuarioServ.findByClubeOrderByNomeAsc(clube);
 	}
@@ -114,32 +106,8 @@ public class FachadaImpl implements Fachada {
 		return this.torcidaServ.findByNome(nome);
 	}
 
-	public List<Torcida> torcidaFindByNomeContaining(String nome) {
-		return this.torcidaServ.findByNomeContaining(nome);
-	}
-
-	public List<Torcida> torcidaFindByNomeStartingWith(String nome) {
-		return this.torcidaServ.findByNomeStartingWith(nome);
-	}
-
-	public List<Torcida> torcidaFindByNomeOrderByNomeAsc(String nome) {
-		return this.torcidaServ.findByNomeOrderByNomeAsc(nome);
-	}
-
-	public List<Torcida> findByNomeOrderByNomeDesc(String nome) {
-		return this.torcidaServ.findByNomeOrderByNomeDesc(nome);
-	}
-
 	public List<Torcida> findByTime(Time time) {
 		return this.torcidaServ.findByTime(time);
-	}
-
-	public List<Torcida> findByTimeOrderByNomeAsc(Time time) {
-		return this.torcidaServ.findByTimeOrderByNomeAsc(time);
-	}
-
-	public List<Torcida> findByTimeOrderByNomeDesc(Time time) {
-		return this.torcidaServ.findByTimeOrderByNomeDesc(time);
 	}
 
 	public List<Torcida> findAllTorcida() {
@@ -154,14 +122,6 @@ public class FachadaImpl implements Fachada {
 
 	public Time timeFindByNome(String nome) throws TimeInexistenteException {
 		return this.timeServ.findByNome(nome);
-	}
-
-	public List<Time> timeFindByNomeStartingWith(String nome) {
-		return this.timeServ.findByNomeStartingWith(nome);
-	}
-
-	public List<Time> timeFByNomeContaining(String nome) {
-		return this.timeServ.findByNomeContaining(nome);
 	}
 
 	/**
@@ -180,25 +140,9 @@ public class FachadaImpl implements Fachada {
 	public List<Jogo> findByDataJogo(Date data) {
 		return this.jogoServ.findByDataJogo(data);
 	}
-
-	public List<Jogo> findByDataOrderByDataAsc(Date data) {
-		return this.jogoServ.findByDataOrderByDataAsc(data);
-	}
-
-	public List<Jogo> findByDataOrderByDataDesc(Date data) {
-		return this.jogoServ.findByDataOrderByDataDesc(data);
-	}
-
+	
 	public List<Jogo> findByEstadio(Estadio estadio) {
 		return this.jogoServ.findByEstadio(estadio);
-	}
-
-	public List<Jogo> findByEstadioOrderByDataAsc(Estadio estadio) {
-		return this.jogoServ.findByEstadioOrderByDataAsc(estadio);
-	}
-
-	public List<Jogo> findByEstadioOrderByDataDesc(Estadio estadio) {
-		return this.jogoServ.findByEstadioOrderByDataDesc(estadio);
 	}
 
 	public List<Jogo> findAllJogo() {
@@ -230,23 +174,6 @@ public class FachadaImpl implements Fachada {
 		return this.jogoServ.findByNumeroAcento(numeroAcento);
 	}
 
-	public List<Ingresso> findByNumeroAcentoAndSetorOrderByDataAsc(int numeroAcento, Setor setor) {
-		return this.jogoServ.findByNumeroAcentoAndSetorOrderByDataAsc(numeroAcento, setor);
-	}
-
-	public Ingresso findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(int numeroAcento, Setor setor, Jogo jogo)
-			throws IngressoInexistenteException {
-		return this.jogoServ.findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(numeroAcento,setor,jogo);
-	}
-
-	public List<Ingresso> findByJogoOrderByDataAsc(Jogo jogo) {
-		return this.jogoServ.findByJogoOrderByDataAsc(jogo);
-	}
-
-	public List<Ingresso> findByJogoOrderByDataDesc(Jogo jogo) {
-		return this.jogoServ.findByJogoOrderByDataDesc(jogo);
-	}
-
 	public Ingresso findOneIngresso(Long id) throws IngressoInexistenteException {
 		return this.jogoServ.findOneIngresso(id);
 	}
@@ -265,7 +192,7 @@ public class FachadaImpl implements Fachada {
 		return this.estadioServ.findAllEstadio();
 	}
 
-	//Setor
+	//SETOR
 
 	public Setor findOneSetor(Long id) throws SetorInexistenteException {
 		return this.estadioServ.findOneSetor(id);
@@ -273,13 +200,5 @@ public class FachadaImpl implements Fachada {
 
 	public Setor findByNome(String nome) throws SetorInexistenteException {
 		return this.estadioServ.findByNome(nome);
-	}
-
-	public List<Setor> findByNomeStartingWith(String nome) {
-		return this.estadioServ.findByNomeStartingWith(nome);
-	}
-
-	public List<Setor> findByNomeContaining(String nome) {
-		return this.estadioServ.findByNomeContaining(nome);
 	}
 }

@@ -57,19 +57,6 @@ public interface ServiceUsuario extends Serializable {
 	 */
 	public List<Usuario> findByNomeOrderByNomeAsc(String nome);
 	
-	/**
-	 * Recupera uma lista de usuario contendo um nome.
-	 * @param nome
-	 * @return Uma coleção do tipo List de Usuario
-	 */
-	public List<Usuario> findByNomeContaining(String nome);
-	
-	/**
-	 * Recupera uma lista de usuario iniciado com um nome.
-	 * @param nome
-	 * @return Uma coleção do tipo List de Usuario
-	 */
-	public List<Usuario> findByNomeStartingWith(String nome);
 	
 	/**
 	 * 

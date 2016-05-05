@@ -85,18 +85,4 @@ public interface ServiceEstadio extends Serializable {
 	 * @return Uma entidade do tipo Setor.
 	 */
 	public Setor findByNome(String nome)throws SetorInexistenteException;
-	
-	/**
-	 * Recupera uma lista de Setor começando pelo nome.
-	 * @param nome
-	 * @return Uma coleção do tipo List de Setor.
-	 */
-	public List<Setor> findByNomeStartingWith(String nome);
-	
-	/**
-	 * Resupera um setor contendo um determinado nome.
-	 * @param nome
-	 * @return Uma coleção do tipo List de Setor.
-	 */
-	public List<Setor> findByNomeContaining(String nome);
 }

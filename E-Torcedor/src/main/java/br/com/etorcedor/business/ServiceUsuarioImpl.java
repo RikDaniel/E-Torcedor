@@ -13,15 +13,11 @@ import br.com.etorcedor.entity.Usuario;
 import br.com.etorcedor.exception.IngressoInexistenteException;
 import br.com.etorcedor.exception.UsuarioExistenteException;
 import br.com.etorcedor.exception.UsuarioInexistenteException;
-import br.com.etorcedor.persistence.RepositorioIngresso;
 import br.com.etorcedor.persistence.RepositorioUsuario;
 
 @Service
 public class ServiceUsuarioImpl implements ServiceUsuario {
 
-	/**
-	 * Falta o metodo de remover
-	 */
 	private static final long serialVersionUID = 1336061289381836117L;
 
 	@Autowired
@@ -83,15 +79,7 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 	}
 
 	public List<Usuario> findByNomeOrderByNomeAsc(String nome) {
-		return usuarioRep.findByNomeContaining(nome);
-	}
-
-	public List<Usuario> findByNomeContaining(String nome) {
-		return usuarioRep.findByNomeContaining(nome);
-	}
-
-	public List<Usuario> findByNomeStartingWith(String nome) {
-		return usuarioRep.findByNomeStartingWith(nome);
+		return usuarioRep.findByNomeOrderByNomeAsc(nome);
 	}
 
 	public List<Usuario> findByClubeOrderByNomeAsc(Time clube) {

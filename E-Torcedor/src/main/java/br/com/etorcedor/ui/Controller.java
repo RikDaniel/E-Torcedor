@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,7 +23,6 @@ import br.com.etorcedor.exception.IngressoInexistenteException;
 import br.com.etorcedor.exception.JogoInexistenteException;
 import br.com.etorcedor.exception.SetorInexistenteException;
 import br.com.etorcedor.exception.TimeInexistenteException;
-import br.com.etorcedor.exception.TorcidaExistenteException;
 import br.com.etorcedor.exception.TorcidaInexistenteException;
 import br.com.etorcedor.exception.UsuarioInexistenteException;
 
@@ -37,11 +35,8 @@ public class Controller {
 
 	@RequestMapping("/usuario/add")
 	public ResponseEntity<?> adicionarUsuario(Usuario u) {
-
 		try {
-
 			this.fachada.adicionarUsuario(u);
-
 		} catch (Exception e) {
 			return new ResponseEntity<Exception>(e, HttpStatus.BAD_REQUEST);
 		}
@@ -50,7 +45,6 @@ public class Controller {
 
 	@RequestMapping("/usuario/att")
 	public ResponseEntity<?> atualizarUsuario(Usuario u) {
-
 		try {
 			this.fachada.atualizarUsuario(u);
 		} catch (Exception e) {
@@ -61,7 +55,6 @@ public class Controller {
 
 	@RequestMapping("/usuario/remov")
 	public ResponseEntity<?> removerUsuario(Long id) {
-
 		try {
 			this.fachada.removerUsuario(id);
 		} catch (Exception e) {
@@ -90,30 +83,6 @@ public class Controller {
 		}
 	}
 
-	@RequestMapping(value = "/usuario/find/nome/orderly", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Usuario> findByNomeOrderByNomeAsc(String nome) {
-		return this.fachada.findByNomeOrderByNomeAsc(nome);
-	}
-
-	@RequestMapping(value = "/usuario/find/nome/contain", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Usuario> usuarioFindByNomeContaining(String nome) {
-		return this.fachada.usuarioFindByNomeContaining(nome);
-	}
-
-	@RequestMapping(value = "/usuario/find/nome/start", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Usuario> usuarioFindByNomeStartingWith(String nome) {
-		return this.fachada.usuarioFindByNomeStartingWith(nome);
-	}
-
-	@RequestMapping(value = "/usuario/find/clube", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Usuario> findByClubeOrderByNomeAsc(Time clube) {
-		return this.fachada.findByClubeOrderByNomeAsc(clube);
-	}
-
-	@RequestMapping("/usuario/find/torcida")
-	public List<Usuario> findByTorcidaOrderByNomeAsc(Torcida torcida) {
-		return this.fachada.findByTorcidaOrderByNomeAsc(torcida);
-	}
 
 	// TORCIDA
 	@RequestMapping("/torcida/add")
@@ -138,7 +107,6 @@ public class Controller {
 
 	@RequestMapping("/torcida/remov")
 	public ResponseEntity<?> removerTorcida(Long id) {
-
 		try {
 			this.fachada.removerTorcida(id);
 		} catch (Exception e) {
@@ -157,43 +125,12 @@ public class Controller {
 		}
 	}
 
-	@RequestMapping(value = "/torcida/find/nome/contain", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Torcida> torcidaFindByNomeContaining(String nome) {
-		return this.fachada.torcidaFindByNomeContaining(nome);
-	}
-
-	@RequestMapping(value = "/torcida/find/nome/start", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Torcida> torcidaFindByNomeStartingWith(String nome) {
-		return this.fachada.torcidaFindByNomeStartingWith(nome);
-	}
-
-	@RequestMapping(value = "/torcida/find/nome/orderly/asc", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Torcida> torcidaFindByNomeOrderByNomeAsc(String nome) {
-		return this.fachada.torcidaFindByNomeOrderByNomeAsc(nome);
-	}
-
-	@RequestMapping(value = "/torcida/find/nome/orderly/desc", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Torcida> findByNomeOrderByNomeDesc(String nome) {
-		return this.fachada.findByNomeOrderByNomeDesc(nome);
-	}
-
 	@RequestMapping(value = "/torcida/find/time", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Torcida> findByTime(Time time) {
 		return this.fachada.findByTime(time);
 	}
 
-	@RequestMapping(value = "/torcida/find/time/ordely/asc", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Torcida> findByTimeOrderByNomeAsc(Time time) {
-		return this.fachada.findByTimeOrderByNomeAsc(time);
-	}
-
-	@RequestMapping(value = "/torcida/find/time/ordely/desc", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Torcida> findByTimeOrderByNomeDesc(Time time) {
-		return this.fachada.findByTimeOrderByNomeDesc(time);
-	}
-
 	// TIME
-
 	@RequestMapping(value = "/time/find", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Time findByOne(Long id) {
 		try {
@@ -212,18 +149,7 @@ public class Controller {
 		}
 	}
 
-	@RequestMapping(value = "/time/find/nome/start", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Time> timeFindByNomeStartingWith(String nome) {
-		return this.fachada.timeFindByNomeStartingWith(nome);
-	}
-
-	@RequestMapping(value = "/time/find/nome/contain", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Time> timeFByNomeContaining(String nome) {
-		return this.fachada.timeFByNomeContaining(nome);
-	}
-
 	// JOGO
-
 	@RequestMapping(value = "/jogo/find", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Jogo findOneJogo(Long id) {
 		try {
@@ -238,33 +164,12 @@ public class Controller {
 		return this.fachada.findByDataJogo(data);
 	}
 
-	@RequestMapping(value = "/jogo/find/data/asc", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Jogo> findByDataOrderByDataAsc(Date data) {
-		return this.fachada.findByDataOrderByDataAsc(data);
-	}
-
-	@RequestMapping(value = "/jogo/find/data/desc", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Jogo> findByDataOrderByDataDesc(Date data) {
-		return this.fachada.findByDataOrderByDataDesc(data);
-	}
-
 	@RequestMapping(value = "/jogo/find/estadio", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Jogo> findByEstadio(Estadio estadio) {
 		return this.fachada.findByEstadio(estadio);
 	}
 
-	@RequestMapping(value = "/jogo/find/estadio/data/asc", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Jogo> findByEstadioOrderByDataAsc(Estadio estadio) {
-		return this.fachada.findByEstadioOrderByDataAsc(estadio);
-	}
-
-	@RequestMapping(value = "/jogo/find/estadio/data/desc", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Jogo> findByEstadioOrderByDataDesc(Estadio estadio) {
-		return this.fachada.findByEstadioOrderByDataDesc(estadio);
-	}
-
-	//INGRESSO
-	
+	//INGRESSO	
 	@RequestMapping("/ingresso/add")
 	public ResponseEntity<?> adicionarIngreco(Ingresso i){		
 		try {
@@ -274,7 +179,7 @@ public class Controller {
 		}
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
-	
+
 	@RequestMapping("/ingresso/att")
 	public ResponseEntity<?> atualizarIngreco(Ingresso i){
 		try {
@@ -284,7 +189,7 @@ public class Controller {
 		}
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
-	
+
 	@RequestMapping("/ingresso/remov")
 	public ResponseEntity<?> removerIngreco(Long i){
 		try {
@@ -294,47 +199,22 @@ public class Controller {
 		}
 		return new ResponseEntity<String>(HttpStatus.OK);
 	}
-	
+
 	@RequestMapping(value = "/ingresso/find/jogo", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Ingresso> findByJogo(Jogo jogo){
 		return this.fachada.findByJogo(jogo);
 	}
-	
+
 	@RequestMapping(value = "/ingresso/find/data", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Ingresso> findByDataIngresso(Date data){
 		return this.fachada.findByDataIngresso(data);
 	}
-	
+
 	@RequestMapping(value = "/ingresso/find/acento", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Ingresso> findByNumeroAcento(int numeroAcento){
 		return this.fachada.findByNumeroAcento(numeroAcento);
 	}
-	
-	@RequestMapping(value = "/ingresso/find/acento/setor/ordely/asc", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Ingresso> findByNumeroAcentoAndSetorOrderByDataAsc(int numeroAcento, Setor setor){
-		return this.fachada.findByNumeroAcentoAndSetorOrderByDataAsc(numeroAcento, setor);
-	}
-	
-	@RequestMapping(value = "/ingresso/find/acento/setor/jogo/ordely/asc", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(int numeroAcento, Setor setor, Jogo jogo){
-		try {
-			Ingresso ingresso = this.fachada.findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(numeroAcento, setor, jogo);
-			return new ResponseEntity<Ingresso>(ingresso, HttpStatus.OK);
-		} catch (IngressoInexistenteException e) {
-			return new ResponseEntity<IngressoInexistenteException>(e, HttpStatus.BAD_REQUEST);
-		}
-	}
-	
-	@RequestMapping(value = "/ingresso/find/jogo/ordely/asc", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Ingresso> findByJogoOrderByDataAsc(Jogo jogo){
-		return this.fachada.findByJogoOrderByDataAsc(jogo);
-	}
-	
-	@RequestMapping(value = "/ingresso/find/jogo/ordely/desc", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Ingresso> findByJogoOrderByDataDesc(Jogo jogo){
-		return this.fachada.findByJogoOrderByDataDesc(jogo);
-	}
- 	
+
 	@RequestMapping(value = "/ingresso/find", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> findOneIngresso(Long id){
 		try {
@@ -344,9 +224,8 @@ public class Controller {
 			return new ResponseEntity<IngressoInexistenteException>(e, HttpStatus.BAD_REQUEST);
 		}		
 	}
-	
-	//Estadio
-	
+
+	//ESTADIO
 	@RequestMapping(value = "/estadio/find", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> findOneEstadio(Long id){
 		try {
@@ -356,10 +235,8 @@ public class Controller {
 			return new ResponseEntity<EstadioInexistenteException>(e, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	
-	//Setor
-	
+
+	//SETOR
 	@RequestMapping(value = "/setor/find", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> findOneSetor(Long id){
 		try {
@@ -369,7 +246,7 @@ public class Controller {
 			return new ResponseEntity<SetorInexistenteException>(e, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@RequestMapping(value = "/setor/find/nome",  produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> findByNome(String nome){
 		try {
@@ -378,15 +255,5 @@ public class Controller {
 		} catch (SetorInexistenteException e) {
 			return new ResponseEntity<SetorInexistenteException>(e, HttpStatus.BAD_REQUEST);
 		}
-	}
- 	
-	@RequestMapping(value = "/setor/find/nome/start", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Setor> findByNomeStartingWith(String nome){
-		return this.fachada.findByNomeStartingWith(nome);
-	}
-	
-	@RequestMapping(value = "/setor/find/nome/contain", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Setor> findByNomeContaining(String nome){
-		return this.fachada.findByNomeContaining(nome);
 	}
 }

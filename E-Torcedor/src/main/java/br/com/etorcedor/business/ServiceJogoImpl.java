@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
-import br.com.etorcedor.entity.Setor;
 import br.com.etorcedor.exception.IngressoExistenteException;
 import br.com.etorcedor.exception.IngressoInexistenteException;
 import br.com.etorcedor.exception.JogoExistenteException;
@@ -21,11 +20,8 @@ import br.com.etorcedor.persistence.RepositorioJogo;
 @Service
 public class ServiceJogoImpl implements ServiceJogo {
 
-	/**
-	 * Falta implementar os metodos de remover
-	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@Autowired
 	private RepositorioJogo jogoRep;
 	@Autowired
@@ -55,16 +51,16 @@ public class ServiceJogoImpl implements ServiceJogo {
 
 	@Transactional(rollbackFor = JogoInexistenteException.class)
 	public void removerJogo(Jogo j) throws JogoInexistenteException {
-			Jogo old= findOneJogo(j.getId());
-			
-			List<Ingresso> i = old.getIngrecos();
-			try {
-				for(Ingresso n:i)
-					removerIngreco(n.getId());
-				jogoRep.delete(old);	
-			} catch (Exception e) {
-				throw new JogoInexistenteException();
-			}
+		Jogo old= findOneJogo(j.getId());
+
+		List<Ingresso> i = old.getIngrecos();
+		try {
+			for(Ingresso n:i)
+				removerIngreco(n.getId());
+			jogoRep.delete(old);	
+		} catch (Exception e) {
+			throw new JogoInexistenteException();
+		}
 	}
 
 	public Jogo findOneJogo(Long id) throws JogoInexistenteException {
@@ -80,25 +76,10 @@ public class ServiceJogoImpl implements ServiceJogo {
 		return jogoRep.findByData(data);
 	}
 
-	public List<Jogo> findByDataOrderByDataAsc(Date data) {
-		return jogoRep.findByDataOrderByDataAsc(data);
-	}
-
-	public List<Jogo> findByDataOrderByDataDesc(Date data) {
-		return jogoRep.findByDataOrderByDataDesc(data);
-	}
-
 	public List<Jogo> findByEstadio(Estadio estadio) {
 		return jogoRep.findByEstadio(estadio);
 	}
 
-	public List<Jogo> findByEstadioOrderByDataAsc(Estadio estadio) {
-		return jogoRep.findByEstadioOrderByDataAsc(estadio);
-	}
-
-	public List<Jogo> findByEstadioOrderByDataDesc(Estadio estadio) {
-		return jogoRep.findByEstadioOrderByDataDesc(estadio);
-	}
 	public List<Jogo> findAllJogo() {
 		return (List<Jogo>) this.jogoRep.findAll();
 	}
@@ -111,7 +92,6 @@ public class ServiceJogoImpl implements ServiceJogo {
 		} catch (IngressoInexistenteException ei) {
 			ingressoRep.save(i);
 		}
-
 	}
 
 	@Transactional(rollbackFor = IngressoInexistenteException.class)
@@ -124,14 +104,12 @@ public class ServiceJogoImpl implements ServiceJogo {
 		old.setUsuario(i.getUsuario());
 		old.setValor_ingreco(i.getValor_ingreco());
 		ingressoRep.save(old);
-
 	}
 
 	@Transactional(rollbackFor = IngressoInexistenteException.class)
 	public void removerIngreco(Long i) throws IngressoInexistenteException {
 		Ingresso old = findOneIngresso(i);
 		ingressoRep.delete(old);
-			
 	}
 
 	public Ingresso findOneIngresso(Long id) throws IngressoInexistenteException {
@@ -140,7 +118,6 @@ public class ServiceJogoImpl implements ServiceJogo {
 			throw new IngressoInexistenteException();
 		}
 		return i;
-
 	}
 
 	public List<Ingresso> findByJogo(Jogo jogo) {
@@ -155,23 +132,6 @@ public class ServiceJogoImpl implements ServiceJogo {
 		return ingressoRep.findByNumeroAcento(numeroAcento);
 	}
 
-	public List<Ingresso> findByNumeroAcentoAndSetorOrderByDataAsc(int numeroAcento, Setor setor) {
-		return ingressoRep.findByNumeroAcentoAndSetorOrderByDataAsc(numeroAcento, setor);
-	}
-
-	public Ingresso findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(int numeroAcento, Setor setor, Jogo jogo)
-			throws IngressoInexistenteException {
-		return ingressoRep.findByNumeroAcentoAndSetorAndJogoOrderByDataAsc(numeroAcento, setor, jogo);
-	}
-
-	public List<Ingresso> findByJogoOrderByDataAsc(Jogo jogo) {
-		return ingressoRep.findByJogoOrderByDataAsc(jogo);
-	}
-
-	public List<Ingresso> findByJogoOrderByDataDesc(Jogo jogo) {
-		return ingressoRep.findByJogoOrderByDataDesc(jogo);
-	}
-	
 	public List<Ingresso> findAllIngresso() {
 		return (List<Ingresso>) this.ingressoRep.findAll();
 	}
