@@ -56,7 +56,7 @@ public class ServiceJogoImpl implements ServiceJogo {
 		List<Ingresso> i = old.getIngrecos();
 		try {
 			for(Ingresso n:i)
-				removerIngreco(n.getId());
+				removerIngresso(n.getId());
 			jogoRep.delete(old);	
 		} catch (Exception e) {
 			throw new JogoInexistenteException();
@@ -85,7 +85,7 @@ public class ServiceJogoImpl implements ServiceJogo {
 	}
 
 	@Transactional(rollbackFor = IngressoExistenteException.class)
-	public void adicionarIngreco(Ingresso i) throws IngressoExistenteException {
+	public void adicionarIngresso(Ingresso i) throws IngressoExistenteException {
 		try {
 			findOneIngresso(i.getId());
 			throw new IngressoExistenteException();
@@ -95,19 +95,19 @@ public class ServiceJogoImpl implements ServiceJogo {
 	}
 
 	@Transactional(rollbackFor = IngressoInexistenteException.class)
-	public void atualizarIngreco(Ingresso i) throws IngressoInexistenteException {
+	public void atualizarIngresso(Ingresso i) throws IngressoInexistenteException {
 		Ingresso old = ingressoRep.findOne(i.getId());
 		old.setData(i.getData());
 		old.setJogo(i.getJogo());
-		old.setNumero_acento(i.getNumero_acento());
+		old.setNumeroAcento(i.getNumeroAcento());
 		old.setSetor(i.getSetor());
 		old.setUsuario(i.getUsuario());
-		old.setValor_ingreco(i.getValor_ingreco());
+		old.setValorIngresso(i.getValorIngresso());
 		ingressoRep.save(old);
 	}
 
 	@Transactional(rollbackFor = IngressoInexistenteException.class)
-	public void removerIngreco(Long i) throws IngressoInexistenteException {
+	public void removerIngresso(Long i) throws IngressoInexistenteException {
 		Ingresso old = findOneIngresso(i);
 		ingressoRep.delete(old);
 	}
@@ -129,7 +129,7 @@ public class ServiceJogoImpl implements ServiceJogo {
 	}
 
 	public List<Ingresso> findByNumeroAcento(int numeroAcento) {
-		return ingressoRep.findByNumeroCadeira(numeroAcento);
+		return ingressoRep.findByNumeroAcento(numeroAcento);
 	}
 
 	public List<Ingresso> findAllIngresso() {

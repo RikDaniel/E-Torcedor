@@ -20,7 +20,7 @@ public class Ingresso implements Serializable {
 	private Date data;
 	private Jogo jogo;
 	private int numeroAcento;
-	private float valorIngreco;
+	private float valorIngresso;
 	private Usuario usuario;
 	private Setor setor;
 
@@ -28,13 +28,13 @@ public class Ingresso implements Serializable {
 		
 	}
 
-	public Ingresso(Long id, Date data, Jogo jogo, int numero_acento, float valor_ingreco, Usuario usuario,
+	public Ingresso(Long id, Date data, Jogo jogo, int numeroAcento, float valorIngresso, Usuario usuario,
 			Setor setor) {
 		this.id = id;
 		this.data = data;
 		this.jogo = jogo;
-		this.numeroAcento = numero_acento;
-		this.valorIngreco = valor_ingreco;
+		this.numeroAcento = numeroAcento;
+		this.valorIngresso = valorIngresso;
 		this.usuario = usuario;
 		this.setSetor(setor);
 	}
@@ -66,20 +66,20 @@ public class Ingresso implements Serializable {
 		this.jogo = jogo;
 	}
 
-	public int getNumero_acento() {
+	public int getNumeroAcento() {
 		return numeroAcento;
 	}
 
-	public void setNumero_acento(int numero_acento) {
-		this.numeroAcento = numero_acento;
+	public void setNumeroAcento(int numeroAcento) {
+		this.numeroAcento = numeroAcento;
 	}
 
-	public float getValor_ingreco() {
-		return valorIngreco;
+	public float getValorIngresso() {
+		return valorIngresso;
 	}
 
-	public void setValor_ingreco(float valor_ingreco) {
-		this.valorIngreco = valor_ingreco;
+	public void setValorIngresso(float valorIngresso) {
+		this.valorIngresso = valorIngresso;
 	}
 
 	@ManyToOne
@@ -114,7 +114,7 @@ public class Ingresso implements Serializable {
 		result = prime * result + numeroAcento;
 		result = prime * result + ((setor == null) ? 0 : setor.hashCode());
 		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
-		result = prime * result + Float.floatToIntBits(valorIngreco);
+		result = prime * result + Float.floatToIntBits(valorIngresso);
 		return result;
 	}
 
@@ -154,14 +154,14 @@ public class Ingresso implements Serializable {
 				return false;
 		} else if (!usuario.equals(other.usuario))
 			return false;
-		if (Float.floatToIntBits(valorIngreco) != Float.floatToIntBits(other.valorIngreco))
+		if (Float.floatToIntBits(valorIngresso) != Float.floatToIntBits(other.valorIngresso))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Ingreco [id=" + id + ", data=" + data + ", jogo=" + jogo + ", numero_acento=" + numeroAcento
-				+ ", valor_ingreco=" + valorIngreco + ", usuario=" + usuario + ", setor=" + setor + "]";
+		return "Ingresso [id=" + id + ", data=" + data + ", jogo=" + jogo + ", numeroAcento=" + numeroAcento
+				+ ", valorIngresso=" + valorIngresso + ", usuario=" + usuario + ", setor=" + setor + "]";
 	}
 }

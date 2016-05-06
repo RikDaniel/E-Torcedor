@@ -59,7 +59,7 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 		List<Ingresso> i= old.getIngressos();
 			try {
 				for(Ingresso e:i){
-					ingressoServ.removerIngreco(e.getId());
+					ingressoServ.removerIngresso(e.getId());
 				}
 				usuarioRep.delete(old);
 			} catch (IngressoInexistenteException e1) {

@@ -151,15 +151,15 @@ public class FachadaImpl implements Fachada {
 
 	//INGRESSO
 	public void adicionarIngreco(Ingresso i) throws IngressoExistenteException {
-		this.jogoServ.adicionarIngreco(i);
+		this.jogoServ.adicionarIngresso(i);
 	}
 
 	public void atualizarIngreco(Ingresso i) throws IngressoInexistenteException {
-		this.jogoServ.atualizarIngreco(i);
+		this.jogoServ.atualizarIngresso(i);
 	}
 
 	public void removerIngreco(Long i) throws IngressoInexistenteException {
-		this.jogoServ.removerIngreco(i);
+		this.jogoServ.removerIngresso(i);
 	}
 
 	public List<Ingresso> findByJogo(Jogo jogo) {

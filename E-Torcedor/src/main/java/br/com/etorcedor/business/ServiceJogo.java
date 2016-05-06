@@ -71,21 +71,21 @@ public interface ServiceJogo extends Serializable{
 	 * @param i
 	 * @throws IngressoExistenteException
 	 */
-	public void adicionarIngreco(Ingresso i) throws IngressoExistenteException;
+	public void adicionarIngresso(Ingresso i) throws IngressoExistenteException;
 
 	/**
 	 * 
 	 * @param i
 	 * @throws IngressoInexistenteException
 	 */
-	public void atualizarIngreco(Ingresso i) throws IngressoInexistenteException;
+	public void atualizarIngresso(Ingresso i) throws IngressoInexistenteException;
 
 	/**
 	 * 
 	 * @param i
 	 * @throws IngressoInexistenteException
 	 */
-	public void removerIngreco(Long i)throws IngressoInexistenteException;
+	public void removerIngresso(Long i)throws IngressoInexistenteException;
 
 	/**
 	 * Recupera todos os ingressos de um determinado jogo.

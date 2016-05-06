@@ -29,8 +29,8 @@ public interface RepositorioIngresso extends CrudRepository<Ingresso, Long>{
 	
 	/**
 	 * Recupera todos os ingressos pelo numero do acento.
-	 * @param numeroCadeira
+	 * @param numeroAcento
 	 * @return Uma coleção do tipo List de Ingresso.
 	 */
-	public List<Ingresso> findByNumeroCadeira(int numeroCadeira);	
+	public List<Ingresso> findByNumeroAcento(int numeroAcento);	
 }
