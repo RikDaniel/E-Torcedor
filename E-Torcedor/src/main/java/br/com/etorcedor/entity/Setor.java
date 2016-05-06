@@ -19,7 +19,7 @@ public class Setor implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String nome;
-	private List<Integer> numero_cadeiras;
+	private int numero_cadeiras;
 	private Estadio estadio;
 	private List<Ingresso> ingrecos;
 
@@ -27,8 +27,7 @@ public class Setor implements Serializable {
 		
 	}
 
-	public Setor(Long id, String nome, List<Integer> numero_cadeiras, Estadio estadio) {
-		
+	public Setor(Long id, String nome, int numero_cadeiras, Estadio estadio) {
 		this.id = id;
 		this.nome = nome;
 		this.numero_cadeiras = numero_cadeiras;
@@ -53,11 +52,11 @@ public class Setor implements Serializable {
 		this.nome = nome;
 	}
 
-	public List<Integer> getNumero_cadeiras() {
+	public int getNumero_cadeiras() {
 		return numero_cadeiras;
 	}
 
-	public void setNumero_cadeiras(List<Integer> numero_cadeiras) {
+	public void setNumero_cadeiras(int numero_cadeiras) {
 		this.numero_cadeiras = numero_cadeiras;
 	}
 
@@ -85,8 +84,9 @@ public class Setor implements Serializable {
 		int result = 1;
 		result = prime * result + ((estadio == null) ? 0 : estadio.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((ingrecos == null) ? 0 : ingrecos.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((numero_cadeiras == null) ? 0 : numero_cadeiras.hashCode());
+		result = prime * result + numero_cadeiras;
 		return result;
 	}
 
@@ -109,15 +109,17 @@ public class Setor implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
+		if (ingrecos == null) {
+			if (other.ingrecos != null)
+				return false;
+		} else if (!ingrecos.equals(other.ingrecos))
+			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (numero_cadeiras == null) {
-			if (other.numero_cadeiras != null)
-				return false;
-		} else if (!numero_cadeiras.equals(other.numero_cadeiras))
+		if (numero_cadeiras != other.numero_cadeiras)
 			return false;
 		return true;
 	}
@@ -125,6 +127,6 @@ public class Setor implements Serializable {
 	@Override
 	public String toString() {
 		return "Setor [id=" + id + ", nome=" + nome + ", numero_cadeiras=" + numero_cadeiras + ", estadio=" + estadio
-				+ "]";
+				+ ", ingrecos=" + ingrecos + "]";
 	}
 }
