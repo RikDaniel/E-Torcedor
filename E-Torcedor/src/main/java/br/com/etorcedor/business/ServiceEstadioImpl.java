@@ -27,7 +27,6 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 
 	@Transactional(rollbackFor = EstadioExistenteException.class)
 	public void adicionarEstadio(Estadio e) throws EstadioExistenteException {
-
 		try {
 			findOneEstadio(e.getId());
 			throw new EstadioExistenteException();
@@ -47,7 +46,6 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 	@Transactional(rollbackFor = EstadioInexistenteException.class)
 	public void removerEstadio(Estadio e) throws EstadioInexistenteException {
 		Estadio old= this.estadioRep.findOne(e.getId());
-
 		try {
 			List<Setor> s= old.getSetores();
 
@@ -62,7 +60,6 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 
 	public Estadio findOneEstadio(Long id) throws EstadioInexistenteException {
 		Estadio e = estadioRep.findOne(id);
-
 		if (e == null) {
 			throw new EstadioInexistenteException();
 		}
@@ -89,7 +86,7 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 		old.setNome(e.getNome());
 		old.setEstadio(e.getEstadio());
 		old.setIngrecos(e.getIngrecos());
-		old.setNumero_cadeiras(e.getNumero_cadeiras());
+		old.setNumeroCadeira(e.getNumeroCadeira());
 		setorRep.save(old);
 	}
 

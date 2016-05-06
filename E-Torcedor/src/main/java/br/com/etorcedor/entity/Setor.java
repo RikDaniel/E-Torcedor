@@ -19,18 +19,18 @@ public class Setor implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Long id;
 	private String nome;
-	private int numero_cadeiras;
+	private int numeroCadeira;
 	private Estadio estadio;
 	private List<Ingresso> ingrecos;
 
 	public Setor() {
-		
+
 	}
 
-	public Setor(Long id, String nome, int numero_cadeiras, Estadio estadio) {
+	public Setor(Long id, String nome, int numeroCadeira, Estadio estadio) {
 		this.id = id;
 		this.nome = nome;
-		this.numero_cadeiras = numero_cadeiras;
+		this.numeroCadeira = numeroCadeira;
 		this.estadio = estadio;
 	}
 
@@ -52,12 +52,12 @@ public class Setor implements Serializable {
 		this.nome = nome;
 	}
 
-	public int getNumero_cadeiras() {
-		return numero_cadeiras;
+	public int getNumeroCadeira() {
+		return numeroCadeira;
 	}
 
-	public void setNumero_cadeiras(int numero_cadeiras) {
-		this.numero_cadeiras = numero_cadeiras;
+	public void setNumeroCadeira(int numeroCadeira) {
+		this.numeroCadeira = numeroCadeira;
 	}
 
 	@ManyToOne
@@ -68,7 +68,7 @@ public class Setor implements Serializable {
 	public void setEstadio(Estadio estadio) {
 		this.estadio = estadio;
 	}
-	
+
 	@OneToMany
 	public List<Ingresso> getIngrecos() {
 		return ingrecos;
@@ -86,7 +86,7 @@ public class Setor implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((ingrecos == null) ? 0 : ingrecos.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + numero_cadeiras;
+		result = prime * result + numeroCadeira;
 		return result;
 	}
 
@@ -119,14 +119,14 @@ public class Setor implements Serializable {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (numero_cadeiras != other.numero_cadeiras)
+		if (numeroCadeira != other.numeroCadeira)
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Setor [id=" + id + ", nome=" + nome + ", numero_cadeiras=" + numero_cadeiras + ", estadio=" + estadio
+		return "Setor [id=" + id + ", nome=" + nome + ", numeroCadeira=" + numeroCadeira + ", estadio=" + estadio
 				+ ", ingrecos=" + ingrecos + "]";
 	}
 }

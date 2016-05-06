@@ -129,7 +129,7 @@ public class ServiceJogoImpl implements ServiceJogo {
 	}
 
 	public List<Ingresso> findByNumeroAcento(int numeroAcento) {
-		return ingressoRep.findByNumeroAcento(numeroAcento);
+		return ingressoRep.findByNumeroCadeira(numeroAcento);
 	}
 
 	public List<Ingresso> findAllIngresso() {
