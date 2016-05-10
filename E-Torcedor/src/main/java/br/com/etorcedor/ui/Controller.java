@@ -82,6 +82,12 @@ public class Controller {
 			return new ResponseEntity<UsuarioInexistenteException>(e, HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@RequestMapping(value = "/usuario/find/all", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Usuario> findByAllUser() {
+			return this.fachada.findAllUsuario();
+		
+	}	
 
 
 	// TORCIDA
