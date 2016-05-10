@@ -3,6 +3,7 @@ package br.com.etorcedor.ui;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,7 +30,9 @@ import br.com.etorcedor.exception.UsuarioInexistenteException;
 @RestController
 @RequestMapping("/etorcedor")
 public class Controller {
-
+	
+	private static final Logger logger = Logger.getLogger(Controller.class);
+	
 	@Autowired
 	private Fachada fachada;
 
@@ -85,8 +88,8 @@ public class Controller {
 	
 	@RequestMapping(value = "/usuario/find/all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Usuario> findByAllUser() {
-			return this.fachada.findAllUsuario();
-		
+		logger.debug("ENTROU NO FIND_ALL");
+		return this.fachada.findAllUsuario();
 	}	
 
 
