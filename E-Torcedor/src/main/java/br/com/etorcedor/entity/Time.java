@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -52,7 +53,7 @@ public class Time implements Serializable{
 		this.nome = nome;
 	}
 	
-	@OneToMany(mappedBy="time")
+	@OneToMany(mappedBy="time", fetch=FetchType.EAGER)
 	public List<Torcida> getTorcidas() {
 		return torcidas;
 	}

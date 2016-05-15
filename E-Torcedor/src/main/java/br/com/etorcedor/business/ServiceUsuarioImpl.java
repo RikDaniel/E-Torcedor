@@ -44,7 +44,7 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 			old.setGenero(u.getGenero());
 			old.setTelefone(u.getTelefone());
 			old.setEmail(u.getEmail());
-			old.setData_nascimento(u.getData_nascimento());
+			old.setDataNascimento(u.getDataNascimento());
 			old.setTorcida(u.getTorcida());
 			old.setClube(u.getClube());
 			old.setIngressos(u.getIngressos());

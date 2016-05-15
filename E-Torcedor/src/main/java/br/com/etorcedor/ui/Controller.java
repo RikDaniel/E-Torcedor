@@ -38,6 +38,7 @@ public class Controller {
 
 	@RequestMapping("/usuario/add")
 	public ResponseEntity<?> adicionarUsuario(Usuario u) {
+		logger.debug("Entrou no /usuario/add");
 		try {
 			this.fachada.adicionarUsuario(u);
 		} catch (Exception e) {

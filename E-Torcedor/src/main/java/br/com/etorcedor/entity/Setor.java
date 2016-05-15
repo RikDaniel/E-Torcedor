@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -60,7 +61,7 @@ public class Setor implements Serializable {
 		this.numeroCadeira = numeroCadeira;
 	}
 
-	@ManyToOne
+	@ManyToOne()
 	public Estadio getEstadio() {
 		return estadio;
 	}
@@ -69,7 +70,7 @@ public class Setor implements Serializable {
 		this.estadio = estadio;
 	}
 
-	@OneToMany
+	@OneToMany(fetch=FetchType.EAGER)
 	public List<Ingresso> getIngrecos() {
 		return ingrecos;
 	}

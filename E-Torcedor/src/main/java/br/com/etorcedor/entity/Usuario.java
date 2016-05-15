@@ -26,7 +26,7 @@ public class Usuario implements Serializable{
 	private String genero;
 	private String telefone;
 	private String email;
-	private Date data_nascimento;
+	private Date dataNascimento;
 	private Torcida torcida;
 	private Time clube;
 	private List<Ingresso> ingressos;
@@ -36,7 +36,7 @@ public class Usuario implements Serializable{
 	}
 	
 	public Usuario(Long id, String cpf, String nome, Byte imagem, String genero, String telefone, String email,
-			Date data_nascimento) {
+			Date dataNascimento) {
 		this.id = id;
 		this.cpf = cpf;
 		this.nome = nome;
@@ -44,11 +44,11 @@ public class Usuario implements Serializable{
 		this.genero = genero;
 		this.telefone = telefone;
 		this.email = email;
-		this.data_nascimento = data_nascimento;
+		this.dataNascimento = dataNascimento;
 	}
 
 	public Usuario(Long id, String cpf, String nome, Byte imagem, String genero, String telefone, String email,
-			Date data_nascimento, Torcida torcida, Time clube, List<Ingresso> ingressos) {
+			Date dataNascimento, Torcida torcida, Time clube, List<Ingresso> ingressos) {
 		this.id = id;
 		this.cpf = cpf;
 		this.nome = nome;
@@ -56,7 +56,7 @@ public class Usuario implements Serializable{
 		this.genero = genero;
 		this.telefone = telefone;
 		this.email = email;
-		this.data_nascimento = data_nascimento;
+		this.dataNascimento = dataNascimento;
 		this.torcida = torcida;
 		this.clube = clube;
 		this.ingressos = ingressos;
@@ -120,12 +120,12 @@ public class Usuario implements Serializable{
 		this.email = email;
 	}
 
-	public Date getData_nascimento() {
-		return data_nascimento;
+	public Date getDataNascimento() {
+		return dataNascimento;
 	}
 
-	public void setData_nascimento(Date data_nascimento) {
-		this.data_nascimento = data_nascimento;
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
 	@ManyToOne
@@ -164,7 +164,7 @@ public class Usuario implements Serializable{
 		int result = 1;
 		result = prime * result + ((clube == null) ? 0 : clube.hashCode());
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
-		result = prime * result + ((data_nascimento == null) ? 0 : data_nascimento.hashCode());
+		result = prime * result + ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((genero == null) ? 0 : genero.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
@@ -195,10 +195,10 @@ public class Usuario implements Serializable{
 				return false;
 		} else if (!cpf.equals(other.cpf))
 			return false;
-		if (data_nascimento == null) {
-			if (other.data_nascimento != null)
+		if (dataNascimento == null) {
+			if (other.dataNascimento != null)
 				return false;
-		} else if (!data_nascimento.equals(other.data_nascimento))
+		} else if (!dataNascimento.equals(other.dataNascimento))
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -246,7 +246,7 @@ public class Usuario implements Serializable{
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", imagem=" + imagem + ", genero=" + genero
-				+ ", telefone=" + telefone + ", email=" + email + ", data_nascimento=" + data_nascimento + ", torcida="
-				+ torcida + ", clube=" + clube + ", ingrecos=" + ingressos + "]";
+				+ ", telefone=" + telefone + ", email=" + email + ", dataNascimento=" + dataNascimento + ", torcida="
+				+ torcida + ", clube=" + clube + ", ingressos=" + ingressos + "]";
 	}	
 }

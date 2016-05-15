@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -85,7 +86,7 @@ public class Jogo implements Serializable {
 		this.ingrecos_vendidos = ingrecos_vendidos;
 	}
 
-	@OneToMany(mappedBy = "jogo")
+	@OneToMany(mappedBy = "jogo", fetch=FetchType.EAGER)
 	public List<Ingresso> getIngrecos() {
 		return ingrecos;
 	}
