@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,6 +33,18 @@ public class Usuario implements Serializable{
 	
 	public Usuario() {
 		
+	}
+	
+	public Usuario(Long id, String cpf, String nome, Byte imagem, String genero, String telefone, String email,
+			Date data_nascimento) {
+		this.id = id;
+		this.cpf = cpf;
+		this.nome = nome;
+		this.imagem = imagem;
+		this.genero = genero;
+		this.telefone = telefone;
+		this.email = email;
+		this.data_nascimento = data_nascimento;
 	}
 
 	public Usuario(Long id, String cpf, String nome, Byte imagem, String genero, String telefone, String email,
@@ -132,7 +145,7 @@ public class Usuario implements Serializable{
 		this.clube = clube;
 	}
 
-	@OneToMany(mappedBy= "usuario")
+	@OneToMany(mappedBy= "usuario",fetch=FetchType.EAGER)
 	public List<Ingresso> getIngressos() {
 		return ingressos;
 	}

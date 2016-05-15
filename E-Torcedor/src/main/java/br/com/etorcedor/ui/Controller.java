@@ -28,7 +28,7 @@ import br.com.etorcedor.exception.TorcidaInexistenteException;
 import br.com.etorcedor.exception.UsuarioInexistenteException;
 
 @RestController
-@RequestMapping("/etorcedor")
+@RequestMapping("/")
 public class Controller {
 	
 	private static final Logger logger = Logger.getLogger(Controller.class);
@@ -88,7 +88,6 @@ public class Controller {
 	
 	@RequestMapping(value = "/usuario/find/all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Usuario> findByAllUser() {
-		logger.debug("ENTROU NO FIND_ALL");
 		return this.fachada.findAllUsuario();
 	}	
 
