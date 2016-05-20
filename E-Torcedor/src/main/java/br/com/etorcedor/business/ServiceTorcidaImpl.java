@@ -26,8 +26,9 @@ public class ServiceTorcidaImpl implements ServiceTorcida{
 	@Transactional(rollbackFor = TorcidaExistenteException.class)
 	public void adicionarTorcida(Torcida t) throws TorcidaExistenteException {
 		try {
-			this.findById(t.getId());
-			throw new TorcidaExistenteException();
+			Torcida torcida = this.findById(t.getId());
+			if(torcida != null)
+				throw new TorcidaExistenteException();
 		} catch (TorcidaInexistenteException e) {
 			torcidaRep.save(t);
 		}
@@ -84,5 +85,4 @@ public class ServiceTorcidaImpl implements ServiceTorcida{
 	public List<Torcida> findAllTorcida() {
 		return (List<Torcida>) this.torcidaRep.findAll();
 	}
-
 }

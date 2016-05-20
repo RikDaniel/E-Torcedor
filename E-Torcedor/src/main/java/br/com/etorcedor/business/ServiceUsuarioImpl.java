@@ -28,8 +28,9 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 	@Transactional(rollbackFor = UsuarioExistenteException.class)
 	public void adicionarUsuario(Usuario u) throws UsuarioExistenteException {
 		try{
-			this.findByCpf(u.getCpf());
-			throw new UsuarioExistenteException();
+			Usuario usuario = this.findByCpf(u.getCpf());
+			if(usuario != null)
+				throw new UsuarioExistenteException();
 		}catch(UsuarioInexistenteException e){
 			usuarioRep.save(u);
 		}

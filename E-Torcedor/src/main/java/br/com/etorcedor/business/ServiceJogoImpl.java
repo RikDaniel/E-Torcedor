@@ -30,8 +30,9 @@ public class ServiceJogoImpl implements ServiceJogo {
 	@Transactional(rollbackFor = JogoExistenteException.class)
 	public void adicionarJogo(Jogo j) throws JogoExistenteException {
 		try {
-			findOneJogo(j.getId());
-			throw new JogoExistenteException();
+			Jogo jogo = this.findOneJogo(j.getId());
+			if(jogo != null)
+				throw new JogoExistenteException();
 		} catch (JogoInexistenteException e) {
 			jogoRep.save(j);
 		}

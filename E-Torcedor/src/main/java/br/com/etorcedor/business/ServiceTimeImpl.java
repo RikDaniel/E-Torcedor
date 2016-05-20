@@ -33,12 +33,12 @@ public class ServiceTimeImpl implements ServiceTime{
 	@Transactional(rollbackFor = TimeExistenteException.class)
 	public void adicionarTime(Time t) throws TimeExistenteException {
 		try {
-			findByOne(t.getId());
-			throw new TimeExistenteException();
+			Time time = this.findByOne(t.getId());
+			if(time != null)
+				throw new TimeExistenteException();
 		} catch (TimeInexistenteException e) {
 			timeRep.save(t);
 		}
-
 	}
 
 	@Transactional(rollbackFor = TimeInexistenteException.class)
@@ -69,7 +69,7 @@ public class ServiceTimeImpl implements ServiceTime{
 
 	public Time findByOne(Long id) throws TimeInexistenteException {
 		Time t = timeRep.findOne(id);
-		if(t==null){
+		if(t == null){
 			throw new TimeInexistenteException();
 		}
 		return t;
@@ -77,7 +77,7 @@ public class ServiceTimeImpl implements ServiceTime{
 
 	public Time findByNome(String nome) throws TimeInexistenteException {
 		Time t=timeRep.findByNome(nome);
-		if(t==null){
+		if(t == null){
 			throw new TimeInexistenteException();
 		}
 		return t;

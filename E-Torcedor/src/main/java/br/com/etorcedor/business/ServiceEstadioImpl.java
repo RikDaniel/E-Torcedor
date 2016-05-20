@@ -28,8 +28,9 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 	@Transactional(rollbackFor = EstadioExistenteException.class)
 	public void adicionarEstadio(Estadio e) throws EstadioExistenteException {
 		try {
-			findOneEstadio(e.getId());
-			throw new EstadioExistenteException();
+			Estadio estadio = findOneEstadio(e.getId());
+			if(estadio != null)
+				throw new EstadioExistenteException();
 		} catch (EstadioInexistenteException ei) {
 			estadioRep.save(e);
 		}

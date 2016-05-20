@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.etorcedor.business.Fachada;
@@ -36,15 +39,19 @@ public class Controller {
 	@Autowired
 	private Fachada fachada;
 
-	@RequestMapping("/usuario/add")
+	@RequestMapping(value = "/usuario/add", method = RequestMethod.POST)
 	public ResponseEntity<?> adicionarUsuario(Usuario u) {
-		logger.debug("Entrou no /usuario/add");
+		
+		logger.debug(Teste.criadorTracinhos(u.toString().length()) +
+				"TENTANDO CADASTRAR O USUARIO: \n" +
+				u.toString() + 
+				Teste.criadorTracinhos(u.toString().length()));
 		try {
 			this.fachada.adicionarUsuario(u);
 		} catch (Exception e) {
 			return new ResponseEntity<Exception>(e, HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<String>(HttpStatus.OK);
+		return new ResponseEntity<String>("Usuario: " + u.toString() + "Cadastrado com sucesso", HttpStatus.OK);
 	}
 
 	@RequestMapping("/usuario/att")
@@ -59,12 +66,17 @@ public class Controller {
 
 	@RequestMapping("/usuario/remov")
 	public ResponseEntity<?> removerUsuario(Long id) {
+		logger.debug(Teste.criadorTracinhos(30) +
+				"TENTANDO REMOVER O USUARIO: \n" +
+				id + 
+				Teste.criadorTracinhos(30));
+		
 		try {
 			this.fachada.removerUsuario(id);
 		} catch (Exception e) {
 			return new ResponseEntity<Exception>(e, HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<String>(HttpStatus.OK);
+		return new ResponseEntity<String>("Usuario removido com sucesso !!!", HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/usuario/find/cpf", produces = MediaType.APPLICATION_JSON_VALUE)
