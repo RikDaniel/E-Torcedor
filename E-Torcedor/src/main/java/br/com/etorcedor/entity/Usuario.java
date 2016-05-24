@@ -22,7 +22,6 @@ public class Usuario implements Serializable{
 	private Long id;
 	private String cpf;
 	private String nome;
-	private Byte imagem;
 	private String genero;
 	private String telefone;
 	private String email;
@@ -35,24 +34,22 @@ public class Usuario implements Serializable{
 		
 	}
 	
-	public Usuario(Long id, String cpf, String nome, Byte imagem, String genero, String telefone, String email,
+	public Usuario(Long id, String cpf, String nome, String genero, String telefone, String email,
 			Date dataNascimento) {
 		this.id = id;
 		this.cpf = cpf;
 		this.nome = nome;
-		this.imagem = imagem;
 		this.genero = genero;
 		this.telefone = telefone;
 		this.email = email;
 		this.dataNascimento = dataNascimento;
 	}
 
-	public Usuario(Long id, String cpf, String nome, Byte imagem, String genero, String telefone, String email,
+	public Usuario(Long id, String cpf, String nome, String genero, String telefone, String email,
 			Date dataNascimento, Torcida torcida, Time clube, List<Ingresso> ingressos) {
 		this.id = id;
 		this.cpf = cpf;
 		this.nome = nome;
-		this.imagem = imagem;
 		this.genero = genero;
 		this.telefone = telefone;
 		this.email = email;
@@ -86,14 +83,6 @@ public class Usuario implements Serializable{
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public Byte getImagem() {
-		return imagem;
-	}
-
-	public void setImagem(Byte imagem) {
-		this.imagem = imagem;
 	}
 
 	public String getGenero() {
@@ -168,7 +157,6 @@ public class Usuario implements Serializable{
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((genero == null) ? 0 : genero.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((imagem == null) ? 0 : imagem.hashCode());
 		result = prime * result + ((ingressos == null) ? 0 : ingressos.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
@@ -215,11 +203,6 @@ public class Usuario implements Serializable{
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (imagem == null) {
-			if (other.imagem != null)
-				return false;
-		} else if (!imagem.equals(other.imagem))
-			return false;
 		if (ingressos == null) {
 			if (other.ingressos != null)
 				return false;
@@ -245,8 +228,8 @@ public class Usuario implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Usuario [id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", imagem=" + imagem + ", genero=" + genero
-				+ ", telefone=" + telefone + ", email=" + email + ", dataNascimento=" + dataNascimento + ", torcida="
-				+ torcida + ", clube=" + clube + ", ingressos=" + ingressos + "]";
+		return "Usuario [id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", genero=" + genero + ", telefone=" + telefone
+				+ ", email=" + email + ", dataNascimento=" + dataNascimento + ", torcida=" + torcida + ", clube="
+				+ clube + ", ingressos=" + ingressos + "]";
 	}	
 }

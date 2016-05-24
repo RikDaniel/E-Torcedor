@@ -41,7 +41,6 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 			Usuario old = this.findByCpf(u.getCpf());
 			old.setCpf(u.getCpf());
 			old.setNome(u.getNome());
-			old.setImagem(u.getImagem());
 			old.setGenero(u.getGenero());
 			old.setTelefone(u.getTelefone());
 			old.setEmail(u.getEmail());

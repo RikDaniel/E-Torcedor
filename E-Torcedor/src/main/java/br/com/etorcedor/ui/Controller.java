@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.etorcedor.business.Fachada;
@@ -47,7 +46,13 @@ public class Controller {
 				u.toString() + 
 				Teste.criadorTracinhos(u.toString().length()));
 		try {
-			this.fachada.adicionarUsuario(u);
+			if(u.getNome() != null)
+				this.fachada.adicionarUsuario(u);
+			else {
+				logger.debug("PARAMETRO NULO OU INEXISTENTE");
+				return new ResponseEntity<String>("CAMPOS EM BRANCO", HttpStatus.BAD_REQUEST);
+			}
+			
 		} catch (Exception e) {
 			return new ResponseEntity<Exception>(e, HttpStatus.BAD_REQUEST);
 		}
@@ -56,12 +61,16 @@ public class Controller {
 
 	@RequestMapping("/usuario/att")
 	public ResponseEntity<?> atualizarUsuario(Usuario u) {
+		logger.debug(Teste.criadorTracinhos(u.toString().length()) +
+				"TENTANDO ATUALIZAR O USUARIO: \n" +
+				u.toString() + 
+				Teste.criadorTracinhos(u.toString().length()));
 		try {
 			this.fachada.atualizarUsuario(u);
 		} catch (Exception e) {
 			return new ResponseEntity<Exception>(e, HttpStatus.BAD_REQUEST);
 		}
-		return new ResponseEntity<String>(HttpStatus.OK);
+		return new ResponseEntity<String>("Usuario: " + u.getNome() + " atualizado com sucesso", HttpStatus.OK);
 	}
 
 	@RequestMapping("/usuario/remov")
