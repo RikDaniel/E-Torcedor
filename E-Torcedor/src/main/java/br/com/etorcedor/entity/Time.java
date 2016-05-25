@@ -12,7 +12,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Time implements Serializable{
+public class Time implements Serializable {
 
 	/**
 	 * 
@@ -22,13 +22,13 @@ public class Time implements Serializable{
 	private String nome;
 	private List<Torcida> torcidas;
 	private List<Jogo> jogos;
-	
+
 	public Time() {
-		
+
 	}
-	
+
 	public Time(Long id, String nome, List<Torcida> torcidas, List<Jogo> jogos) {
-		
+
 		this.id = id;
 		this.nome = nome;
 		this.torcidas = torcidas;
@@ -36,7 +36,7 @@ public class Time implements Serializable{
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -52,8 +52,8 @@ public class Time implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	@OneToMany(mappedBy="time", fetch=FetchType.EAGER)
+
+	@OneToMany(mappedBy = "time", fetch = FetchType.EAGER)
 	public List<Torcida> getTorcidas() {
 		return torcidas;
 	}
@@ -61,7 +61,7 @@ public class Time implements Serializable{
 	public void setTorcidas(List<Torcida> torcidas) {
 		this.torcidas = torcidas;
 	}
-	
+
 	@ManyToMany
 	public List<Jogo> getJogos() {
 		return jogos;
@@ -117,5 +117,5 @@ public class Time implements Serializable{
 	@Override
 	public String toString() {
 		return "Time [id=" + id + ", nome=" + nome + ", torcidas=" + torcidas + ", jogos=" + jogos + "]";
-	}	
+	}
 }

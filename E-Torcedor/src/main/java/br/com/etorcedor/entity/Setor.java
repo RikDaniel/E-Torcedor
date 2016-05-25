@@ -70,7 +70,7 @@ public class Setor implements Serializable {
 		this.estadio = estadio;
 	}
 
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER)
 	public List<Ingresso> getIngrecos() {
 		return ingrecos;
 	}

@@ -12,40 +12,40 @@ import br.com.etorcedor.exception.IngressoInexistenteException;
 import br.com.etorcedor.exception.JogoExistenteException;
 import br.com.etorcedor.exception.JogoInexistenteException;
 
-public interface ServiceJogo extends Serializable{
+public interface ServiceJogo extends Serializable {
 
-
-	//JOGO
+	// JOGO
 	/**
 	 * 
 	 * @param j
 	 * @throws JogoExistenteException
 	 */
-	public void  adicionarJogo(Jogo j)throws JogoExistenteException;
+	public void adicionarJogo(Jogo j) throws JogoExistenteException;
 
 	/**
 	 * 
 	 * @param j
 	 * @throws JogoInexistenteException
 	 */
-	public void atualizarJogo(Jogo j)throws JogoInexistenteException;
+	public void atualizarJogo(Jogo j) throws JogoInexistenteException;
 
 	/**
 	 * 
 	 * @param j
 	 * @throws JogoInexistenteException
 	 */
-	public void removerJogo(Jogo j)throws JogoInexistenteException;
+	public void removerJogo(Jogo j) throws JogoInexistenteException;
 
 	/**
 	 * 
 	 * @param id
 	 * @return
 	 */
-	public Jogo findOneJogo(Long id)throws JogoInexistenteException;
+	public Jogo findOneJogo(Long id) throws JogoInexistenteException;
 
 	/**
 	 * Recupera uma lista de Jogos em um determinada Data.
+	 * 
 	 * @param data
 	 * @return Uma coleção do tipo List de Jogo
 	 */
@@ -53,6 +53,7 @@ public interface ServiceJogo extends Serializable{
 
 	/**
 	 * Recupera uma lista de Jogos em um estadio.
+	 * 
 	 * @param estadio
 	 * @return Uma coleção do tipo List de Jogo
 	 */
@@ -60,11 +61,12 @@ public interface ServiceJogo extends Serializable{
 
 	/**
 	 * Retorna uma lista com todos os jogos
+	 * 
 	 * @return
 	 */
 	public List<Jogo> findAllJogo();
 
-	//INGRESSO
+	// INGRESSO
 
 	/**
 	 * 
@@ -85,10 +87,11 @@ public interface ServiceJogo extends Serializable{
 	 * @param i
 	 * @throws IngressoInexistenteException
 	 */
-	public void removerIngresso(Long i)throws IngressoInexistenteException;
+	public void removerIngresso(Long i) throws IngressoInexistenteException;
 
 	/**
 	 * Recupera todos os ingressos de um determinado jogo.
+	 * 
 	 * @param jogo
 	 * @return Uma coleção do tipo List de Ingresso.
 	 */
@@ -96,6 +99,7 @@ public interface ServiceJogo extends Serializable{
 
 	/**
 	 * Recupera todos os ingressos de uma data.
+	 * 
 	 * @param data
 	 * @return Uma coleção do tipo List de Ingresso.
 	 */
@@ -103,6 +107,7 @@ public interface ServiceJogo extends Serializable{
 
 	/**
 	 * Recupera todos os ingressos pelo numero do acento.
+	 * 
 	 * @param numeroAcento
 	 * @return Uma coleção do tipo List de Ingresso.
 	 */
@@ -114,7 +119,7 @@ public interface ServiceJogo extends Serializable{
 	 * @return
 	 * @throws IngressoInexistenteException
 	 */
-	public Ingresso findOneIngresso(Long id)throws IngressoInexistenteException;
+	public Ingresso findOneIngresso(Long id) throws IngressoInexistenteException;
 
 	public List<Ingresso> findAllIngresso();
 }

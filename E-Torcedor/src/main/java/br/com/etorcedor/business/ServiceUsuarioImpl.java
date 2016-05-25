@@ -27,49 +27,48 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 
 	@Transactional(rollbackFor = UsuarioExistenteException.class)
 	public void adicionarUsuario(Usuario u) throws UsuarioExistenteException {
-		try{
+		try {
 			Usuario usuario = this.findByCpf(u.getCpf());
-			if(usuario != null)
+			if (usuario != null)
 				throw new UsuarioExistenteException();
-		}catch(UsuarioInexistenteException e){
+		} catch (UsuarioInexistenteException e) {
 			usuarioRep.save(u);
 		}
 	}
 
 	@Transactional(rollbackFor = UsuarioInexistenteException.class)
 	public void atualizarUsuario(Usuario u) throws UsuarioInexistenteException {
-			Usuario old = this.findByCpf(u.getCpf());
-			old.setCpf(u.getCpf());
-			old.setNome(u.getNome());
-			old.setGenero(u.getGenero());
-			old.setTelefone(u.getTelefone());
-			old.setEmail(u.getEmail());
-			old.setDataNascimento(u.getDataNascimento());
-			old.setTorcida(u.getTorcida());
-			old.setClube(u.getClube());
-			old.setIngressos(u.getIngressos());
-			this.usuarioRep.save(old);
-			
+		Usuario old = this.findByCpf(u.getCpf());
+		old.setCpf(u.getCpf());
+		old.setNome(u.getNome());
+		old.setGenero(u.getGenero());
+		old.setTelefone(u.getTelefone());
+		old.setEmail(u.getEmail());
+		old.setDataNascimento(u.getDataNascimento());
+		old.setTorcida(u.getTorcida());
+		old.setClube(u.getClube());
+		old.setIngressos(u.getIngressos());
+		this.usuarioRep.save(old);
+
 	}
 
 	@Transactional(rollbackFor = UsuarioInexistenteException.class)
 	public void removerUsuario(Long id) throws UsuarioInexistenteException {
 		Usuario old = usuarioRep.findOne(id);
-
-		List<Ingresso> i= old.getIngressos();
-			try {
-				for(Ingresso e:i){
-					ingressoServ.removerIngresso(e.getId());
-				}
-				usuarioRep.delete(old);
-			} catch (IngressoInexistenteException e1) {
-				throw new UsuarioInexistenteException();
+		List<Ingresso> i = old.getIngressos();
+		try {
+			for (Ingresso e : i) {
+				ingressoServ.removerIngresso(e.getId());
 			}
+			usuarioRep.delete(old);
+		} catch (IngressoInexistenteException e1) {
+			throw new UsuarioInexistenteException();
+		}
 	}
 
 	public Usuario findByCpf(String cpf) throws UsuarioInexistenteException {
 		Usuario usuario = usuarioRep.findByCpf(cpf);
-		if(usuario == null) 
+		if (usuario == null)
 			throw new UsuarioInexistenteException();
 		return usuario;
 	}
@@ -89,9 +88,10 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 	public List<Usuario> findByTorcidaOrderByNomeAsc(Torcida torcida) {
 		return this.usuarioRep.findByTorcidaOrderByNomeAsc(torcida);
 	}
-	
+
 	/**
 	 * Retorna todos os usuarios do sistema
+	 * 
 	 * @return
 	 */
 	public List<Usuario> findAll() {

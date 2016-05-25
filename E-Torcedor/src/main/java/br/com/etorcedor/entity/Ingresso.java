@@ -25,7 +25,7 @@ public class Ingresso implements Serializable {
 	private Setor setor;
 
 	public Ingresso() {
-		
+
 	}
 
 	public Ingresso(Long id, Date data, Jogo jogo, int numeroAcento, float valorIngresso, Usuario usuario,

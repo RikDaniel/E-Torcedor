@@ -31,7 +31,7 @@ public class ServiceJogoImpl implements ServiceJogo {
 	public void adicionarJogo(Jogo j) throws JogoExistenteException {
 		try {
 			Jogo jogo = this.findOneJogo(j.getId());
-			if(jogo != null)
+			if (jogo != null)
 				throw new JogoExistenteException();
 		} catch (JogoInexistenteException e) {
 			jogoRep.save(j);
@@ -52,13 +52,12 @@ public class ServiceJogoImpl implements ServiceJogo {
 
 	@Transactional(rollbackFor = JogoInexistenteException.class)
 	public void removerJogo(Jogo j) throws JogoInexistenteException {
-		Jogo old= findOneJogo(j.getId());
-
+		Jogo old = findOneJogo(j.getId());
 		List<Ingresso> i = old.getIngrecos();
 		try {
-			for(Ingresso n:i)
+			for (Ingresso n : i)
 				removerIngresso(n.getId());
-			jogoRep.delete(old);	
+			jogoRep.delete(old);
 		} catch (Exception e) {
 			throw new JogoInexistenteException();
 		}
@@ -66,7 +65,6 @@ public class ServiceJogoImpl implements ServiceJogo {
 
 	public Jogo findOneJogo(Long id) throws JogoInexistenteException {
 		Jogo j = jogoRep.findOne(id);
-
 		if (j == null) {
 			throw new JogoInexistenteException();
 		}
@@ -84,6 +82,8 @@ public class ServiceJogoImpl implements ServiceJogo {
 	public List<Jogo> findAllJogo() {
 		return (List<Jogo>) this.jogoRep.findAll();
 	}
+
+	// INGRESSO
 
 	@Transactional(rollbackFor = IngressoExistenteException.class)
 	public void adicionarIngresso(Ingresso i) throws IngressoExistenteException {

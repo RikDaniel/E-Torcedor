@@ -15,6 +15,7 @@ public interface RepositorioJogo extends CrudRepository<Jogo, Long> {
 
 	/**
 	 * Recupera uma lista de Jogos em um determinada Data.
+	 * 
 	 * @param data
 	 * @return Uma coleção do tipo List de Jogo
 	 */
@@ -22,6 +23,7 @@ public interface RepositorioJogo extends CrudRepository<Jogo, Long> {
 
 	/**
 	 * Recupera uma lista de Jogos em um estadio.
+	 * 
 	 * @param estadio
 	 * @return Uma coleção do tipo List de Jogo
 	 */

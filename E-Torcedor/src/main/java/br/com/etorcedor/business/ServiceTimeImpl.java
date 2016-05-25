@@ -16,7 +16,7 @@ import br.com.etorcedor.exception.TorcidaInexistenteException;
 import br.com.etorcedor.persistence.RepositorioTime;
 
 @Service
-public class ServiceTimeImpl implements ServiceTime{
+public class ServiceTimeImpl implements ServiceTime {
 
 	/**
 	 * 
@@ -34,7 +34,7 @@ public class ServiceTimeImpl implements ServiceTime{
 	public void adicionarTime(Time t) throws TimeExistenteException {
 		try {
 			Time time = this.findByOne(t.getId());
-			if(time != null)
+			if (time != null)
 				throw new TimeExistenteException();
 		} catch (TimeInexistenteException e) {
 			timeRep.save(t);
@@ -43,7 +43,7 @@ public class ServiceTimeImpl implements ServiceTime{
 
 	@Transactional(rollbackFor = TimeInexistenteException.class)
 	public void atualizarTime(Time t) throws TimeInexistenteException {
-		Time old= findByOne(t.getId());
+		Time old = findByOne(t.getId());
 		old.setJogos(t.getJogos());
 		old.setNome(t.getNome());
 		old.setTorcidas(t.getTorcidas());
@@ -51,33 +51,33 @@ public class ServiceTimeImpl implements ServiceTime{
 	}
 
 	@Transactional(rollbackFor = TimeInexistenteException.class)
-	public void removerTime(Time t) throws TimeInexistenteException,TorcidaInexistenteException,JogoInexistenteException{
+	public void removerTime(Time t)
+			throws TimeInexistenteException, TorcidaInexistenteException, JogoInexistenteException {
 		Time old = findByOne(t.getId());
-
-		List<Torcida> a =old.getTorcidas();
+		List<Torcida> a = old.getTorcidas();
 		List<Jogo> j = old.getJogos();
 		try {
-			for(Torcida to:a)
+			for (Torcida to : a)
 				torcidaSer.removerTorcida(to.getId());
-			for(Jogo jo:j)
+			for (Jogo jo : j)
 				jogoSer.removerJogo(jo);
 			timeRep.delete(old);
 		} catch (Exception e) {
 			throw new TimeInexistenteException();
-		}		
+		}
 	}
 
 	public Time findByOne(Long id) throws TimeInexistenteException {
 		Time t = timeRep.findOne(id);
-		if(t == null){
+		if (t == null) {
 			throw new TimeInexistenteException();
 		}
 		return t;
 	}
 
 	public Time findByNome(String nome) throws TimeInexistenteException {
-		Time t=timeRep.findByNome(nome);
-		if(t == null){
+		Time t = timeRep.findByNome(nome);
+		if (t == null) {
 			throw new TimeInexistenteException();
 		}
 		return t;

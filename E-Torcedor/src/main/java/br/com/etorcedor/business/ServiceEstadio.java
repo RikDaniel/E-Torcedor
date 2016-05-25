@@ -12,77 +12,78 @@ import br.com.etorcedor.exception.SetorInexistenteException;
 
 public interface ServiceEstadio extends Serializable {
 
-	//ESTADIO
-	
+	// ESTADIO
+
 	/**
 	 * 
 	 * @param e
 	 * @throws EstadioExistenteException
 	 */
 	public void adicionarEstadio(Estadio e) throws EstadioExistenteException;
-	
+
 	/**
 	 * 
 	 * @param e
 	 * @throws EstadioInexistenteException
 	 */
 	public void atualizarEstadio(Estadio e) throws EstadioInexistenteException;
-	
+
 	/**
 	 * 
 	 * @param e
 	 * @throws EstadioInexistenteException
 	 */
 	public void removerEstadio(Estadio e) throws EstadioInexistenteException;
-	
+
 	/**
 	 * 
 	 * @param id
 	 * @return
 	 */
-	public Estadio findOneEstadio(Long id)throws EstadioInexistenteException;
-	
+	public Estadio findOneEstadio(Long id) throws EstadioInexistenteException;
+
 	/**
 	 * 
 	 * @return
 	 */
 	public List<Estadio> findAllEstadio();
-	
-	//SETOR
-	
+
+	// SETOR
+
 	/**
 	 * 
 	 * @param e
 	 * @throws SetorExistenteException
 	 */
 	public void adicionarSetor(Setor e) throws SetorExistenteException;
-	
+
 	/**
 	 * 
 	 * @param e
 	 * @throws SetorInexistenteException
 	 */
-	public void atualizarSetor(Setor e)throws SetorInexistenteException;
-	
+	public void atualizarSetor(Setor e) throws SetorInexistenteException;
+
 	/**
 	 * 
 	 * @param e
 	 * @throws SetorInexistenteException
 	 */
-	public void removerSetor(Setor e)throws SetorInexistenteException;
-	
+	public void removerSetor(Setor e) throws SetorInexistenteException;
+
 	/**
 	 * 
 	 * @param id
 	 * @return
 	 * @throws SetorInexistenteException
 	 */
-	public Setor findOneSetor(Long id)throws SetorInexistenteException;
-	
+	public Setor findOneSetor(Long id) throws SetorInexistenteException;
+
 	/**
 	 * Recupera um setor pelo seu nome.
+	 * 
 	 * @param nome
 	 * @return Uma entidade do tipo Setor.
 	 */
-	public Setor findByNome(String nome)throws SetorInexistenteException;
+	public Setor findByNome(String nome) throws SetorInexistenteException;
 }

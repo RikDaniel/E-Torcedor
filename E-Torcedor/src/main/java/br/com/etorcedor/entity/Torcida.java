@@ -12,7 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Torcida implements Serializable{
+public class Torcida implements Serializable {
 
 	/**
 	 * 
@@ -23,11 +23,11 @@ public class Torcida implements Serializable{
 	private String nome;
 	private Time time;
 	private List<Usuario> torcedores;
-	
+
 	public Torcida() {
-		
+
 	}
-	
+
 	public Torcida(Long id, int socios, String nome, Time time, List<Usuario> torcedores) {
 		this.id = id;
 		this.socios = socios;
@@ -37,7 +37,7 @@ public class Torcida implements Serializable{
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -61,7 +61,7 @@ public class Torcida implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	@ManyToOne
 	public Time getTime() {
 		return time;
@@ -70,8 +70,8 @@ public class Torcida implements Serializable{
 	public void setTime(Time time) {
 		this.time = time;
 	}
-	
-	@OneToMany(mappedBy="torcida", fetch=FetchType.EAGER)
+
+	@OneToMany(mappedBy = "torcida", fetch = FetchType.EAGER)
 	public List<Usuario> getTorcedores() {
 		return torcedores;
 	}

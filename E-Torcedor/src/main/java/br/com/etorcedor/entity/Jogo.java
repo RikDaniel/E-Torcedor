@@ -29,7 +29,7 @@ public class Jogo implements Serializable {
 	private Estadio estadio;
 
 	public Jogo() {
-		
+
 	}
 
 	public Jogo(Long id, List<Time> times, Date data, int ingrecos_quantidade, int ingrecos_vendidos,
@@ -86,7 +86,7 @@ public class Jogo implements Serializable {
 		this.ingrecos_vendidos = ingrecos_vendidos;
 	}
 
-	@OneToMany(mappedBy = "jogo", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "jogo", fetch = FetchType.EAGER)
 	public List<Ingresso> getIngrecos() {
 		return ingrecos;
 	}

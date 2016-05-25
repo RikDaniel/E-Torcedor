@@ -9,12 +9,13 @@ import br.com.etorcedor.entity.Setor;
  *
  */
 public interface RepositorioSetor extends CrudRepository<Setor, Long> {
-	
+
 	/**
 	 * Recupera um setor pelo seu nome.
+	 * 
 	 * @param nome
 	 * @return Uma entidade do tipo Setor.
 	 */
 	public Setor findByNome(String nome);
-	
+
 }

@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Usuario implements Serializable{
+public class Usuario implements Serializable {
 
 	/**
 	 * 
@@ -29,11 +29,11 @@ public class Usuario implements Serializable{
 	private Torcida torcida;
 	private Time clube;
 	private List<Ingresso> ingressos;
-	
+
 	public Usuario() {
-		
+
 	}
-	
+
 	public Usuario(Long id, String cpf, String nome, String genero, String telefone, String email,
 			Date dataNascimento) {
 		this.id = id;
@@ -45,8 +45,8 @@ public class Usuario implements Serializable{
 		this.dataNascimento = dataNascimento;
 	}
 
-	public Usuario(Long id, String cpf, String nome, String genero, String telefone, String email,
-			Date dataNascimento, Torcida torcida, Time clube, List<Ingresso> ingressos) {
+	public Usuario(Long id, String cpf, String nome, String genero, String telefone, String email, Date dataNascimento,
+			Torcida torcida, Time clube, List<Ingresso> ingressos) {
 		this.id = id;
 		this.cpf = cpf;
 		this.nome = nome;
@@ -60,7 +60,7 @@ public class Usuario implements Serializable{
 	}
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -134,7 +134,7 @@ public class Usuario implements Serializable{
 		this.clube = clube;
 	}
 
-	@OneToMany(mappedBy= "usuario",fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
 	public List<Ingresso> getIngressos() {
 		return ingressos;
 	}
@@ -231,5 +231,5 @@ public class Usuario implements Serializable{
 		return "Usuario [id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", genero=" + genero + ", telefone=" + telefone
 				+ ", email=" + email + ", dataNascimento=" + dataNascimento + ", torcida=" + torcida + ", clube="
 				+ clube + ", ingressos=" + ingressos + "]";
-	}	
+	}
 }

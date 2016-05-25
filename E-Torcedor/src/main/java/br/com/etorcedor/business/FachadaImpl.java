@@ -47,7 +47,7 @@ public class FachadaImpl implements Fachada {
 	@Autowired
 	private ServiceEstadio estadioServ;
 
-	//Usuario
+	// Usuario
 
 	public void adicionarUsuario(Usuario u) throws UsuarioExistenteException {
 		this.usuarioServ.adicionarUsuario(u);
@@ -83,12 +83,13 @@ public class FachadaImpl implements Fachada {
 
 	/**
 	 * Retorna todos os usuarios do sistema
+	 * 
 	 * @return
 	 */
 	public List<Usuario> findAllUsuario() {
 		return this.usuarioServ.findAll();
 	}
-	//TORCIDA
+	// TORCIDA
 
 	public void adicionarTorcida(Torcida t) throws TorcidaExistenteException {
 		this.torcidaServ.adicionarTorcida(t);
@@ -114,7 +115,7 @@ public class FachadaImpl implements Fachada {
 		return this.torcidaServ.findAllTorcida();
 	}
 
-	//TIME
+	// TIME
 
 	public Time findByOne(Long id) throws TimeInexistenteException {
 		return this.timeServ.findByOne(id);
@@ -131,7 +132,7 @@ public class FachadaImpl implements Fachada {
 		return this.timeServ.findAll();
 	}
 
-	//JOGO
+	// JOGO
 
 	public Jogo findOneJogo(Long id) throws JogoInexistenteException {
 		return this.jogoServ.findOneJogo(id);
@@ -140,7 +141,7 @@ public class FachadaImpl implements Fachada {
 	public List<Jogo> findByDataJogo(Date data) {
 		return this.jogoServ.findByDataJogo(data);
 	}
-	
+
 	public List<Jogo> findByEstadio(Estadio estadio) {
 		return this.jogoServ.findByEstadio(estadio);
 	}
@@ -149,7 +150,7 @@ public class FachadaImpl implements Fachada {
 		return this.jogoServ.findAllJogo();
 	}
 
-	//INGRESSO
+	// INGRESSO
 	public void adicionarIngreco(Ingresso i) throws IngressoExistenteException {
 		this.jogoServ.adicionarIngresso(i);
 	}
@@ -182,7 +183,7 @@ public class FachadaImpl implements Fachada {
 		return this.jogoServ.findAllIngresso();
 	}
 
-	//ESTADIO
+	// ESTADIO
 
 	public Estadio findOneEstadio(Long id) throws EstadioInexistenteException {
 		return this.estadioServ.findOneEstadio(id);
@@ -192,7 +193,7 @@ public class FachadaImpl implements Fachada {
 		return this.estadioServ.findAllEstadio();
 	}
 
-	//SETOR
+	// SETOR
 
 	public Setor findOneSetor(Long id) throws SetorInexistenteException {
 		return this.estadioServ.findOneSetor(id);

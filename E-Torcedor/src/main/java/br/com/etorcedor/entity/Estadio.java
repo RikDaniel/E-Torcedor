@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Estadio implements Serializable{
+public class Estadio implements Serializable {
 
 	/**
 	 * 
@@ -20,9 +20,9 @@ public class Estadio implements Serializable{
 	private Long id;
 	private List<Jogo> jogos;
 	private List<Setor> setores;
-	
+
 	public Estadio() {
-		
+
 	}
 
 	public Estadio(Long id, List<Jogo> jogos, List<Setor> setores) {
@@ -30,9 +30,9 @@ public class Estadio implements Serializable{
 		this.jogos = jogos;
 		this.setores = setores;
 	}
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	public Long getId() {
 		return id;
 	}
@@ -41,7 +41,7 @@ public class Estadio implements Serializable{
 		this.id = id;
 	}
 
-	@OneToMany(mappedBy="estadio", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "estadio", fetch = FetchType.EAGER)
 	public List<Jogo> getJogos() {
 		return jogos;
 	}
@@ -50,7 +50,7 @@ public class Estadio implements Serializable{
 		this.jogos = jogos;
 	}
 
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany(fetch = FetchType.EAGER)
 	public List<Setor> getSetores() {
 		return setores;
 	}
@@ -62,7 +62,6 @@ public class Estadio implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
 
 	@Override
 	public int hashCode() {
