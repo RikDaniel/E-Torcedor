@@ -221,6 +221,10 @@ public interface Fachada extends Serializable {
 	public Estadio findOneEstadio(Long id) throws EstadioInexistenteException;
 
 	public List<Estadio> findAllEstadio();
+	
+	public Estadio findByNomeEstadio(String nome) throws EstadioInexistenteException;
+	
+	public Estadio findByApelido(String apelido) throws EstadioInexistenteException;
 
 	// SETOR
 

@@ -65,6 +65,22 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 		}
 		return e;
 	}
+	
+	public Estadio findByNomeEstadio(String nome) throws EstadioInexistenteException {
+		Estadio e = estadioRep.findByNome(nome);
+		if (e == null) {
+			throw new EstadioInexistenteException();
+		}
+		return e;
+	}
+	
+	public Estadio findByApelido(String apelido) throws EstadioInexistenteException {
+		Estadio e = estadioRep.findByApelido(apelido);
+		if (e == null) {
+			throw new EstadioInexistenteException();
+		}
+		return e;
+	}
 
 	public List<Estadio> findAllEstadio() {
 		return (List<Estadio>) this.estadioRep.findAll();

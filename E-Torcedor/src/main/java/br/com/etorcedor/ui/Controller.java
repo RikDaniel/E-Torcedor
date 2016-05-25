@@ -208,7 +208,7 @@ public class Controller {
 
 	// TIME
 
-	@RequestMapping(value = "/time/find", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/time/find/one", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Time findByOne(Long id) {
 		try {
 			if (id != null && id >= 1)
@@ -232,9 +232,14 @@ public class Controller {
 		}
 	}
 
+	@RequestMapping(value = "/time/find/all", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Time> findAllTime() {
+		return this.fachada.findAllTime();
+	}
+
 	// JOGO
 
-	@RequestMapping(value = "/jogo/find", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/jogo/find/one", produces = MediaType.APPLICATION_JSON_VALUE)
 	public Jogo findOneJogo(Long id) {
 		try {
 			if (id != null && id >= 1)
@@ -255,11 +260,16 @@ public class Controller {
 	}
 
 	@RequestMapping(value = "/jogo/find/estadio", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Jogo> findByEstadio(Estadio estadio) {
-		if (estadio != null)
-			return this.fachada.findByEstadio(estadio);
-		else
+	public List<Jogo> findByEstadio(String nomeEstadio) {
+		try {
+
+			if (nomeEstadio != null)
+				return this.fachada.findByEstadio(this.fachada.findByNomeEstadio(nomeEstadio));
+			else
+				return null;
+		} catch (EstadioInexistenteException e) {
 			return null;
+		}
 	}
 
 	// INGRESSO
@@ -288,7 +298,7 @@ public class Controller {
 			return null;
 	}
 
-	@RequestMapping(value = "/ingresso/find", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/ingresso/find/one", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> findOneIngresso(Long id) {
 		try {
 			if (id != null && id >= 1) {
@@ -303,7 +313,7 @@ public class Controller {
 	}
 
 	// ESTADIO
-	@RequestMapping(value = "/estadio/find", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/estadio/find/one", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> findOneEstadio(Long id) {
 		try {
 			if (id != null && id >= 1) {
@@ -312,12 +322,27 @@ public class Controller {
 			} else
 				return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		} catch (EstadioInexistenteException e) {
-			return new ResponseEntity<EstadioInexistenteException>(e, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("Estadio Inexistente", HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@RequestMapping(value = "/estadio/find/nome", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> findByNomeEstadio(String nome) {
+		try {
+			if (nome != null) {
+				Estadio estadio = this.fachada.findByNomeEstadio(nome);
+				if(estadio == null)
+					estadio = this.fachada.findByApelido(nome);
+			return new ResponseEntity<Estadio>(estadio, HttpStatus.OK);
+			} else
+				return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		} catch (EstadioInexistenteException e) {
+			return new ResponseEntity<String>("Estadio Inexistente", HttpStatus.BAD_REQUEST);
 		}
 	}
 
 	// SETOR
-	@RequestMapping(value = "/setor/find", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/setor/find/one", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> findOneSetor(Long id) {
 		try {
 			if (id != null && id >= 1) {

@@ -44,6 +44,22 @@ public interface ServiceEstadio extends Serializable {
 
 	/**
 	 * 
+	 * @param nome
+	 * @return
+	 * @throws EstadioInexistenteException
+	 */
+	public Estadio findByNomeEstadio(String nome) throws EstadioInexistenteException;
+	
+	/**
+	 * 
+	 * @param apelido
+	 * @return
+	 * @throws EstadioInexistenteException
+	 */
+	public Estadio findByApelido(String apelido) throws EstadioInexistenteException;
+
+	/**
+	 * 
 	 * @return
 	 */
 	public List<Estadio> findAllEstadio();

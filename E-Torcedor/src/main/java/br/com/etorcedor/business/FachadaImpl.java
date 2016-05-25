@@ -192,6 +192,14 @@ public class FachadaImpl implements Fachada {
 	public List<Estadio> findAllEstadio() {
 		return this.estadioServ.findAllEstadio();
 	}
+	
+	public Estadio findByNomeEstadio(String nome) throws EstadioInexistenteException {
+		return this.estadioServ.findByNomeEstadio(nome);
+	}
+	
+	public Estadio findByApelido(String apelido) throws EstadioInexistenteException {
+		return this.estadioServ.findByApelido(apelido);
+	}
 
 	// SETOR
 
