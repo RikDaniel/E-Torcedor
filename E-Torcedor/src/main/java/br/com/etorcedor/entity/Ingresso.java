@@ -12,10 +12,7 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Ingresso implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -1692556219162243475L;
 	private Long id;
 	private Date data;
 	private Jogo jogo;
@@ -28,6 +25,15 @@ public class Ingresso implements Serializable {
 
 	}
 
+	public Ingresso(Date data, Jogo jogo, int numeroAcento, float valorIngresso, Usuario usuario, Setor setor) {
+		this.data = data;
+		this.jogo = jogo;
+		this.numeroAcento = numeroAcento;
+		this.valorIngresso = valorIngresso;
+		this.usuario = usuario;
+		this.setor = setor;
+	}
+
 	public Ingresso(Long id, Date data, Jogo jogo, int numeroAcento, float valorIngresso, Usuario usuario,
 			Setor setor) {
 		this.id = id;
@@ -36,7 +42,7 @@ public class Ingresso implements Serializable {
 		this.numeroAcento = numeroAcento;
 		this.valorIngresso = valorIngresso;
 		this.usuario = usuario;
-		this.setSetor(setor);
+		this.setor = setor;
 	}
 
 	@Id

@@ -13,10 +13,7 @@ import javax.persistence.OneToMany;
 @Entity
 public class Estadio implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = -222699005554563762L;
 	private Long id;
 	private String nome;
 	private String apelido;
@@ -25,6 +22,12 @@ public class Estadio implements Serializable {
 
 	public Estadio() {
 
+	}
+	
+	public Estadio(String nome, List<Setor> setores, String apelido) {
+		this.nome = nome;
+		this.apelido = apelido;
+		this.setores = setores;
 	}
 
 	public Estadio(Long id, String nome, List<Jogo> jogos, List<Setor> setores, String apelido) {

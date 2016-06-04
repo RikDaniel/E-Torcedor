@@ -13,11 +13,9 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Time implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = 4947351929869437331L;
+	
 	private Long id;
 	private String nome;
 	private List<Torcida> torcidas;
@@ -25,6 +23,10 @@ public class Time implements Serializable {
 
 	public Time() {
 
+	}
+	
+	public Time(String nome) {
+		this.nome = nome;
 	}
 
 	public Time(Long id, String nome, List<Torcida> torcidas, List<Jogo> jogos) {

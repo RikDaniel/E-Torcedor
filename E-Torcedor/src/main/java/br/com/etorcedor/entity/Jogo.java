@@ -16,10 +16,8 @@ import javax.persistence.OneToMany;
 @Entity
 public class Jogo implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1892054941459772393L;
+	
 	private Long id;
 	private List<Time> times;
 	private Date data;
@@ -30,6 +28,13 @@ public class Jogo implements Serializable {
 
 	public Jogo() {
 
+	}
+
+	public Jogo(Date data, int ingrecos_quantidade, Estadio estadio) {
+
+		this.data = data;
+		this.ingrecos_quantidade = ingrecos_quantidade;
+		this.estadio = estadio;
 	}
 
 	public Jogo(Long id, List<Time> times, Date data, int ingrecos_quantidade, int ingrecos_vendidos,

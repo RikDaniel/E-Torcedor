@@ -13,11 +13,9 @@ import javax.persistence.OneToMany;
 
 @Entity
 public class Setor implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = -4322754912050432672L;
+	
 	private Long id;
 	private String nome;
 	private int numeroCadeira;
@@ -26,6 +24,12 @@ public class Setor implements Serializable {
 
 	public Setor() {
 
+	}
+	
+	public Setor(String nome, int numeroCadeira, Estadio estadio) {
+		this.nome = nome;
+		this.numeroCadeira = numeroCadeira;
+		this.estadio = estadio;
 	}
 
 	public Setor(Long id, String nome, int numeroCadeira, Estadio estadio) {

@@ -37,7 +37,7 @@ public class ServiceTimeImpl implements ServiceTime {
 			if (time != null)
 				throw new TimeExistenteException();
 		} catch (TimeInexistenteException e) {
-			timeRep.save(t);
+			this.timeRep.save(t);
 		}
 	}
 
@@ -47,7 +47,7 @@ public class ServiceTimeImpl implements ServiceTime {
 		old.setJogos(t.getJogos());
 		old.setNome(t.getNome());
 		old.setTorcidas(t.getTorcidas());
-		timeRep.save(old);
+		this.timeRep.save(old);
 	}
 
 	@Transactional(rollbackFor = TimeInexistenteException.class)

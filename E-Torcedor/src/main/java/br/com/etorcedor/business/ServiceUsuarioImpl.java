@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.etorcedor.entity.Delito;
 import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.exception.DelitoNaoEncontradoException;
 import br.com.etorcedor.exception.IngressoInexistenteException;
 import br.com.etorcedor.exception.UsuarioExistenteException;
 import br.com.etorcedor.exception.UsuarioInexistenteException;
@@ -24,6 +26,8 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 	private RepositorioUsuario usuarioRep;
 	@Autowired
 	private ServiceJogo ingressoServ;
+	@Autowired
+	private ServiceDelito delitoServ;
 
 	@Transactional(rollbackFor = UsuarioExistenteException.class)
 	public void adicionarUsuario(Usuario u) throws UsuarioExistenteException {
@@ -48,22 +52,36 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 		old.setTorcida(u.getTorcida());
 		old.setClube(u.getClube());
 		old.setIngressos(u.getIngressos());
+		old.setDelitos(u.getDelitos());
 		this.usuarioRep.save(old);
 
 	}
 
 	@Transactional(rollbackFor = UsuarioInexistenteException.class)
 	public void removerUsuario(Long id) throws UsuarioInexistenteException {
-		Usuario old = usuarioRep.findOne(id);
-		List<Ingresso> i = old.getIngressos();
-		try {
-			for (Ingresso e : i) {
-				ingressoServ.removerIngresso(e.getId());
+		Usuario old = this.usuarioRep.findOne(id);
+		
+		if(old != null) {
+			List<Ingresso> i = old.getIngressos();
+			List<Delito> delito = old.getDelitos();
+			try {
+				for (Ingresso e : i) {
+					this.ingressoServ.removerIngresso(e.getId());
+				}
+				if(delito != null) {
+					for(Delito d : delito) {
+						this.delitoServ.removeDelito(d.getBo());
+					}
+				}
+				this.usuarioRep.delete(old);
+			} catch (IngressoInexistenteException e1) {
+				throw new UsuarioInexistenteException();
+			} catch (DelitoNaoEncontradoException e1) {
+				
 			}
-			usuarioRep.delete(old);
-		} catch (IngressoInexistenteException e1) {
-			throw new UsuarioInexistenteException();
 		}
+		else
+			throw new UsuarioInexistenteException();
 	}
 
 	public Usuario findByCpf(String cpf) throws UsuarioInexistenteException {

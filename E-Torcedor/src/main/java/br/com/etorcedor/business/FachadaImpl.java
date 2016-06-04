@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.etorcedor.entity.Delito;
 import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
@@ -13,6 +14,7 @@ import br.com.etorcedor.entity.Setor;
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.exception.DelitoNaoEncontradoException;
 import br.com.etorcedor.exception.EstadioInexistenteException;
 import br.com.etorcedor.exception.IngressoExistenteException;
 import br.com.etorcedor.exception.IngressoInexistenteException;
@@ -46,8 +48,11 @@ public class FachadaImpl implements Fachada {
 
 	@Autowired
 	private ServiceEstadio estadioServ;
+	
+	@Autowired
+	private ServiceDelito delitoServ;
 
-	// Usuario
+	// USUARIO
 
 	public void adicionarUsuario(Usuario u) throws UsuarioExistenteException {
 		this.usuarioServ.adicionarUsuario(u);
@@ -81,14 +86,10 @@ public class FachadaImpl implements Fachada {
 		return this.usuarioServ.findByTorcidaOrderByNomeAsc(torcida);
 	}
 
-	/**
-	 * Retorna todos os usuarios do sistema
-	 * 
-	 * @return
-	 */
 	public List<Usuario> findAllUsuario() {
 		return this.usuarioServ.findAll();
 	}
+
 	// TORCIDA
 
 	public void adicionarTorcida(Torcida t) throws TorcidaExistenteException {
@@ -125,9 +126,6 @@ public class FachadaImpl implements Fachada {
 		return this.timeServ.findByNome(nome);
 	}
 
-	/**
-	 * Retorna uma lista com todos os times
-	 */
 	public List<Time> findAllTime() {
 		return this.timeServ.findAll();
 	}
@@ -201,7 +199,7 @@ public class FachadaImpl implements Fachada {
 		return this.estadioServ.findByApelido(apelido);
 	}
 
-	// SETOR
+	//SETOR
 
 	public Setor findOneSetor(Long id) throws SetorInexistenteException {
 		return this.estadioServ.findOneSetor(id);
@@ -210,4 +208,16 @@ public class FachadaImpl implements Fachada {
 	public Setor findByNome(String nome) throws SetorInexistenteException {
 		return this.estadioServ.findByNome(nome);
 	}
+	
+	//DELITO
+	
+	public Delito findByBo(long bo) throws DelitoNaoEncontradoException {
+		return this.delitoServ.findByBo(bo);
+	}
+	public List<Delito> findByDia(Date dia) {
+		return this.delitoServ.findByDia(dia);
+	}
+ 	public List<Delito> findAll() {
+ 		return this.delitoServ.findAll();
+ 	}
 }

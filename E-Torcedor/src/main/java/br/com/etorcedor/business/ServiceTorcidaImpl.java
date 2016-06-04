@@ -15,11 +15,8 @@ import br.com.etorcedor.persistence.RepositorioTorcida;
 @Service
 public class ServiceTorcidaImpl implements ServiceTorcida {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
+	private static final long serialVersionUID = 5184754998130052128L;
+	
 	@Autowired
 	private RepositorioTorcida torcidaRep;
 
@@ -42,7 +39,6 @@ public class ServiceTorcidaImpl implements ServiceTorcida {
 		old.setTime(t.getTime());
 		old.setTorcedores(t.getTorcedores());
 		torcidaRep.save(old);
-
 	}
 
 	@Transactional(rollbackFor = TorcidaInexistenteException.class)

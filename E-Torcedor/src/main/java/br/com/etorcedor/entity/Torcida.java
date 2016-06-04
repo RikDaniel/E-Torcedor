@@ -14,10 +14,9 @@ import javax.persistence.OneToMany;
 @Entity
 public class Torcida implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = 1127487177019451658L;
+	
 	private Long id;
 	private int socios;
 	private String nome;
@@ -26,6 +25,12 @@ public class Torcida implements Serializable {
 
 	public Torcida() {
 
+	}
+	
+	public Torcida(int socios, String nome, Time time) {
+		this.socios = socios;
+		this.nome = nome;
+		this.time = time;
 	}
 
 	public Torcida(Long id, int socios, String nome, Time time, List<Usuario> torcedores) {

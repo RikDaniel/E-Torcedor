@@ -367,4 +367,9 @@ public class Controller {
 			return new ResponseEntity<SetorInexistenteException>(e, HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	@RequestMapping(value = "/compra/ingresso")
+	public ResponseEntity<?> compraIngresso(Long idUsuario, Long idJogo) {
+		return null;
+	}
 }
