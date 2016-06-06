@@ -1,5 +1,6 @@
 package br.com.etorcedor.ui;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.etorcedor.business.Fachada;
+import br.com.etorcedor.entity.Compra;
 import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
@@ -20,12 +22,12 @@ import br.com.etorcedor.entity.Setor;
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.exception.DelitoExistenteException;
 import br.com.etorcedor.exception.EstadioInexistenteException;
 import br.com.etorcedor.exception.IngressoInexistenteException;
 import br.com.etorcedor.exception.JogoInexistenteException;
 import br.com.etorcedor.exception.SetorInexistenteException;
 import br.com.etorcedor.exception.TimeInexistenteException;
-import br.com.etorcedor.exception.TorcidaExistenteException;
 import br.com.etorcedor.exception.TorcidaInexistenteException;
 import br.com.etorcedor.exception.UsuarioExistenteException;
 import br.com.etorcedor.exception.UsuarioInexistenteException;
@@ -46,6 +48,7 @@ public class Controller {
 				+ Log.traits(u.toString().length()));
 		try {
 			if (u.getNome() != null)
+
 				this.fachada.adicionarUsuario(u);
 			else {
 				logger.debug("PARAMETRO NULO OU INEXISTENTE");
@@ -123,60 +126,6 @@ public class Controller {
 	@RequestMapping(value = "/usuario/find/all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Usuario> findByAllUser() {
 		return this.fachada.findAllUsuario();
-	}
-
-	// TORCIDA
-	/*
-	 * Os métodos de inserir, remover e atualizar não estão disponiveís para
-	 * usuarios padrão. Somente para administração do sistema.
-	 */
-
-	// Não está disponível para usuário comum
-	@RequestMapping(value = "/torcida/add", method = RequestMethod.POST)
-	public ResponseEntity<?> adicionarTorcida(Torcida t) {
-		try {
-			if (t != null) {
-				this.fachada.adicionarTorcida(t);
-				return new ResponseEntity<String>("Torcida cadastrada com sucesso", HttpStatus.OK);
-			} else {
-				logger.debug("PARAMETRO NULO OU INVALIDO");
-				return new ResponseEntity<String>("CAMPOS EM BRANCO", HttpStatus.BAD_REQUEST);
-			}
-		} catch (TorcidaExistenteException e) {
-			return new ResponseEntity<TorcidaExistenteException>(e, HttpStatus.BAD_REQUEST);
-		}
-	}
-
-	// Não está disponível para usuário comum
-	@RequestMapping(value = "/torcida/att", method = RequestMethod.POST)
-	public ResponseEntity<?> atualizarTorcida(Torcida t) {
-		try {
-			if (t != null) {
-				this.fachada.atualizarTorcida(t);
-				return new ResponseEntity<String>("Torcida atualizada com sucesso", HttpStatus.OK);
-			} else {
-				logger.debug("PARAMETRO NULO OU INVALIDO");
-				return new ResponseEntity<String>("CAMPOS EM BRANCO", HttpStatus.BAD_REQUEST);
-			}
-		} catch (TorcidaInexistenteException e) {
-			return new ResponseEntity<TorcidaInexistenteException>(e, HttpStatus.BAD_REQUEST);
-		}
-	}
-
-	// Não está disponível para usuário comum
-	@RequestMapping(value = "/torcida/remov", method = RequestMethod.GET)
-	public ResponseEntity<?> removerTorcida(Long id) {
-		try {
-			if (id != null && id >= 1) {
-				this.fachada.removerTorcida(id);
-				return new ResponseEntity<String>("Torcida removida com sucesso", HttpStatus.OK);
-			} else {
-				logger.debug("PARAMETRO NULO OU INVALIDO");
-				return new ResponseEntity<String>("ID INVALIDO", HttpStatus.BAD_REQUEST);
-			}
-		} catch (TorcidaInexistenteException e) {
-			return new ResponseEntity<TorcidaInexistenteException>(e, HttpStatus.BAD_REQUEST);
-		}
 	}
 
 	@RequestMapping(value = "/torcida/find/nome", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -331,9 +280,9 @@ public class Controller {
 		try {
 			if (nome != null) {
 				Estadio estadio = this.fachada.findByNomeEstadio(nome);
-				if(estadio == null)
+				if (estadio == null)
 					estadio = this.fachada.findByApelido(nome);
-			return new ResponseEntity<Estadio>(estadio, HttpStatus.OK);
+				return new ResponseEntity<Estadio>(estadio, HttpStatus.OK);
 			} else
 				return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		} catch (EstadioInexistenteException e) {
@@ -367,9 +316,30 @@ public class Controller {
 			return new ResponseEntity<SetorInexistenteException>(e, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
+
 	@RequestMapping(value = "/compra/ingresso")
-	public ResponseEntity<?> compraIngresso(Long idUsuario, Long idJogo) {
-		return null;
+	public ResponseEntity<?> compraIngresso(String cpf, Long idIngresso) {
+		Compra compra;
+		Date dia = new Date();
+		List<Ingresso> ingressos = new ArrayList<Ingresso>();
+		Usuario usuario = new Usuario();
+
+		try {
+			usuario = this.fachada.findByCpf(cpf);
+
+				ingressos.add(this.fachada.findOneIngresso(idIngresso));
+			
+			compra = new Compra(dia, usuario, ingressos);
+			this.fachada.adicionarComprar(compra);
+			return new ResponseEntity<String>("Compra Realizada com Sucesso", HttpStatus.OK);
+		} catch (UsuarioInexistenteException e) {
+			return new ResponseEntity<UsuarioInexistenteException>(e, HttpStatus.BAD_REQUEST);
+		} catch (IngressoInexistenteException e) {
+			return new ResponseEntity<IngressoInexistenteException>(e, HttpStatus.BAD_REQUEST);
+		} catch (DelitoExistenteException e) {
+			return new ResponseEntity<DelitoExistenteException>(e, HttpStatus.BAD_REQUEST);
+		} catch (JogoInexistenteException e) {
+			return new ResponseEntity<JogoInexistenteException>(e, HttpStatus.BAD_REQUEST);
+		}
 	}
 }

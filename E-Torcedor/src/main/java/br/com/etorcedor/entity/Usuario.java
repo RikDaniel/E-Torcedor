@@ -28,7 +28,7 @@ public class Usuario implements Serializable {
 	private Torcida torcida;
 	private Time clube;
 	private List<Delito> delitos;
-	private List<Ingresso> ingressos;
+	private List<Compra> compras;
 
 	public Usuario() {
 
@@ -44,7 +44,7 @@ public class Usuario implements Serializable {
 	}
 
 	public Usuario(Long id, String cpf, String nome, String genero, String telefone, String email, Date dataNascimento,
-			Torcida torcida, Time clube, List<Ingresso> ingressos, List<Delito> delitos) {
+			Torcida torcida, Time clube, List<Delito> delitos, List<Compra> compras) {
 		this.id = id;
 		this.cpf = cpf;
 		this.nome = nome;
@@ -54,7 +54,7 @@ public class Usuario implements Serializable {
 		this.dataNascimento = dataNascimento;
 		this.torcida = torcida;
 		this.clube = clube;
-		this.ingressos = ingressos;
+		this.compras = compras;
 	}
 
 	@Id
@@ -132,19 +132,6 @@ public class Usuario implements Serializable {
 		this.clube = clube;
 	}
 
-	@OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
-	public List<Ingresso> getIngressos() {
-		return ingressos;
-	}
-
-	public void setIngressos(List<Ingresso> ingrecos) {
-		this.ingressos = ingrecos;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
 	@ManyToMany(mappedBy = "usuarios", fetch = FetchType.EAGER)
 	public List<Delito> getDelitos() {
 		return delitos;
@@ -153,19 +140,28 @@ public class Usuario implements Serializable {
 	public void setDelitos(List<Delito> delitos) {
 		this.delitos = delitos;
 	}
+	
+	@OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
+	public List<Compra> getCompras() {
+		return compras;
+	}
+
+	public void setCompras(List<Compra> compras) {
+		this.compras = compras;
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((clube == null) ? 0 : clube.hashCode());
+		result = prime * result + ((compras == null) ? 0 : compras.hashCode());
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
 		result = prime * result + ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
 		result = prime * result + ((delitos == null) ? 0 : delitos.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((genero == null) ? 0 : genero.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((ingressos == null) ? 0 : ingressos.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
 		result = prime * result + ((torcida == null) ? 0 : torcida.hashCode());
@@ -185,6 +181,11 @@ public class Usuario implements Serializable {
 			if (other.clube != null)
 				return false;
 		} else if (!clube.equals(other.clube))
+			return false;
+		if (compras == null) {
+			if (other.compras != null)
+				return false;
+		} else if (!compras.equals(other.compras))
 			return false;
 		if (cpf == null) {
 			if (other.cpf != null)
@@ -216,11 +217,6 @@ public class Usuario implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (ingressos == null) {
-			if (other.ingressos != null)
-				return false;
-		} else if (!ingressos.equals(other.ingressos))
-			return false;
 		if (nome == null) {
 			if (other.nome != null)
 				return false;
@@ -243,6 +239,6 @@ public class Usuario implements Serializable {
 	public String toString() {
 		return "Usuario [id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", genero=" + genero + ", telefone=" + telefone
 				+ ", email=" + email + ", dataNascimento=" + dataNascimento + ", torcida=" + torcida + ", clube="
-				+ clube + ", delitos=" + delitos + ", ingressos=" + ingressos + "]";
+				+ clube + ", delitos=" + delitos + ", compras=" + compras + "]";
 	}
 }

@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import br.com.etorcedor.entity.Compra;
 import br.com.etorcedor.entity.Delito;
 import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Ingresso;
@@ -12,6 +13,7 @@ import br.com.etorcedor.entity.Setor;
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.exception.DelitoExistenteException;
 import br.com.etorcedor.exception.DelitoNaoEncontradoException;
 import br.com.etorcedor.exception.EstadioInexistenteException;
 import br.com.etorcedor.exception.IngressoExistenteException;
@@ -60,7 +62,6 @@ public interface Fachada extends Serializable {
 	// INGRESSO
 
 	public void adicionarIngreco(Ingresso i) throws IngressoExistenteException;
-	public void atualizarIngreco(Ingresso i) throws IngressoInexistenteException;
 	public void removerIngreco(Long i) throws IngressoInexistenteException;
 	public List<Ingresso> findByJogo(Jogo jogo);
 	public List<Ingresso> findByDataIngresso(Date data);
@@ -85,4 +86,11 @@ public interface Fachada extends Serializable {
 	public Delito findByBo(long bo) throws DelitoNaoEncontradoException;
 	public List<Delito> findByDia(Date dia);
  	public List<Delito> findAll();
+ 	
+ 	//COMPRA
+ 	public void adicionarComprar(Compra compra)throws DelitoExistenteException, JogoInexistenteException;
+	public Compra findByOneCompra(Long id);
+	public List<Compra> findByUsuario(Usuario usuario);
+	public List<Compra> findByAllCompras();
+	
 }

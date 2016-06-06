@@ -6,13 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.etorcedor.entity.Compra;
 import br.com.etorcedor.entity.Delito;
-import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
 import br.com.etorcedor.exception.DelitoNaoEncontradoException;
-import br.com.etorcedor.exception.IngressoInexistenteException;
 import br.com.etorcedor.exception.UsuarioExistenteException;
 import br.com.etorcedor.exception.UsuarioInexistenteException;
 import br.com.etorcedor.persistence.RepositorioUsuario;
@@ -24,10 +23,12 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 
 	@Autowired
 	private RepositorioUsuario usuarioRep;
-	@Autowired
-	private ServiceJogo ingressoServ;
+		
 	@Autowired
 	private ServiceDelito delitoServ;
+	
+	@Autowired
+	private ServiceCompra compraServ;
 
 	@Transactional(rollbackFor = UsuarioExistenteException.class)
 	public void adicionarUsuario(Usuario u) throws UsuarioExistenteException {
@@ -51,7 +52,7 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 		old.setDataNascimento(u.getDataNascimento());
 		old.setTorcida(u.getTorcida());
 		old.setClube(u.getClube());
-		old.setIngressos(u.getIngressos());
+		old.setCompras(u.getCompras());
 		old.setDelitos(u.getDelitos());
 		this.usuarioRep.save(old);
 
@@ -62,11 +63,11 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 		Usuario old = this.usuarioRep.findOne(id);
 		
 		if(old != null) {
-			List<Ingresso> i = old.getIngressos();
+			List<Compra> compras = old.getCompras();
 			List<Delito> delito = old.getDelitos();
 			try {
-				for (Ingresso e : i) {
-					this.ingressoServ.removerIngresso(e.getId());
+				for (Compra c : compras) {
+					this.compraServ.removerCompras(c);
 				}
 				if(delito != null) {
 					for(Delito d : delito) {
@@ -74,10 +75,8 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 					}
 				}
 				this.usuarioRep.delete(old);
-			} catch (IngressoInexistenteException e1) {
-				throw new UsuarioInexistenteException();
 			} catch (DelitoNaoEncontradoException e1) {
-				
+				throw new UsuarioInexistenteException();
 			}
 		}
 		else

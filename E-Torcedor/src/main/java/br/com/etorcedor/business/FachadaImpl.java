@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.etorcedor.entity.Compra;
 import br.com.etorcedor.entity.Delito;
 import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Ingresso;
@@ -14,6 +15,7 @@ import br.com.etorcedor.entity.Setor;
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.exception.DelitoExistenteException;
 import br.com.etorcedor.exception.DelitoNaoEncontradoException;
 import br.com.etorcedor.exception.EstadioInexistenteException;
 import br.com.etorcedor.exception.IngressoExistenteException;
@@ -51,6 +53,9 @@ public class FachadaImpl implements Fachada {
 	
 	@Autowired
 	private ServiceDelito delitoServ;
+	
+	@Autowired
+	private ServiceCompra compraServ;
 
 	// USUARIO
 
@@ -153,10 +158,6 @@ public class FachadaImpl implements Fachada {
 		this.jogoServ.adicionarIngresso(i);
 	}
 
-	public void atualizarIngreco(Ingresso i) throws IngressoInexistenteException {
-		this.jogoServ.atualizarIngresso(i);
-	}
-
 	public void removerIngreco(Long i) throws IngressoInexistenteException {
 		this.jogoServ.removerIngresso(i);
 	}
@@ -220,4 +221,19 @@ public class FachadaImpl implements Fachada {
  	public List<Delito> findAll() {
  		return this.delitoServ.findAll();
  	}
+ 	
+ 	//COMPRA
+ 	
+ 	public void adicionarComprar(Compra compra)throws DelitoExistenteException, JogoInexistenteException {
+ 		this.compraServ.adicionarComprar(compra);
+ 	}
+	public Compra findByOneCompra(Long id) {
+		return this.compraServ.findByOneCompra(id);
+	}
+	public List<Compra> findByUsuario(Usuario usuario) {
+		return this.compraServ.findByUsuario(usuario);
+	}
+	public List<Compra> findByAllCompras() {
+		return this.findByAllCompras();
+	}
 }

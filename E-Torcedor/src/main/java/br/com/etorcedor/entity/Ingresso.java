@@ -18,31 +18,31 @@ public class Ingresso implements Serializable {
 	private Jogo jogo;
 	private int numeroAcento;
 	private float valorIngresso;
-	private Usuario usuario;
 	private Setor setor;
+	private Compra compra;
 
 	public Ingresso() {
 
 	}
 
-	public Ingresso(Date data, Jogo jogo, int numeroAcento, float valorIngresso, Usuario usuario, Setor setor) {
+	public Ingresso(Date data, Jogo jogo, int numeroAcento, float valorIngresso, Setor setor, Compra compra) {
 		this.data = data;
 		this.jogo = jogo;
 		this.numeroAcento = numeroAcento;
 		this.valorIngresso = valorIngresso;
-		this.usuario = usuario;
 		this.setor = setor;
+		this.compra = compra;
 	}
 
-	public Ingresso(Long id, Date data, Jogo jogo, int numeroAcento, float valorIngresso, Usuario usuario,
-			Setor setor) {
+	public Ingresso(Long id, Date data, Jogo jogo, int numeroAcento, float valorIngresso,
+			Setor setor, Compra compra) {
 		this.id = id;
 		this.data = data;
 		this.jogo = jogo;
 		this.numeroAcento = numeroAcento;
 		this.valorIngresso = valorIngresso;
-		this.usuario = usuario;
 		this.setor = setor;
+		this.compra = compra;
 	}
 
 	@Id
@@ -89,11 +89,6 @@ public class Ingresso implements Serializable {
 	}
 
 	@ManyToOne
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	@ManyToOne
 	public Setor getSetor() {
 		return setor;
 	}
@@ -101,25 +96,30 @@ public class Ingresso implements Serializable {
 	public void setSetor(Setor setor) {
 		this.setor = setor;
 	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+	
+	@ManyToOne
+	public Compra getCompra() {
+		return compra;
+	}
+
+	public void setCompra(Compra compra) {
+		this.compra = compra;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((compra == null) ? 0 : compra.hashCode());
 		result = prime * result + ((data == null) ? 0 : data.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((jogo == null) ? 0 : jogo.hashCode());
 		result = prime * result + numeroAcento;
 		result = prime * result + ((setor == null) ? 0 : setor.hashCode());
-		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
 		result = prime * result + Float.floatToIntBits(valorIngresso);
 		return result;
 	}
@@ -133,6 +133,11 @@ public class Ingresso implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Ingresso other = (Ingresso) obj;
+		if (compra == null) {
+			if (other.compra != null)
+				return false;
+		} else if (!compra.equals(other.compra))
+			return false;
 		if (data == null) {
 			if (other.data != null)
 				return false;
@@ -155,11 +160,6 @@ public class Ingresso implements Serializable {
 				return false;
 		} else if (!setor.equals(other.setor))
 			return false;
-		if (usuario == null) {
-			if (other.usuario != null)
-				return false;
-		} else if (!usuario.equals(other.usuario))
-			return false;
 		if (Float.floatToIntBits(valorIngresso) != Float.floatToIntBits(other.valorIngresso))
 			return false;
 		return true;
@@ -168,6 +168,6 @@ public class Ingresso implements Serializable {
 	@Override
 	public String toString() {
 		return "Ingresso [id=" + id + ", data=" + data + ", jogo=" + jogo + ", numeroAcento=" + numeroAcento
-				+ ", valorIngresso=" + valorIngresso + ", usuario=" + usuario + ", setor=" + setor + "]";
+				+ ", valorIngresso=" + valorIngresso + ", setor=" + setor + ", compra=" + compra + "]";
 	}
 }

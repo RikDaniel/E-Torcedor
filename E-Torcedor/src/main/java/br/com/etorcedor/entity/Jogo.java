@@ -21,30 +21,30 @@ public class Jogo implements Serializable {
 	private Long id;
 	private List<Time> times;
 	private Date data;
-	private int ingrecos_quantidade;
-	private int ingrecos_vendidos;
-	private List<Ingresso> ingrecos;
+	private int ingressos_quantidade;
+	private int ingressos_vendidos;
+	private List<Ingresso> ingressos;
 	private Estadio estadio;
 
 	public Jogo() {
 
 	}
 
-	public Jogo(Date data, int ingrecos_quantidade, Estadio estadio) {
+	public Jogo(Date data, int ingressos_quantidade, Estadio estadio) {
 
 		this.data = data;
-		this.ingrecos_quantidade = ingrecos_quantidade;
+		this.ingressos_quantidade = ingressos_quantidade;
 		this.estadio = estadio;
 	}
 
-	public Jogo(Long id, List<Time> times, Date data, int ingrecos_quantidade, int ingrecos_vendidos,
-			List<Ingresso> ingrecos, Estadio estadio) {
+	public Jogo(Long id, List<Time> times, Date data, int ingressos_quantidade, int ingressos_vendidos,
+			List<Ingresso> ingressos, Estadio estadio) {
 		this.id = id;
 		this.times = times;
 		this.data = data;
-		this.ingrecos_quantidade = ingrecos_quantidade;
-		this.ingrecos_vendidos = ingrecos_vendidos;
-		this.ingrecos = ingrecos;
+		this.ingressos_quantidade = ingressos_quantidade;
+		this.ingressos_vendidos = ingressos_vendidos;
+		this.ingressos = ingressos;
 		this.estadio = estadio;
 	}
 
@@ -75,29 +75,29 @@ public class Jogo implements Serializable {
 		this.data = data;
 	}
 
-	public int getIngrecos_quantidade() {
-		return ingrecos_quantidade;
+	public int getIngressos_quantidade() {
+		return ingressos_quantidade;
 	}
 
-	public void setIngrecos_quantidade(int ingrecos_quantidade) {
-		this.ingrecos_quantidade = ingrecos_quantidade;
+	public void setIngressos_quantidade(int ingrecos_quantidade) {
+		this.ingressos_quantidade = ingrecos_quantidade;
 	}
 
 	public int getIngrecos_vendidos() {
-		return ingrecos_vendidos;
+		return ingressos_vendidos;
 	}
 
 	public void setIngrecos_vendidos(int ingrecos_vendidos) {
-		this.ingrecos_vendidos = ingrecos_vendidos;
+		this.ingressos_vendidos = ingrecos_vendidos;
 	}
 
 	@OneToMany(mappedBy = "jogo", fetch = FetchType.EAGER)
-	public List<Ingresso> getIngrecos() {
-		return ingrecos;
+	public List<Ingresso> getIngressos() {
+		return ingressos;
 	}
 
-	public void setIngrecos(List<Ingresso> ingrecos) {
-		this.ingrecos = ingrecos;
+	public void setIngressos(List<Ingresso> ingressos) {
+		this.ingressos = ingressos;
 	}
 
 	@ManyToOne
@@ -116,9 +116,9 @@ public class Jogo implements Serializable {
 		result = prime * result + ((data == null) ? 0 : data.hashCode());
 		result = prime * result + ((estadio == null) ? 0 : estadio.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		result = prime * result + ((ingrecos == null) ? 0 : ingrecos.hashCode());
-		result = prime * result + ingrecos_quantidade;
-		result = prime * result + ingrecos_vendidos;
+		result = prime * result + ((ingressos == null) ? 0 : ingressos.hashCode());
+		result = prime * result + ingressos_quantidade;
+		result = prime * result + ingressos_vendidos;
 		result = prime * result + ((times == null) ? 0 : times.hashCode());
 		return result;
 	}
@@ -147,14 +147,14 @@ public class Jogo implements Serializable {
 				return false;
 		} else if (!id.equals(other.id))
 			return false;
-		if (ingrecos == null) {
-			if (other.ingrecos != null)
+		if (ingressos == null) {
+			if (other.ingressos != null)
 				return false;
-		} else if (!ingrecos.equals(other.ingrecos))
+		} else if (!ingressos.equals(other.ingressos))
 			return false;
-		if (ingrecos_quantidade != other.ingrecos_quantidade)
+		if (ingressos_quantidade != other.ingressos_quantidade)
 			return false;
-		if (ingrecos_vendidos != other.ingrecos_vendidos)
+		if (ingressos_vendidos != other.ingressos_vendidos)
 			return false;
 		if (times == null) {
 			if (other.times != null)
@@ -166,7 +166,8 @@ public class Jogo implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Jogo [id=" + id + ", times=" + times + ", data=" + data + ", ingrecos_quantidade=" + ingrecos_quantidade
-				+ ", ingrecos_vendidos=" + ingrecos_vendidos + ", ingrecos=" + ingrecos + ", estadio=" + estadio + "]";
+		return "Jogo [id=" + id + ", times=" + times + ", data=" + data + ", ingressos_quantidade="
+				+ ingressos_quantidade + ", ingressos_vendidos=" + ingressos_vendidos + ", ingressos=" + ingressos
+				+ ", estadio=" + estadio + "]";
 	}
 }

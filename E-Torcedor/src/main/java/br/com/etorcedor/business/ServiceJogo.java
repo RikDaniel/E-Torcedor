@@ -80,13 +80,6 @@ public interface ServiceJogo extends Serializable {
 	 * @param i
 	 * @throws IngressoInexistenteException
 	 */
-	public void atualizarIngresso(Ingresso i) throws IngressoInexistenteException;
-
-	/**
-	 * 
-	 * @param i
-	 * @throws IngressoInexistenteException
-	 */
 	public void removerIngresso(Long i) throws IngressoInexistenteException;
 
 	/**

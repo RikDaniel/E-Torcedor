@@ -43,9 +43,9 @@ public class ServiceJogoImpl implements ServiceJogo {
 		Jogo old = findOneJogo(j.getId());
 		old.setData(j.getData());
 		old.setEstadio(j.getEstadio());
-		old.setIngrecos(j.getIngrecos());
-		old.setIngrecos_quantidade(j.getIngrecos_quantidade());
-		old.setIngrecos_vendidos(j.getIngrecos_quantidade());
+		old.setIngressos(j.getIngressos());
+		old.setIngressos_quantidade(j.getIngressos_quantidade());
+		old.setIngrecos_vendidos(j.getIngressos_quantidade());
 		old.setTimes(j.getTimes());
 		jogoRep.save(old);
 	}
@@ -53,7 +53,7 @@ public class ServiceJogoImpl implements ServiceJogo {
 	@Transactional(rollbackFor = JogoInexistenteException.class)
 	public void removerJogo(Jogo j) throws JogoInexistenteException {
 		Jogo old = findOneJogo(j.getId());
-		List<Ingresso> i = old.getIngrecos();
+		List<Ingresso> i = old.getIngressos();
 		try {
 			for (Ingresso n : i)
 				removerIngresso(n.getId());
@@ -93,18 +93,6 @@ public class ServiceJogoImpl implements ServiceJogo {
 		} catch (IngressoInexistenteException ei) {
 			ingressoRep.save(i);
 		}
-	}
-
-	@Transactional(rollbackFor = IngressoInexistenteException.class)
-	public void atualizarIngresso(Ingresso i) throws IngressoInexistenteException {
-		Ingresso old = ingressoRep.findOne(i.getId());
-		old.setData(i.getData());
-		old.setJogo(i.getJogo());
-		old.setNumeroAcento(i.getNumeroAcento());
-		old.setSetor(i.getSetor());
-		old.setUsuario(i.getUsuario());
-		old.setValorIngresso(i.getValorIngresso());
-		ingressoRep.save(old);
 	}
 
 	@Transactional(rollbackFor = IngressoInexistenteException.class)
