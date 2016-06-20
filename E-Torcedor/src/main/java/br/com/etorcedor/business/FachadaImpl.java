@@ -17,11 +17,15 @@ import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
 import br.com.etorcedor.exception.DelitoExistenteException;
 import br.com.etorcedor.exception.DelitoNaoEncontradoException;
+import br.com.etorcedor.exception.EstadioExistenteException;
 import br.com.etorcedor.exception.EstadioInexistenteException;
 import br.com.etorcedor.exception.IngressoExistenteException;
 import br.com.etorcedor.exception.IngressoInexistenteException;
+import br.com.etorcedor.exception.JogoExistenteException;
 import br.com.etorcedor.exception.JogoInexistenteException;
+import br.com.etorcedor.exception.SetorExistenteException;
 import br.com.etorcedor.exception.SetorInexistenteException;
+import br.com.etorcedor.exception.TimeExistenteException;
 import br.com.etorcedor.exception.TimeInexistenteException;
 import br.com.etorcedor.exception.TorcidaExistenteException;
 import br.com.etorcedor.exception.TorcidaInexistenteException;
@@ -31,9 +35,6 @@ import br.com.etorcedor.exception.UsuarioInexistenteException;
 @Service
 public class FachadaImpl implements Fachada {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -3823897062337010663L;
 
 	@Autowired
@@ -50,10 +51,10 @@ public class FachadaImpl implements Fachada {
 
 	@Autowired
 	private ServiceEstadio estadioServ;
-	
+
 	@Autowired
 	private ServiceDelito delitoServ;
-	
+
 	@Autowired
 	private ServiceCompra compraServ;
 
@@ -123,6 +124,19 @@ public class FachadaImpl implements Fachada {
 
 	// TIME
 
+	public void adicionarTime(Time time) throws TimeExistenteException {
+		this.timeServ.adicionarTime(time);
+	}
+
+	public void removerTime(Time time)
+			throws TimeInexistenteException, TorcidaInexistenteException, JogoInexistenteException {
+		this.timeServ.removerTime(time);
+	}
+
+	public void atualizarTime(Time time) throws TimeInexistenteException {
+		this.timeServ.atualizarTime(time);
+	}
+
 	public Time findByOne(Long id) throws TimeInexistenteException {
 		return this.timeServ.findByOne(id);
 	}
@@ -136,6 +150,18 @@ public class FachadaImpl implements Fachada {
 	}
 
 	// JOGO
+
+	public void adicionarJogo(Jogo jogo) throws JogoExistenteException {
+		this.jogoServ.adicionarJogo(jogo);
+	}
+
+	public void atualizarJogo(Jogo jogo) throws JogoInexistenteException {
+		this.jogoServ.atualizarJogo(jogo);
+	}
+
+	public void removerJogo(Jogo jogo) throws JogoInexistenteException {
+		this.jogoServ.removerJogo(jogo);
+	}
 
 	public Jogo findOneJogo(Long id) throws JogoInexistenteException {
 		return this.jogoServ.findOneJogo(id);
@@ -184,6 +210,18 @@ public class FachadaImpl implements Fachada {
 
 	// ESTADIO
 
+	public void adicionarEstadio(Estadio estadio) throws EstadioExistenteException {
+		this.estadioServ.adicionarEstadio(estadio);
+	}
+
+	public void atualizarEstadio(Estadio estadio) throws EstadioInexistenteException {
+		this.atualizarEstadio(estadio);
+	}
+
+	public void removerEstadio(Estadio estadio) throws EstadioInexistenteException {
+		this.atualizarEstadio(estadio);
+	}
+
 	public Estadio findOneEstadio(Long id) throws EstadioInexistenteException {
 		return this.estadioServ.findOneEstadio(id);
 	}
@@ -191,16 +229,28 @@ public class FachadaImpl implements Fachada {
 	public List<Estadio> findAllEstadio() {
 		return this.estadioServ.findAllEstadio();
 	}
-	
+
 	public Estadio findByNomeEstadio(String nome) throws EstadioInexistenteException {
 		return this.estadioServ.findByNomeEstadio(nome);
 	}
-	
+
 	public Estadio findByApelido(String apelido) throws EstadioInexistenteException {
 		return this.estadioServ.findByApelido(apelido);
 	}
 
-	//SETOR
+	// SETOR
+
+	public void adicionarSetor(Setor e) throws SetorExistenteException {
+		this.estadioServ.adicionarSetor(e);
+	}
+
+	public void atualizarSetor(Setor e) throws SetorInexistenteException {
+		this.estadioServ.atualizarSetor(e);
+	}
+
+	public void removerSetor(Setor e) throws SetorInexistenteException {
+		this.estadioServ.removerSetor(e);
+	}
 
 	public Setor findOneSetor(Long id) throws SetorInexistenteException {
 		return this.estadioServ.findOneSetor(id);
@@ -209,30 +259,35 @@ public class FachadaImpl implements Fachada {
 	public Setor findByNome(String nome) throws SetorInexistenteException {
 		return this.estadioServ.findByNome(nome);
 	}
-	
-	//DELITO
-	
+
+	// DELITO
+
 	public Delito findByBo(long bo) throws DelitoNaoEncontradoException {
 		return this.delitoServ.findByBo(bo);
 	}
+
 	public List<Delito> findByDia(Date dia) {
 		return this.delitoServ.findByDia(dia);
 	}
- 	public List<Delito> findAll() {
- 		return this.delitoServ.findAll();
- 	}
- 	
- 	//COMPRA
- 	
- 	public void adicionarComprar(Compra compra)throws DelitoExistenteException, JogoInexistenteException {
- 		this.compraServ.adicionarComprar(compra);
- 	}
+
+	public List<Delito> findAll() {
+		return this.delitoServ.findAll();
+	}
+
+	// COMPRA
+
+	public void adicionarComprar(Compra compra) throws DelitoExistenteException, JogoInexistenteException {
+		this.compraServ.adicionarComprar(compra);
+	}
+
 	public Compra findByOneCompra(Long id) {
 		return this.compraServ.findByOneCompra(id);
 	}
+
 	public List<Compra> findByUsuario(Usuario usuario) {
 		return this.compraServ.findByUsuario(usuario);
 	}
+
 	public List<Compra> findByAllCompras() {
 		return this.findByAllCompras();
 	}
