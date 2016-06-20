@@ -94,10 +94,13 @@ public class ControllerAdm {
 	// TIME
 	@RequestMapping(value = "/time/add", method = RequestMethod.POST)
 	public ResponseEntity<?> adicionarTime(@RequestBody Time time) {
+		logger.debug(Log.traits(time.toString().length()) + "CADASTRANDO O Time: \n" + time.toString()
+		+ Log.traits(time.toString().length()));
 		try {
 			this.fachada.adicionarTime(time);
 			return new ResponseEntity<String>(HttpStatus.OK);
 		} catch (TimeExistenteException e) {
+			logger.debug(e.getMessage());
 			return new ResponseEntity<TimeExistenteException>(e, HttpStatus.BAD_REQUEST);
 		}
 	}

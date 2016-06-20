@@ -33,7 +33,7 @@ public class ServiceTimeImpl implements ServiceTime {
 	@Transactional(rollbackFor = TimeExistenteException.class)
 	public void adicionarTime(Time t) throws TimeExistenteException {
 		try {
-			Time time = this.findByOne(t.getId());
+			Time time = this.findByNome(t.getNome());
 			if (time != null)
 				throw new TimeExistenteException();
 		} catch (TimeInexistenteException e) {

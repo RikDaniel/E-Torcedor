@@ -64,7 +64,7 @@ public class Time implements Serializable {
 		this.torcidas = torcidas;
 	}
 
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	public List<Jogo> getJogos() {
 		return jogos;
 	}
