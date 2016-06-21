@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body ng-app="E-torcedor">
+<h1>Cadastro de Alunos</h1>
+
+<div ng-controller = "ControladorAlunos as contAlunos">
+<form >
+	Nome:<input type = "text" name="nome" ng-model = "contAlunos.aluno.nome"><br/>
+	Email:<input type = "email" nome="email" ng-model = "contAlunos.aluno.email"><br/> 
+	<input type="button" value="Cadastrar" ng-click="contAlunos.enviar()">
+</form>
+	<div>
+		Nome: $$contAlunos.aluno.nome
+	</div>
+</div>
+</body>
+</html>

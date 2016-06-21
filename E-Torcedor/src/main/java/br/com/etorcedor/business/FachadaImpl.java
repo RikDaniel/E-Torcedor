@@ -13,6 +13,7 @@ import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.entity.Setor;
 import br.com.etorcedor.entity.Time;
+import br.com.etorcedor.entity.TimeLong;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
 import br.com.etorcedor.exception.DelitoExistenteException;
@@ -145,7 +146,7 @@ public class FachadaImpl implements Fachada {
 		return this.timeServ.findByNome(nome);
 	}
 
-	public List<Time> findAllTime() {
+	public List<TimeLong> findAllTime() {
 		return this.timeServ.findAll();
 	}
 

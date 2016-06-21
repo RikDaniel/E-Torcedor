@@ -1,5 +1,6 @@
 package br.com.etorcedor.business;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.entity.Time;
+import br.com.etorcedor.entity.TimeLong;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.exception.JogoInexistenteException;
 import br.com.etorcedor.exception.TimeExistenteException;
@@ -86,7 +88,17 @@ public class ServiceTimeImpl implements ServiceTime {
 	/**
 	 * Retorna uma lista com todos os times
 	 */
-	public List<Time> findAll() {
-		return (List<Time>) this.timeRep.findAll();
+	public List<TimeLong> findAll() {
+		List<Time> times = (List<Time>) this.timeRep.findAll();
+		List<TimeLong> timeslong= new ArrayList<TimeLong>();	
+		TimeLong timelong=null;
+		
+		for(Time i:times){
+			timelong.setId(i.getId());
+			timelong.setNome(i.getNome());
+			//timelong.setJogos(i.getJogos());
+			timeslong.add(timelong);
+			}
+	return timeslong;
 	}
 }

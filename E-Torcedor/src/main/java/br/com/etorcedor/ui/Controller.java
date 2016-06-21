@@ -21,6 +21,7 @@ import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.entity.Setor;
 import br.com.etorcedor.entity.Time;
+import br.com.etorcedor.entity.TimeLong;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
 import br.com.etorcedor.exception.DelitoExistenteException;
@@ -183,7 +184,7 @@ public class Controller {
 	}
 
 	@RequestMapping(value = "/time/find/all", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Time> findAllTime() {
+	public List<TimeLong> findAllTime() {
 		return this.fachada.findAllTime();
 	}
 
