@@ -21,27 +21,36 @@ public class TimeShort extends TimePai {
 	}
 
 	public static TimeShort toTimeShort(Time time) {
-		TimeShort timeshort = new TimeShort();	
-		List<TorcidaShort> list = new ArrayList<TorcidaShort>();
-		timeshort.setId(time.getId());
-		timeshort.setNome(time.getNome());
-		for(Torcida torcida : time.getTorcidas()) {
-			list.add(TorcidaShort.toTorcidaShort(torcida));
+		TimeShort timeshort = new TimeShort();
+		if (time != null) {
+
+			List<TorcidaShort> list = new ArrayList<TorcidaShort>();
+			timeshort.setId(time.getId());
+			timeshort.setNome(time.getNome());
+			for (Torcida torcida : time.getTorcidas()) {
+				list.add(TorcidaShort.toTorcidaShort(torcida));
+			}
+			timeshort.setTorcidas(list);
+			return timeshort;
+		} else {
+			return null;
 		}
-		timeshort.setTorcidas(list);
-		return timeshort;	
 	}
-	
+
 	public static Time toTime(TimeShort timeshort) {
-		Time time = new Time();	
+		Time time = new Time();
 		List<Torcida> list = new ArrayList<Torcida>();
-		
-		time.setId(timeshort.getId());
+
 		time.setNome(timeshort.getNome());
-		for(TorcidaShort torcidas:  timeshort.getTorcidas()) {
-			list.add(TorcidaShort.toTorcida(torcidas));
+		if (timeshort != null && timeshort.getTorcidas() != null) {
+			time.setId(timeshort.getId());
+			if(timeshort.getTorcidas() != null)
+			for (TorcidaShort torcidas : timeshort.getTorcidas()) {
+				list.add(TorcidaShort.toTorcida(torcidas));
+			}
+			time.setTorcidas(list);
 		}
-		time.setTorcidas(list);
-		return time;	
+		
+		return time;
 	}
 }
