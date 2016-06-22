@@ -14,8 +14,8 @@ import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.entity.Setor;
-import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
+import br.com.etorcedor.entity.odc.TimeShort;
 import br.com.etorcedor.exception.EstadioExistenteException;
 import br.com.etorcedor.exception.EstadioInexistenteException;
 import br.com.etorcedor.exception.IngressoExistenteException;
@@ -93,7 +93,7 @@ public class ControllerAdm {
 
 	// TIME
 	@RequestMapping(value = "/time/add", method = RequestMethod.POST)
-	public ResponseEntity<?> adicionarTime(@RequestBody Time time) {
+	public ResponseEntity<?> adicionarTime(@RequestBody TimeShort time) {
 		logger.debug(Log.traits(time.toString().length()) + "CADASTRANDO O Time: \n" + time.toString()
 		+ Log.traits(time.toString().length()));
 		try {
@@ -106,7 +106,7 @@ public class ControllerAdm {
 	}
 
 	@RequestMapping(value = "/time/remov", method = RequestMethod.POST)
-	public ResponseEntity<?> removerTime(@RequestBody Time time) {
+	public ResponseEntity<?> removerTime(@RequestBody long time) {
 		try {
 			this.fachada.removerTime(time);
 			return new ResponseEntity<String>(HttpStatus.OK);
@@ -120,7 +120,7 @@ public class ControllerAdm {
 	}
 
 	@RequestMapping(value = "/time/att", method = RequestMethod.POST)
-	public ResponseEntity<?> atualizarTime(@RequestBody Time time) {
+	public ResponseEntity<?> atualizarTime(@RequestBody TimeShort time) {
 		try {
 			this.fachada.atualizarTime(time);
 			return new ResponseEntity<String>(HttpStatus.OK);

@@ -13,9 +13,10 @@ import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.entity.Setor;
 import br.com.etorcedor.entity.Time;
-import br.com.etorcedor.entity.TimeLong;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.entity.odc.TimeLong;
+import br.com.etorcedor.entity.odc.TimeShort;
 import br.com.etorcedor.exception.DelitoExistenteException;
 import br.com.etorcedor.exception.DelitoNaoEncontradoException;
 import br.com.etorcedor.exception.EstadioExistenteException;
@@ -125,24 +126,24 @@ public class FachadaImpl implements Fachada {
 
 	// TIME
 
-	public void adicionarTime(Time time) throws TimeExistenteException {
+	public void adicionarTime(TimeShort time) throws TimeExistenteException {
 		this.timeServ.adicionarTime(time);
 	}
 
-	public void removerTime(Time time)
+	public void removerTime(Long time)
 			throws TimeInexistenteException, TorcidaInexistenteException, JogoInexistenteException {
 		this.timeServ.removerTime(time);
 	}
 
-	public void atualizarTime(Time time) throws TimeInexistenteException {
+	public void atualizarTime(TimeShort time) throws TimeInexistenteException {
 		this.timeServ.atualizarTime(time);
 	}
 
-	public Time findByOne(Long id) throws TimeInexistenteException {
+	public TimeLong findByOne(Long id) throws TimeInexistenteException {
 		return this.timeServ.findByOne(id);
 	}
 
-	public Time timeFindByNome(String nome) throws TimeInexistenteException {
+	public TimeShort timeFindByNome(String nome) throws TimeInexistenteException {
 		return this.timeServ.findByNome(nome);
 	}
 

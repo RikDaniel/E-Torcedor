@@ -20,10 +20,10 @@ import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.entity.Setor;
-import br.com.etorcedor.entity.Time;
-import br.com.etorcedor.entity.TimeLong;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.entity.odc.TimeLong;
+import br.com.etorcedor.entity.odc.TimeShort;
 import br.com.etorcedor.exception.DelitoExistenteException;
 import br.com.etorcedor.exception.EstadioInexistenteException;
 import br.com.etorcedor.exception.IngressoInexistenteException;
@@ -148,7 +148,7 @@ public class Controller {
 	@RequestMapping(value = "/torcida/find/time", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Torcida> findByTime(String nomeTime) {
 		if (nomeTime != null)
-			return this.fachada.findByTime(this.timeFindByNome(nomeTime));
+			return this.fachada.findByTime(TimeShort.toTime(this.timeFindByNome(nomeTime)));
 		return null;
 	}
 
@@ -160,7 +160,7 @@ public class Controller {
 	// TIME
 
 	@RequestMapping(value = "/time/find/one", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Time findByOne(Long id) {
+	public TimeLong findByOne(Long id) {
 		try {
 			if (id != null && id >= 1)
 				return this.fachada.findByOne(id);
@@ -172,7 +172,7 @@ public class Controller {
 	}
 
 	@RequestMapping(value = "/time/find/nome", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Time timeFindByNome(String nome) {
+	public TimeShort timeFindByNome(String nome) {
 		try {
 			if (nome != null)
 				return this.fachada.timeFindByNome(nome);
@@ -329,8 +329,8 @@ public class Controller {
 		try {
 			usuario = this.fachada.findByCpf(cpf);
 
-				ingressos.add(this.fachada.findOneIngresso(idIngresso));
-			
+			ingressos.add(this.fachada.findOneIngresso(idIngresso));
+
 			compra = new Compra(dia, usuario, ingressos);
 			this.fachada.adicionarComprar(compra);
 			return new ResponseEntity<String>("Compra Realizada com Sucesso", HttpStatus.OK);
