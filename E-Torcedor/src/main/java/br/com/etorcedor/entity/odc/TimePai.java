@@ -27,6 +27,19 @@ public class TimePai {
 		this.torcidas = torcidas;
 	}
 	
+	public static Time toTime(TimePai timeshort) {
+		Time time = new Time();	
+		List<Torcida> list = new ArrayList<Torcida>();
+		
+		time.setId(timeshort.getId());
+		time.setNome(timeshort.getNome());
+		for(TorcidaShort torcidas:  timeshort.getTorcidas()) {
+			list.add(TorcidaShort.toTorcida(torcidas));
+		}
+		time.setTorcidas(list);
+		return time;	
+	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -46,20 +59,6 @@ public class TimePai {
 		this.torcidas = torcidas;
 	}
 	
-	public static Time toTime(TimePai timeshort) {
-		Time time = new Time();	
-		List<Torcida> list = new ArrayList<Torcida>();
-		
-		time.setId(timeshort.getId());
-		time.setNome(timeshort.getNome());
-		for(TorcidaShort torcidas:  timeshort.getTorcidas()) {
-			list.add(TorcidaShort.toTorcida(torcidas));
-		}
-		time.setTorcidas(list);
-		return time;	
-	}
-	
-		
 	@Override
 	public int hashCode() {
 		final int prime = 31;

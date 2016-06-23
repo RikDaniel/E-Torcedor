@@ -13,6 +13,8 @@ import br.com.etorcedor.entity.Setor;
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.entity.odc.JogoLong;
+import br.com.etorcedor.entity.odc.JogoShort;
 import br.com.etorcedor.entity.odc.TimeLong;
 import br.com.etorcedor.entity.odc.TimeShort;
 import br.com.etorcedor.exception.DelitoExistenteException;
@@ -79,19 +81,19 @@ public interface Fachada extends Serializable {
 
 	// JOGO
 
-	public void adicionarJogo(Jogo jogo) throws JogoExistenteException;
+	public void adicionarJogo(JogoLong jogo) throws JogoExistenteException;
 
-	public void atualizarJogo(Jogo jogo) throws JogoInexistenteException;
+	public void atualizarJogo(JogoLong jogo) throws JogoInexistenteException;
 
-	public void removerJogo(Jogo jogo) throws JogoInexistenteException;
+	public void removerJogo(Long id) throws JogoInexistenteException;
 
-	public Jogo findOneJogo(Long id) throws JogoInexistenteException;
+	public JogoLong findOneJogo(Long id) throws JogoInexistenteException;
 
-	public List<Jogo> findByDataJogo(Date data);
+	public List<JogoShort> findByDataJogo(Date data);
 
-	public List<Jogo> findByEstadio(Estadio estadio);
+	public List<JogoShort> findByEstadio(Estadio estadio);
 
-	public List<Jogo> findAllJogo();
+	public List<JogoShort> findAllJogo();
 
 	// INGRESSO
 

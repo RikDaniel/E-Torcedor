@@ -79,16 +79,16 @@ public class Jogo implements Serializable {
 		return ingressos_quantidade;
 	}
 
-	public void setIngressos_quantidade(int ingrecos_quantidade) {
-		this.ingressos_quantidade = ingrecos_quantidade;
+	public void setIngressos_quantidade(int ingressos_quantidade) {
+		this.ingressos_quantidade = ingressos_quantidade;
 	}
 
-	public int getIngrecos_vendidos() {
+	public int getIngressos_vendidos() {
 		return ingressos_vendidos;
 	}
 
-	public void setIngrecos_vendidos(int ingrecos_vendidos) {
-		this.ingressos_vendidos = ingrecos_vendidos;
+	public void setIngressos_vendidos(int ingressos_vendidos) {
+		this.ingressos_vendidos = ingressos_vendidos;
 	}
 
 	@OneToMany(mappedBy = "jogo", fetch = FetchType.EAGER)

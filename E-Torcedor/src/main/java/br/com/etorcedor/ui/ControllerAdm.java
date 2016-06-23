@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.etorcedor.business.Fachada;
 import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Ingresso;
-import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.entity.Setor;
 import br.com.etorcedor.entity.Torcida;
+import br.com.etorcedor.entity.odc.JogoLong;
 import br.com.etorcedor.entity.odc.TimeShort;
 import br.com.etorcedor.exception.EstadioExistenteException;
 import br.com.etorcedor.exception.EstadioInexistenteException;
@@ -132,7 +132,7 @@ public class ControllerAdm {
 	// JOGO
 
 	@RequestMapping(value = "/jogo/add", method = RequestMethod.POST)
-	public ResponseEntity<?> adicionarJogo(@RequestBody Jogo jogo) {
+	public ResponseEntity<?> adicionarJogo(@RequestBody JogoLong jogo) {
 		try {
 			this.fachada.adicionarJogo(jogo);
 			return new ResponseEntity<String>(HttpStatus.OK);
@@ -142,7 +142,7 @@ public class ControllerAdm {
 	}
 
 	@RequestMapping(value = "/jogo/att", method = RequestMethod.POST)
-	public ResponseEntity<?> atualizarJogo(@RequestBody Jogo jogo) {
+	public ResponseEntity<?> atualizarJogo(@RequestBody JogoLong jogo) {
 		try {
 			this.fachada.atualizarJogo(jogo);
 			return new ResponseEntity<String>(HttpStatus.OK);
@@ -152,9 +152,9 @@ public class ControllerAdm {
 	}
 
 	@RequestMapping(value = "/jogo/remov", method = RequestMethod.POST)
-	public ResponseEntity<?> removerJogo(@RequestBody Jogo jogo) {
+	public ResponseEntity<?> removerJogo(@RequestBody Long id) {
 		try {
-			this.fachada.removerJogo(jogo);
+			this.fachada.removerJogo(id);
 			return new ResponseEntity<String>(HttpStatus.OK);
 		} catch (JogoInexistenteException e) {
 			return new ResponseEntity<JogoInexistenteException>(e, HttpStatus.BAD_REQUEST);

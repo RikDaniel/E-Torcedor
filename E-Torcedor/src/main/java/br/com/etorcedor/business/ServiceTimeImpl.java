@@ -63,7 +63,7 @@ public class ServiceTimeImpl implements ServiceTime {
 				this.torcidaSer.removerTorcida(to.getId());
 
 			for (Jogo jo : j)
-				this.jogoSer.removerJogo(jo);
+				this.jogoSer.removerJogo(jo.getId());
 
 			this.timeRep.delete(TimePai.toTime(old));
 		} catch (Exception e) {

@@ -7,6 +7,8 @@ import java.util.List;
 import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
+import br.com.etorcedor.entity.odc.JogoLong;
+import br.com.etorcedor.entity.odc.JogoShort;
 import br.com.etorcedor.exception.IngressoExistenteException;
 import br.com.etorcedor.exception.IngressoInexistenteException;
 import br.com.etorcedor.exception.JogoExistenteException;
@@ -20,28 +22,28 @@ public interface ServiceJogo extends Serializable {
 	 * @param j
 	 * @throws JogoExistenteException
 	 */
-	public void adicionarJogo(Jogo j) throws JogoExistenteException;
+	public void adicionarJogo(JogoLong j) throws JogoExistenteException;
 
 	/**
 	 * 
 	 * @param j
 	 * @throws JogoInexistenteException
 	 */
-	public void atualizarJogo(Jogo j) throws JogoInexistenteException;
+	public void atualizarJogo(JogoLong j) throws JogoInexistenteException;
 
 	/**
 	 * 
 	 * @param j
 	 * @throws JogoInexistenteException
 	 */
-	public void removerJogo(Jogo j) throws JogoInexistenteException;
+	public void removerJogo(Long id) throws JogoInexistenteException;
 
 	/**
 	 * 
 	 * @param id
 	 * @return
 	 */
-	public Jogo findOneJogo(Long id) throws JogoInexistenteException;
+	public JogoLong findOneJogo(Long id) throws JogoInexistenteException;
 
 	/**
 	 * Recupera uma lista de Jogos em um determinada Data.
@@ -49,7 +51,7 @@ public interface ServiceJogo extends Serializable {
 	 * @param data
 	 * @return Uma coleção do tipo List de Jogo
 	 */
-	public List<Jogo> findByDataJogo(Date data);
+	public List<JogoShort> findByDataJogo(Date data);
 
 	/**
 	 * Recupera uma lista de Jogos em um estadio.
@@ -57,14 +59,14 @@ public interface ServiceJogo extends Serializable {
 	 * @param estadio
 	 * @return Uma coleção do tipo List de Jogo
 	 */
-	public List<Jogo> findByEstadio(Estadio estadio);
+	public List<JogoShort> findByEstadio(Estadio estadio);
 
 	/**
 	 * Retorna uma lista com todos os jogos
 	 * 
 	 * @return
 	 */
-	public List<Jogo> findAllJogo();
+	public List<JogoShort> findAllJogo();
 
 	// INGRESSO
 

@@ -36,6 +36,18 @@ public class TimeShort extends TimePai {
 			return null;
 		}
 	}
+	
+	public static List<TimeShort> toTimeShort(List<Time> time) {
+		List<TimeShort> timeshort = new ArrayList<TimeShort>();
+		if (time != null) {
+			for(Time times : time) {
+				timeshort.add(TimeShort.toTimeShort(times));
+			}
+			return timeshort;
+		} else {
+			return null;
+		}
+	}
 
 	public static Time toTime(TimeShort timeshort) {
 		Time time = new Time();
@@ -53,4 +65,15 @@ public class TimeShort extends TimePai {
 		
 		return time;
 	}
+	
+	public static List<Time> toTime(List<TimeShort>timeshort) {
+		List<Time> time = new ArrayList<Time>();
+		if (timeshort != null) {
+			for(TimeShort timehort : timeshort) {
+				time.add(TimeShort.toTime(timehort));
+			}
+		}
+		return time;
+	}
+
 }

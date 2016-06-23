@@ -15,6 +15,8 @@ import br.com.etorcedor.entity.Setor;
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.entity.odc.JogoLong;
+import br.com.etorcedor.entity.odc.JogoShort;
 import br.com.etorcedor.entity.odc.TimeLong;
 import br.com.etorcedor.entity.odc.TimeShort;
 import br.com.etorcedor.exception.DelitoExistenteException;
@@ -153,31 +155,31 @@ public class FachadaImpl implements Fachada {
 
 	// JOGO
 
-	public void adicionarJogo(Jogo jogo) throws JogoExistenteException {
+	public void adicionarJogo(JogoLong jogo) throws JogoExistenteException {
 		this.jogoServ.adicionarJogo(jogo);
 	}
 
-	public void atualizarJogo(Jogo jogo) throws JogoInexistenteException {
+	public void atualizarJogo(JogoLong jogo) throws JogoInexistenteException {
 		this.jogoServ.atualizarJogo(jogo);
 	}
 
-	public void removerJogo(Jogo jogo) throws JogoInexistenteException {
-		this.jogoServ.removerJogo(jogo);
+	public void removerJogo(Long id) throws JogoInexistenteException {
+		this.jogoServ.removerJogo(id);
 	}
 
-	public Jogo findOneJogo(Long id) throws JogoInexistenteException {
+	public JogoLong findOneJogo(Long id) throws JogoInexistenteException {
 		return this.jogoServ.findOneJogo(id);
 	}
 
-	public List<Jogo> findByDataJogo(Date data) {
+	public List<JogoShort> findByDataJogo(Date data) {
 		return this.jogoServ.findByDataJogo(data);
 	}
 
-	public List<Jogo> findByEstadio(Estadio estadio) {
+	public List<JogoShort> findByEstadio(Estadio estadio) {
 		return this.jogoServ.findByEstadio(estadio);
 	}
 
-	public List<Jogo> findAllJogo() {
+	public List<JogoShort> findAllJogo() {
 		return this.jogoServ.findAllJogo();
 	}
 

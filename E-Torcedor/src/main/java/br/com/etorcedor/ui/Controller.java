@@ -1,5 +1,7 @@
 package br.com.etorcedor.ui;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,6 +24,8 @@ import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.entity.Setor;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.entity.odc.JogoLong;
+import br.com.etorcedor.entity.odc.JogoShort;
 import br.com.etorcedor.entity.odc.TimeLong;
 import br.com.etorcedor.entity.odc.TimeShort;
 import br.com.etorcedor.exception.DelitoExistenteException;
@@ -147,8 +151,12 @@ public class Controller {
 
 	@RequestMapping(value = "/torcida/find/time", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Torcida> findByTime(String nomeTime) {
-		if (nomeTime != null)
-			return this.fachada.findByTime(TimeShort.toTime(this.timeFindByNome(nomeTime)));
+		if (nomeTime != null) {
+			try {
+				return this.fachada.findByTime(TimeShort.toTime(this.fachada.timeFindByNome(nomeTime)));
+			} catch (TimeInexistenteException e) {
+			}
+		}
 		return null;
 	}
 
@@ -160,26 +168,28 @@ public class Controller {
 	// TIME
 
 	@RequestMapping(value = "/time/find/one", produces = MediaType.APPLICATION_JSON_VALUE)
-	public TimeLong findByOne(Long id) {
+	public ResponseEntity<?> findByOne(Long id) {
 		try {
-			if (id != null && id >= 1)
-				return this.fachada.findByOne(id);
-			else
-				return null;
+			if (id != null && id >= 1) {
+				TimeLong timelong = this.fachada.findByOne(id);
+				return new ResponseEntity<TimeLong>(timelong, HttpStatus.OK);
+			} else
+				return new ResponseEntity<String>("DADOS INVALIDOS", HttpStatus.BAD_REQUEST);
 		} catch (TimeInexistenteException e) {
-			return null;
+			return new ResponseEntity<String>(HttpStatus.OK);
 		}
 	}
 
 	@RequestMapping(value = "/time/find/nome", produces = MediaType.APPLICATION_JSON_VALUE)
-	public TimeShort timeFindByNome(String nome) {
+	public ResponseEntity<?> timeFindByNome(String nome) {
 		try {
-			if (nome != null)
-				return this.fachada.timeFindByNome(nome);
-			else
-				return null;
+			if (nome != null) {
+				TimeShort timeshort = this.fachada.timeFindByNome(nome);
+				return new ResponseEntity<TimeShort>(timeshort, HttpStatus.OK);
+			} else
+				return new ResponseEntity<String>("DADOS INVALIDOS", HttpStatus.BAD_REQUEST);
 		} catch (TimeInexistenteException e) {
-			return null;
+			return new ResponseEntity<String>(HttpStatus.OK);
 		}
 	}
 
@@ -191,32 +201,34 @@ public class Controller {
 	// JOGO
 
 	@RequestMapping(value = "/jogo/find/one", produces = MediaType.APPLICATION_JSON_VALUE)
-	public Jogo findOneJogo(Long id) {
+	public ResponseEntity<?> findOneJogo(Long id) {
 		try {
-			if (id != null && id >= 1)
-				return this.fachada.findOneJogo(id);
-			else
-				return null;
+			if (id != null && id >= 1) {
+				JogoLong jogolong = this.fachada.findOneJogo(id);
+				return new ResponseEntity<JogoLong>(jogolong, HttpStatus.OK);
+			} else
+				return new ResponseEntity<String>("DADOS INVALIDOS", HttpStatus.BAD_REQUEST);
 		} catch (JogoInexistenteException e) {
-			return null;
+			return new ResponseEntity<String>(HttpStatus.OK);
 		}
 	}
 
 	@RequestMapping(value = "/jogo/find/data", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Jogo> findByDataJogo(Date data) {
-		if (data != null)
-			return this.fachada.findByDataJogo(data);
+	public List<JogoShort> findByDataJogo(Date dia) {
+
+		if (dia != null)
+			return this.fachada.findByDataJogo(dia);
 		else
 			return null;
 	}
 
 	@RequestMapping(value = "/jogo/find/estadio", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Jogo> findByEstadio(String nomeEstadio) {
+	public List<JogoShort> findByEstadio(String nomeEstadio) {
 		try {
-
-			if (nomeEstadio != null)
+			
+			if (nomeEstadio != null) {
 				return this.fachada.findByEstadio(this.fachada.findByNomeEstadio(nomeEstadio));
-			else
+			} else
 				return null;
 		} catch (EstadioInexistenteException e) {
 			return null;

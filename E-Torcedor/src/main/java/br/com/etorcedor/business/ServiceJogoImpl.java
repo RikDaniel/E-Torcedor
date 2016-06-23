@@ -10,6 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
+import br.com.etorcedor.entity.odc.IngressoShort;
+import br.com.etorcedor.entity.odc.JogoLong;
+import br.com.etorcedor.entity.odc.JogoShort;
 import br.com.etorcedor.exception.IngressoExistenteException;
 import br.com.etorcedor.exception.IngressoInexistenteException;
 import br.com.etorcedor.exception.JogoExistenteException;
@@ -28,59 +31,74 @@ public class ServiceJogoImpl implements ServiceJogo {
 	private RepositorioIngresso ingressoRep;
 
 	@Transactional(rollbackFor = JogoExistenteException.class)
-	public void adicionarJogo(Jogo j) throws JogoExistenteException {
+	public void adicionarJogo(JogoLong j) throws JogoExistenteException {
+		JogoLong jogo = new JogoLong();
 		try {
-			Jogo jogo = this.findOneJogo(j.getId());
+			 jogo = this.findOneJogo(j.getId());
 			if (jogo != null)
 				throw new JogoExistenteException();
 		} catch (JogoInexistenteException e) {
-			jogoRep.save(j);
+			this.jogoRep.save(JogoLong.toJogo(j));
 		}
 	}
 
 	@Transactional(rollbackFor = JogoInexistenteException.class)
-	public void atualizarJogo(Jogo j) throws JogoInexistenteException {
-		Jogo old = findOneJogo(j.getId());
+	public void atualizarJogo(JogoLong j) throws JogoInexistenteException {
+		JogoLong old = this.findOneJogo(j.getId());
 		old.setData(j.getData());
-		old.setEstadio(j.getEstadio());
+		old.setEstadioApelido(j.getEstadioApelido());
+		old.setEstadioNome(j.getEstadioNome());
 		old.setIngressos(j.getIngressos());
 		old.setIngressos_quantidade(j.getIngressos_quantidade());
-		old.setIngrecos_vendidos(j.getIngressos_quantidade());
+		old.setIngressos_vendidos(j.getIngressos_vendidos());
 		old.setTimes(j.getTimes());
-		jogoRep.save(old);
+		this.jogoRep.save(JogoLong.toJogo(old));
 	}
 
 	@Transactional(rollbackFor = JogoInexistenteException.class)
-	public void removerJogo(Jogo j) throws JogoInexistenteException {
-		Jogo old = findOneJogo(j.getId());
-		List<Ingresso> i = old.getIngressos();
+	public void removerJogo(Long id) throws JogoInexistenteException {
+		JogoLong old = this.findOneJogo(id);
+		List<IngressoShort> i = old.getIngressos();
 		try {
-			for (Ingresso n : i)
-				removerIngresso(n.getId());
-			jogoRep.delete(old);
+			for (IngressoShort n : i)
+				this.removerIngresso(n.getId());
+			this.jogoRep.delete(old.getId());
 		} catch (Exception e) {
 			throw new JogoInexistenteException();
 		}
 	}
 
-	public Jogo findOneJogo(Long id) throws JogoInexistenteException {
-		Jogo j = jogoRep.findOne(id);
+	public JogoLong findOneJogo(Long id) throws JogoInexistenteException {
+		JogoLong jl = new JogoLong();
+		JogoLong j = jl.toJogoLong(this.jogoRep.findOne(id));
 		if (j == null) {
 			throw new JogoInexistenteException();
 		}
 		return j;
 	}
 
-	public List<Jogo> findByDataJogo(Date data) {
-		return jogoRep.findByData(data);
+	public List<JogoShort> findByDataJogo(Date data) {
+		List<JogoShort> js = null;
+		for(Jogo jogo : this.jogoRep.findByData(data)) {
+			js.add(JogoShort.toJogoShort(jogo));
+		}
+		return js; 
 	}
 
-	public List<Jogo> findByEstadio(Estadio estadio) {
-		return jogoRep.findByEstadio(estadio);
+	public List<JogoShort> findByEstadio(Estadio estadio) {
+		List<JogoShort> js = null;
+		for(Jogo jogo : this.jogoRep.findByEstadio(estadio)) {
+			js.add(JogoShort.toJogoShort(jogo));
+		}
+		return js;
 	}
 
-	public List<Jogo> findAllJogo() {
-		return (List<Jogo>) this.jogoRep.findAll();
+	public List<JogoShort> findAllJogo() {
+		List<JogoShort> js = null;
+		for(Jogo jogo : (List<Jogo>) this.jogoRep.findAll()) {
+			js.add(JogoShort.toJogoShort(jogo));
+		}
+		return js;
 	}
 
 	// INGRESSO

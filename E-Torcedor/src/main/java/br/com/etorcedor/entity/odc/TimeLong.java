@@ -32,7 +32,7 @@ public class TimeLong extends TimePai {
 
 		for(Jogo j : time.getJogos()) {
 			JogoShort jogoShort = new JogoShort();
-			jogoShorts.add(jogoShort.toJogosShort(j));
+			jogoShorts.add(jogoShort.toJogoShort(j));
 		}
 		for(Torcida torcida : time.getTorcidas()) {			
 			torcidaShorts.add(TorcidaShort.toTorcidaShort(torcida));

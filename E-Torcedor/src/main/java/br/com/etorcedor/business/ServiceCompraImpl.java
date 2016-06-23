@@ -13,6 +13,7 @@ import br.com.etorcedor.entity.Delito;
 import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.entity.odc.JogoLong;
 import br.com.etorcedor.exception.DelitoExistenteException;
 import br.com.etorcedor.exception.JogoInexistenteException;
 import br.com.etorcedor.persistence.RepositorioCompra;
@@ -37,9 +38,9 @@ public class ServiceCompraImpl implements ServiceCompra {
 		}
 		
 		for(Ingresso i : compra.getIngressos()) {
-			Jogo jogo = this.jogoServ.findOneJogo(i.getJogo().getId());
-			if(jogo.getIngressos_quantidade() != jogo.getIngrecos_vendidos()) {
-				jogo.setIngrecos_vendidos(jogo.getIngrecos_vendidos()+1);
+			JogoLong jogo = this.jogoServ.findOneJogo(i.getJogo().getId());
+			if(jogo.getIngressos_quantidade() != jogo.getIngressos_vendidos()) {
+				jogo.setIngressos_vendidos(jogo.getIngressos_vendidos()+1);
 				this.jogoServ.atualizarJogo(jogo);				
 			}
 			compra.setValorTotal(compra.getValorTotal()+i.getValorIngresso());		
