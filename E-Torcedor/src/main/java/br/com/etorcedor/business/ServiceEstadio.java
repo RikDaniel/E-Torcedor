@@ -3,8 +3,9 @@ package br.com.etorcedor.business;
 import java.io.Serializable;
 import java.util.List;
 
-import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Setor;
+import br.com.etorcedor.entity.odc.EstadioShort;
+import br.com.etorcedor.entity.odc.SetorShort;
 import br.com.etorcedor.exception.EstadioExistenteException;
 import br.com.etorcedor.exception.EstadioInexistenteException;
 import br.com.etorcedor.exception.SetorExistenteException;
@@ -19,28 +20,28 @@ public interface ServiceEstadio extends Serializable {
 	 * @param e
 	 * @throws EstadioExistenteException
 	 */
-	public void adicionarEstadio(Estadio e) throws EstadioExistenteException;
+	public void adicionarEstadio(EstadioShort e) throws EstadioExistenteException;
 
 	/**
 	 * 
 	 * @param e
 	 * @throws EstadioInexistenteException
 	 */
-	public void atualizarEstadio(Estadio e) throws EstadioInexistenteException;
+	public void atualizarEstadio(EstadioShort e) throws EstadioInexistenteException;
 
 	/**
 	 * 
 	 * @param e
 	 * @throws EstadioInexistenteException
 	 */
-	public void removerEstadio(Estadio e) throws EstadioInexistenteException;
+	public void removerEstadio(Long id) throws EstadioInexistenteException;
 
 	/**
 	 * 
 	 * @param id
 	 * @return
 	 */
-	public Estadio findOneEstadio(Long id) throws EstadioInexistenteException;
+	public EstadioShort findOneEstadio(Long id) throws EstadioInexistenteException;
 
 	/**
 	 * 
@@ -48,7 +49,7 @@ public interface ServiceEstadio extends Serializable {
 	 * @return
 	 * @throws EstadioInexistenteException
 	 */
-	public Estadio findByNomeEstadio(String nome) throws EstadioInexistenteException;
+	public EstadioShort findByNomeEstadio(String nome) throws EstadioInexistenteException;
 	
 	/**
 	 * 
@@ -56,13 +57,13 @@ public interface ServiceEstadio extends Serializable {
 	 * @return
 	 * @throws EstadioInexistenteException
 	 */
-	public Estadio findByApelido(String apelido) throws EstadioInexistenteException;
+	public EstadioShort findByApelido(String apelido) throws EstadioInexistenteException;
 
 	/**
 	 * 
 	 * @return
 	 */
-	public List<Estadio> findAllEstadio();
+	public List<EstadioShort> findAllEstadio();
 
 	// SETOR
 
@@ -71,21 +72,21 @@ public interface ServiceEstadio extends Serializable {
 	 * @param e
 	 * @throws SetorExistenteException
 	 */
-	public void adicionarSetor(Setor e) throws SetorExistenteException;
+	public void adicionarSetor(SetorShort e) throws SetorExistenteException;
 
 	/**
 	 * 
 	 * @param e
 	 * @throws SetorInexistenteException
 	 */
-	public void atualizarSetor(Setor e) throws SetorInexistenteException;
+	public void atualizarSetor(SetorShort e) throws SetorInexistenteException;
 
 	/**
 	 * 
 	 * @param e
 	 * @throws SetorInexistenteException
 	 */
-	public void removerSetor(Setor e) throws SetorInexistenteException;
+	public void removerSetor(Long id) throws SetorInexistenteException;
 
 	/**
 	 * 
@@ -93,7 +94,7 @@ public interface ServiceEstadio extends Serializable {
 	 * @return
 	 * @throws SetorInexistenteException
 	 */
-	public Setor findOneSetor(Long id) throws SetorInexistenteException;
+	public SetorShort findOneSetor(Long id) throws SetorInexistenteException;
 
 	/**
 	 * Recupera um setor pelo seu nome.
@@ -101,5 +102,11 @@ public interface ServiceEstadio extends Serializable {
 	 * @param nome
 	 * @return Uma entidade do tipo Setor.
 	 */
-	public Setor findByNome(String nome) throws SetorInexistenteException;
+	public List<SetorShort> findByNome(String nome) throws SetorInexistenteException;
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public List<SetorShort> findAllSetores();
 }

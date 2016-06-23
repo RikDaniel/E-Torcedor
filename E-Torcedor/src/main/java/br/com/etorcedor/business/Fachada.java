@@ -9,12 +9,13 @@ import br.com.etorcedor.entity.Delito;
 import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
-import br.com.etorcedor.entity.Setor;
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.entity.odc.EstadioShort;
 import br.com.etorcedor.entity.odc.JogoLong;
 import br.com.etorcedor.entity.odc.JogoShort;
+import br.com.etorcedor.entity.odc.SetorShort;
 import br.com.etorcedor.entity.odc.TimeLong;
 import br.com.etorcedor.entity.odc.TimeShort;
 import br.com.etorcedor.exception.DelitoExistenteException;
@@ -113,30 +114,32 @@ public interface Fachada extends Serializable {
 
 	// ESTADIO
 
-	public void adicionarEstadio(Estadio estadio) throws EstadioExistenteException;
+	public void adicionarEstadio(EstadioShort estadio) throws EstadioExistenteException;
 
-	public void atualizarEstadio(Estadio estadio) throws EstadioInexistenteException;
+	public void atualizarEstadio(EstadioShort estadio) throws EstadioInexistenteException;
 
-	public void removerEstadio(Estadio estadio) throws EstadioInexistenteException;
+	public void removerEstadio(Long id) throws EstadioInexistenteException;
 
-	public Estadio findOneEstadio(Long id) throws EstadioInexistenteException;
+	public EstadioShort findOneEstadio(Long id) throws EstadioInexistenteException;
 
-	public List<Estadio> findAllEstadio();
+	public List<EstadioShort> findAllEstadio();
 
-	public Estadio findByNomeEstadio(String nome) throws EstadioInexistenteException;
+	public EstadioShort findByNomeEstadio(String nome) throws EstadioInexistenteException;
 
-	public Estadio findByApelido(String apelido) throws EstadioInexistenteException;
+	public EstadioShort findByApelido(String apelido) throws EstadioInexistenteException;
 
 	// SETOR
-	public void adicionarSetor(Setor e) throws SetorExistenteException;
+	public void adicionarSetor(SetorShort e) throws SetorExistenteException;
 
-	public void atualizarSetor(Setor e) throws SetorInexistenteException;
+	public void atualizarSetor(SetorShort e) throws SetorInexistenteException;
 
-	public void removerSetor(Setor e) throws SetorInexistenteException;
+	public void removerSetor(Long id) throws SetorInexistenteException;
 
-	public Setor findOneSetor(Long id) throws SetorInexistenteException;
+	public SetorShort findOneSetor(Long id) throws SetorInexistenteException;
 
-	public Setor findByNome(String nome) throws SetorInexistenteException;
+	public List<SetorShort> findByNome(String nome) throws SetorInexistenteException;
+	
+	public List<SetorShort> findAllSetores();
 
 	// DELITO
 

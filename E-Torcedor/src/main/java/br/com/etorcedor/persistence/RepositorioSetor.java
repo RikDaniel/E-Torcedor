@@ -1,5 +1,7 @@
 package br.com.etorcedor.persistence;
 
+import java.util.List;
+
 import org.springframework.data.repository.CrudRepository;
 import br.com.etorcedor.entity.Setor;
 
@@ -16,6 +18,6 @@ public interface RepositorioSetor extends CrudRepository<Setor, Long> {
 	 * @param nome
 	 * @return Uma entidade do tipo Setor.
 	 */
-	public Setor findByNome(String nome);
+	public List<Setor> findByNome(String nome);
 
 }

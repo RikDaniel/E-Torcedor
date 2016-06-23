@@ -11,12 +11,13 @@ import br.com.etorcedor.entity.Delito;
 import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
-import br.com.etorcedor.entity.Setor;
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.entity.odc.EstadioShort;
 import br.com.etorcedor.entity.odc.JogoLong;
 import br.com.etorcedor.entity.odc.JogoShort;
+import br.com.etorcedor.entity.odc.SetorShort;
 import br.com.etorcedor.entity.odc.TimeLong;
 import br.com.etorcedor.entity.odc.TimeShort;
 import br.com.etorcedor.exception.DelitoExistenteException;
@@ -214,54 +215,58 @@ public class FachadaImpl implements Fachada {
 
 	// ESTADIO
 
-	public void adicionarEstadio(Estadio estadio) throws EstadioExistenteException {
+	public void adicionarEstadio(EstadioShort estadio) throws EstadioExistenteException {
 		this.estadioServ.adicionarEstadio(estadio);
 	}
 
-	public void atualizarEstadio(Estadio estadio) throws EstadioInexistenteException {
-		this.atualizarEstadio(estadio);
+	public void atualizarEstadio(EstadioShort estadio) throws EstadioInexistenteException {
+		this.estadioServ.atualizarEstadio(estadio);
 	}
 
-	public void removerEstadio(Estadio estadio) throws EstadioInexistenteException {
-		this.atualizarEstadio(estadio);
+	public void removerEstadio(Long id) throws EstadioInexistenteException {
+		this.estadioServ.removerEstadio(id);;
 	}
 
-	public Estadio findOneEstadio(Long id) throws EstadioInexistenteException {
+	public EstadioShort findOneEstadio(Long id) throws EstadioInexistenteException {
 		return this.estadioServ.findOneEstadio(id);
 	}
 
-	public List<Estadio> findAllEstadio() {
+	public List<EstadioShort> findAllEstadio() {
 		return this.estadioServ.findAllEstadio();
 	}
 
-	public Estadio findByNomeEstadio(String nome) throws EstadioInexistenteException {
+	public EstadioShort findByNomeEstadio(String nome) throws EstadioInexistenteException {
 		return this.estadioServ.findByNomeEstadio(nome);
 	}
 
-	public Estadio findByApelido(String apelido) throws EstadioInexistenteException {
+	public EstadioShort findByApelido(String apelido) throws EstadioInexistenteException {
 		return this.estadioServ.findByApelido(apelido);
 	}
 
 	// SETOR
 
-	public void adicionarSetor(Setor e) throws SetorExistenteException {
+	public void adicionarSetor(SetorShort e) throws SetorExistenteException {
 		this.estadioServ.adicionarSetor(e);
 	}
 
-	public void atualizarSetor(Setor e) throws SetorInexistenteException {
+	public void atualizarSetor(SetorShort e) throws SetorInexistenteException {
 		this.estadioServ.atualizarSetor(e);
 	}
 
-	public void removerSetor(Setor e) throws SetorInexistenteException {
-		this.estadioServ.removerSetor(e);
+	public void removerSetor(Long id) throws SetorInexistenteException {
+		this.estadioServ.removerSetor(id);
 	}
 
-	public Setor findOneSetor(Long id) throws SetorInexistenteException {
+	public SetorShort findOneSetor(Long id) throws SetorInexistenteException {
 		return this.estadioServ.findOneSetor(id);
 	}
 
-	public Setor findByNome(String nome) throws SetorInexistenteException {
+	public List<SetorShort> findByNome(String nome) throws SetorInexistenteException {
 		return this.estadioServ.findByNome(nome);
+	}
+	
+	public List<SetorShort> findAllSetores() {
+		return this.estadioServ.findAllSetores();
 	}
 
 	// DELITO

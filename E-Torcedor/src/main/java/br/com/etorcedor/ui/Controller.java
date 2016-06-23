@@ -1,7 +1,5 @@
 package br.com.etorcedor.ui;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,14 +16,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.etorcedor.business.Fachada;
 import br.com.etorcedor.entity.Compra;
-import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
-import br.com.etorcedor.entity.Setor;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.entity.odc.EstadioShort;
 import br.com.etorcedor.entity.odc.JogoLong;
 import br.com.etorcedor.entity.odc.JogoShort;
+import br.com.etorcedor.entity.odc.SetorShort;
 import br.com.etorcedor.entity.odc.TimeLong;
 import br.com.etorcedor.entity.odc.TimeShort;
 import br.com.etorcedor.exception.DelitoExistenteException;
@@ -225,9 +223,9 @@ public class Controller {
 	@RequestMapping(value = "/jogo/find/estadio", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<JogoShort> findByEstadio(String nomeEstadio) {
 		try {
-			
+
 			if (nomeEstadio != null) {
-				return this.fachada.findByEstadio(this.fachada.findByNomeEstadio(nomeEstadio));
+				return this.fachada.findByEstadio(EstadioShort.toEstadio(this.fachada.findByNomeEstadio(nomeEstadio)));
 			} else
 				return null;
 		} catch (EstadioInexistenteException e) {
@@ -280,8 +278,8 @@ public class Controller {
 	public ResponseEntity<?> findOneEstadio(Long id) {
 		try {
 			if (id != null && id >= 1) {
-				Estadio estadio = this.fachada.findOneEstadio(id);
-				return new ResponseEntity<Estadio>(estadio, HttpStatus.OK);
+				EstadioShort estadio = this.fachada.findOneEstadio(id);
+				return new ResponseEntity<EstadioShort>(estadio, HttpStatus.OK);
 			} else
 				return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		} catch (EstadioInexistenteException e) {
@@ -293,10 +291,10 @@ public class Controller {
 	public ResponseEntity<?> findByNomeEstadio(String nome) {
 		try {
 			if (nome != null) {
-				Estadio estadio = this.fachada.findByNomeEstadio(nome);
+				EstadioShort estadio = this.fachada.findByNomeEstadio(nome);
 				if (estadio == null)
 					estadio = this.fachada.findByApelido(nome);
-				return new ResponseEntity<Estadio>(estadio, HttpStatus.OK);
+				return new ResponseEntity<EstadioShort>(estadio, HttpStatus.OK);
 			} else
 				return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		} catch (EstadioInexistenteException e) {
@@ -304,13 +302,18 @@ public class Controller {
 		}
 	}
 
+	@RequestMapping(value = "/estadio/find/all", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<EstadioShort> findAllEstadio() {
+		return this.fachada.findAllEstadio();
+	}
+
 	// SETOR
 	@RequestMapping(value = "/setor/find/one", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> findOneSetor(Long id) {
 		try {
 			if (id != null && id >= 1) {
-				Setor setor = this.fachada.findOneSetor(id);
-				return new ResponseEntity<Setor>(setor, HttpStatus.OK);
+				SetorShort setor = this.fachada.findOneSetor(id);
+				return new ResponseEntity<SetorShort>(setor, HttpStatus.OK);
 			} else
 				return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		} catch (SetorInexistenteException e) {
@@ -319,17 +322,21 @@ public class Controller {
 	}
 
 	@RequestMapping(value = "/setor/find/nome", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> findByNome(String nome) {
+	public List<SetorShort> findByNome(String nome) {
 		try {
-			if (nome != null) {
-				Setor setor = this.fachada.findByNome(nome);
-				return new ResponseEntity<Setor>(setor, HttpStatus.OK);
-			} else
-				return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			return this.fachada.findByNome(nome);
+
 		} catch (SetorInexistenteException e) {
-			return new ResponseEntity<SetorInexistenteException>(e, HttpStatus.BAD_REQUEST);
+			return null;
 		}
 	}
+
+	@RequestMapping(value = "/setor/find/all", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<SetorShort> findAllSetor() {
+		return this.fachada.findAllSetores();
+	}
+
+	// INGRESSO
 
 	@RequestMapping(value = "/compra/ingresso")
 	public ResponseEntity<?> compraIngresso(String cpf, Long idIngresso) {

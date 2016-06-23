@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.etorcedor.business.Fachada;
-import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Ingresso;
-import br.com.etorcedor.entity.Setor;
 import br.com.etorcedor.entity.Torcida;
+import br.com.etorcedor.entity.odc.EstadioShort;
 import br.com.etorcedor.entity.odc.JogoLong;
+import br.com.etorcedor.entity.odc.SetorShort;
 import br.com.etorcedor.entity.odc.TimeShort;
 import br.com.etorcedor.exception.EstadioExistenteException;
 import br.com.etorcedor.exception.EstadioInexistenteException;
@@ -186,7 +186,7 @@ public class ControllerAdm {
 	// ESTADIO
 
 	@RequestMapping(value = "/estadio/add", method = RequestMethod.POST)
-	public ResponseEntity<?> adicionarEstadio(Estadio estadio) {
+	public ResponseEntity<?> adicionarEstadio(EstadioShort estadio) {
 		try {
 			this.fachada.adicionarEstadio(estadio);
 			return new ResponseEntity<String>(HttpStatus.OK);
@@ -196,7 +196,7 @@ public class ControllerAdm {
 	}
 
 	@RequestMapping(value = "/estadio/att", method = RequestMethod.POST)
-	public ResponseEntity<?> atualizarEstadio(Estadio estadio) {
+	public ResponseEntity<?> atualizarEstadio(EstadioShort estadio) {
 		try {
 			this.fachada.atualizarEstadio(estadio);
 			return new ResponseEntity<String>(HttpStatus.OK);
@@ -206,9 +206,9 @@ public class ControllerAdm {
 	}
 
 	@RequestMapping(value = "/estadio/remov", method = RequestMethod.POST)
-	public ResponseEntity<?> removerEstadio(Estadio estadio) {
+	public ResponseEntity<?> removerEstadio(Long id) {
 		try {
-			this.fachada.removerEstadio(estadio);
+			this.fachada.removerEstadio(id);
 			return new ResponseEntity<String>(HttpStatus.OK);
 		} catch (EstadioInexistenteException e) {
 			return new ResponseEntity<EstadioInexistenteException>(e, HttpStatus.BAD_REQUEST);
@@ -218,7 +218,7 @@ public class ControllerAdm {
 	// SETOR
 	
 	@RequestMapping(value = "/setor/add", method = RequestMethod.POST)
-	public ResponseEntity<?> adicionarSetor(Setor setor) {
+	public ResponseEntity<?> adicionarSetor(SetorShort setor) {
 		try {
 			this.fachada.adicionarSetor(setor);
 			return new ResponseEntity<String>(HttpStatus.OK);
@@ -228,7 +228,7 @@ public class ControllerAdm {
 	}
 
 	@RequestMapping(value = "/setor/att", method = RequestMethod.POST)
-	public ResponseEntity<?> atualizarSetor(Setor setor) {
+	public ResponseEntity<?> atualizarSetor(SetorShort setor) {
 		try {
 			this.fachada.atualizarSetor(setor);
 			return new ResponseEntity<String>(HttpStatus.OK);
@@ -238,9 +238,9 @@ public class ControllerAdm {
 	}
 	
 	@RequestMapping(value = "/setor/remov", method = RequestMethod.POST)
-	public ResponseEntity<?> removerSetor(Setor setor) {
+	public ResponseEntity<?> removerSetor(Long id) {
 		try {
-			this.fachada.removerSetor(setor);
+			this.fachada.removerSetor(id);
 			return new ResponseEntity<String>(HttpStatus.OK);
 		} catch (SetorInexistenteException e) {
 			return new ResponseEntity<SetorInexistenteException>(e, HttpStatus.BAD_REQUEST);
