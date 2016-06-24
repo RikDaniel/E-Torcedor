@@ -20,6 +20,8 @@ import br.com.etorcedor.entity.odc.JogoShort;
 import br.com.etorcedor.entity.odc.SetorShort;
 import br.com.etorcedor.entity.odc.TimeLong;
 import br.com.etorcedor.entity.odc.TimeShort;
+import br.com.etorcedor.entity.odc.UsuarioLong;
+import br.com.etorcedor.entity.odc.UsuarioShort;
 import br.com.etorcedor.exception.DelitoExistenteException;
 import br.com.etorcedor.exception.DelitoNaoEncontradoException;
 import br.com.etorcedor.exception.EstadioExistenteException;
@@ -65,11 +67,11 @@ public class FachadaImpl implements Fachada {
 
 	// USUARIO
 
-	public void adicionarUsuario(Usuario u) throws UsuarioExistenteException {
+	public void adicionarUsuario(UsuarioShort u) throws UsuarioExistenteException {
 		this.usuarioServ.adicionarUsuario(u);
 	}
 
-	public void atualizarUsuario(Usuario u) throws UsuarioInexistenteException {
+	public void atualizarUsuario(UsuarioShort u) throws UsuarioInexistenteException {
 		this.usuarioServ.atualizarUsuario(u);
 	}
 
@@ -77,27 +79,27 @@ public class FachadaImpl implements Fachada {
 		this.usuarioServ.removerUsuario(id);
 	}
 
-	public Usuario findByCpf(String cpf) throws UsuarioInexistenteException {
+	public UsuarioShort findByCpf(String cpf) throws UsuarioInexistenteException {
 		return this.usuarioServ.findByCpf(cpf);
 	}
 
-	public Usuario findByEmail(String email) throws UsuarioInexistenteException {
+	public UsuarioLong findByEmail(String email) throws UsuarioInexistenteException {
 		return this.usuarioServ.findByEmail(email);
 	}
 
-	public List<Usuario> findByNomeOrderByNomeAsc(String nome) {
+	public List<UsuarioShort> findByNomeOrderByNomeAsc(String nome) {
 		return this.usuarioServ.findByNomeOrderByNomeAsc(nome);
 	}
 
-	public List<Usuario> findByClubeOrderByNomeAsc(Time clube) {
+	public List<UsuarioShort> findByClubeOrderByNomeAsc(Time clube) {
 		return this.usuarioServ.findByClubeOrderByNomeAsc(clube);
 	}
 
-	public List<Usuario> findByTorcidaOrderByNomeAsc(Torcida torcida) {
+	public List<UsuarioShort> findByTorcidaOrderByNomeAsc(Torcida torcida) {
 		return this.usuarioServ.findByTorcidaOrderByNomeAsc(torcida);
 	}
 
-	public List<Usuario> findAllUsuario() {
+	public List<UsuarioLong> findAllUsuario() {
 		return this.usuarioServ.findAll();
 	}
 

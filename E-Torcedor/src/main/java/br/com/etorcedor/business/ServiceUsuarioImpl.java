@@ -11,6 +11,8 @@ import br.com.etorcedor.entity.Delito;
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.entity.odc.UsuarioLong;
+import br.com.etorcedor.entity.odc.UsuarioShort;
 import br.com.etorcedor.exception.DelitoNaoEncontradoException;
 import br.com.etorcedor.exception.UsuarioExistenteException;
 import br.com.etorcedor.exception.UsuarioInexistenteException;
@@ -31,30 +33,28 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 	private ServiceCompra compraServ;
 
 	@Transactional(rollbackFor = UsuarioExistenteException.class)
-	public void adicionarUsuario(Usuario u) throws UsuarioExistenteException {
+	public void adicionarUsuario(UsuarioShort u) throws UsuarioExistenteException {
 		try {
-			Usuario usuario = this.findByCpf(u.getCpf());
+			UsuarioShort usuario = this.findByCpf(u.getCpf());
 			if (usuario != null)
 				throw new UsuarioExistenteException();
 		} catch (UsuarioInexistenteException e) {
-			usuarioRep.save(u);
+			usuarioRep.save(UsuarioShort.toUsuario(u));
 		}
 	}
 
 	@Transactional(rollbackFor = UsuarioInexistenteException.class)
-	public void atualizarUsuario(Usuario u) throws UsuarioInexistenteException {
-		Usuario old = this.findByCpf(u.getCpf());
+	public void atualizarUsuario(UsuarioShort u) throws UsuarioInexistenteException {
+		UsuarioShort old = this.findByCpf(u.getCpf());
 		old.setCpf(u.getCpf());
 		old.setNome(u.getNome());
 		old.setGenero(u.getGenero());
 		old.setTelefone(u.getTelefone());
 		old.setEmail(u.getEmail());
 		old.setDataNascimento(u.getDataNascimento());
-		old.setTorcida(u.getTorcida());
 		old.setClube(u.getClube());
-		old.setCompras(u.getCompras());
-		old.setDelitos(u.getDelitos());
-		this.usuarioRep.save(old);
+		old.setClube(u.getClube());
+		this.usuarioRep.save(UsuarioShort.toUsuario(old));
 
 	}
 
@@ -83,27 +83,27 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 			throw new UsuarioInexistenteException();
 	}
 
-	public Usuario findByCpf(String cpf) throws UsuarioInexistenteException {
-		Usuario usuario = usuarioRep.findByCpf(cpf);
+	public UsuarioShort findByCpf(String cpf) throws UsuarioInexistenteException {
+		UsuarioShort usuario = UsuarioShort.toUsuarioShort(this.usuarioRep.findByCpf(cpf));
 		if (usuario == null)
 			throw new UsuarioInexistenteException();
 		return usuario;
 	}
 
-	public Usuario findByEmail(String email) {
-		return usuarioRep.findByEmail(email);
+	public UsuarioLong findByEmail(String email) {
+		return UsuarioLong.toUsuarioLong(this.usuarioRep.findByEmail(email));
+	} 
+
+	public List<UsuarioShort> findByNomeOrderByNomeAsc(String nome) {
+		return UsuarioShort.toUsuarioShort(this.usuarioRep.findByNomeOrderByNomeAsc(nome));
 	}
 
-	public List<Usuario> findByNomeOrderByNomeAsc(String nome) {
-		return usuarioRep.findByNomeOrderByNomeAsc(nome);
+	public List<UsuarioShort> findByClubeOrderByNomeAsc(Time clube) {
+		return UsuarioShort.toUsuarioShort(this.usuarioRep.findByClubeOrderByNomeAsc(clube));
 	}
 
-	public List<Usuario> findByClubeOrderByNomeAsc(Time clube) {
-		return usuarioRep.findByClubeOrderByNomeAsc(clube);
-	}
-
-	public List<Usuario> findByTorcidaOrderByNomeAsc(Torcida torcida) {
-		return this.usuarioRep.findByTorcidaOrderByNomeAsc(torcida);
+	public List<UsuarioShort> findByTorcidaOrderByNomeAsc(Torcida torcida) {
+		return UsuarioShort.toUsuarioShort(this.usuarioRep.findByTorcidaOrderByNomeAsc(torcida));
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 	 * 
 	 * @return
 	 */
-	public List<Usuario> findAll() {
-		return (List<Usuario>) this.usuarioRep.findAll();
+	public List<UsuarioLong> findAll() {
+		return UsuarioLong.toUsuarioLong((List<Usuario>) this.usuarioRep.findAll());
 	}
 }

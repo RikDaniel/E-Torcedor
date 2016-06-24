@@ -6,6 +6,8 @@ import java.util.List;
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.entity.odc.UsuarioLong;
+import br.com.etorcedor.entity.odc.UsuarioShort;
 import br.com.etorcedor.exception.UsuarioExistenteException;
 import br.com.etorcedor.exception.UsuarioInexistenteException;
 
@@ -17,7 +19,7 @@ public interface ServiceUsuario extends Serializable {
 	 * @param u
 	 * @throws UsuarioExistenteException
 	 */
-	public void adicionarUsuario(Usuario u) throws UsuarioExistenteException;
+	public void adicionarUsuario(UsuarioShort u) throws UsuarioExistenteException;
 
 	/**
 	 * Atualiza um usuario
@@ -25,7 +27,7 @@ public interface ServiceUsuario extends Serializable {
 	 * @param u
 	 * @throws UsuarioInexistenteException
 	 */
-	public void atualizarUsuario(Usuario u) throws UsuarioInexistenteException;
+	public void atualizarUsuario(UsuarioShort u) throws UsuarioInexistenteException;
 
 	/**
 	 * Remove um usuario
@@ -42,7 +44,7 @@ public interface ServiceUsuario extends Serializable {
 	 * @param cpf
 	 * @return Uma entidade do tipo Usuario
 	 */
-	public Usuario findByCpf(String cpf) throws UsuarioInexistenteException;
+	public UsuarioShort findByCpf(String cpf) throws UsuarioInexistenteException;
 
 	/**
 	 * 
@@ -51,7 +53,7 @@ public interface ServiceUsuario extends Serializable {
 	 * @param email
 	 * @return Uma entidade do tipo Usuario
 	 */
-	public Usuario findByEmail(String email) throws UsuarioInexistenteException;
+	public UsuarioLong findByEmail(String email) throws UsuarioInexistenteException;
 
 	/**
 	 * Procura todos os usuarios pelo seu nome, ordenando de forma ascendente.
@@ -59,7 +61,7 @@ public interface ServiceUsuario extends Serializable {
 	 * @param nome
 	 * @return Uma coleção do tipo List de Usuario
 	 */
-	public List<Usuario> findByNomeOrderByNomeAsc(String nome);
+	public List<UsuarioShort> findByNomeOrderByNomeAsc(String nome);
 
 	/**
 	 * 
@@ -69,7 +71,7 @@ public interface ServiceUsuario extends Serializable {
 	 * @param clube
 	 * @return Uma coleção do tipo List de Usuario
 	 */
-	public List<Usuario> findByClubeOrderByNomeAsc(Time clube);
+	public List<UsuarioShort> findByClubeOrderByNomeAsc(Time clube);
 
 	/**
 	 * 
@@ -79,12 +81,12 @@ public interface ServiceUsuario extends Serializable {
 	 * @param torcida
 	 * @return Uma coleção do tipo List de Usuario
 	 */
-	public List<Usuario> findByTorcidaOrderByNomeAsc(Torcida torcida);
+	public List<UsuarioShort> findByTorcidaOrderByNomeAsc(Torcida torcida);
 
 	/**
 	 * Retorna todos os usuarios do sistema
 	 * 
 	 * @return
 	 */
-	public List<Usuario> findAll();
+	public List<UsuarioLong> findAll();
 }

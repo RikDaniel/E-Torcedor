@@ -26,6 +26,8 @@ import br.com.etorcedor.entity.odc.JogoShort;
 import br.com.etorcedor.entity.odc.SetorShort;
 import br.com.etorcedor.entity.odc.TimeLong;
 import br.com.etorcedor.entity.odc.TimeShort;
+import br.com.etorcedor.entity.odc.UsuarioLong;
+import br.com.etorcedor.entity.odc.UsuarioShort;
 import br.com.etorcedor.exception.DelitoExistenteException;
 import br.com.etorcedor.exception.EstadioInexistenteException;
 import br.com.etorcedor.exception.IngressoInexistenteException;
@@ -46,7 +48,7 @@ public class Controller {
 	private Fachada fachada;
 
 	@RequestMapping(value = "/usuario/add", method = RequestMethod.POST)
-	public ResponseEntity<?> adicionarUsuario(@RequestBody Usuario u) {
+	public ResponseEntity<?> adicionarUsuario(@RequestBody UsuarioShort u) {
 
 		logger.debug(Log.traits(u.toString().length()) + "CADASTRANDO O USUARIO: \n" + u.toString()
 				+ Log.traits(u.toString().length()));
@@ -65,7 +67,7 @@ public class Controller {
 	}
 
 	@RequestMapping(value = "/usuario/att", method = RequestMethod.POST)
-	public ResponseEntity<?> atualizarUsuario(Usuario u) {
+	public ResponseEntity<?> atualizarUsuario(UsuarioShort u) {
 		logger.debug(Log.traits(u.toString().length()) + "ATUALIZANDO O USUARIO: \n" + u.toString()
 				+ Log.traits(u.toString().length()));
 		try {
@@ -101,8 +103,8 @@ public class Controller {
 	public ResponseEntity<?> findByCpf(String cpf) {
 		try {
 			if ((cpf != null) && (cpf.length() <= 12)) {
-				Usuario usuario = this.fachada.findByCpf(cpf);
-				return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
+				UsuarioShort usuario = this.fachada.findByCpf(cpf);
+				return new ResponseEntity<UsuarioShort>(usuario, HttpStatus.OK);
 			} else {
 				logger.debug("PARAMETRO INVALIDO");
 				return new ResponseEntity<String>("CPF INVALIDO", HttpStatus.BAD_REQUEST);
@@ -116,8 +118,8 @@ public class Controller {
 	public ResponseEntity<?> findByEmail(String email) {
 		try {
 			if (email.contains("@")) {
-				Usuario usuario = this.fachada.findByEmail(email);
-				return new ResponseEntity<Usuario>(usuario, HttpStatus.OK);
+				UsuarioLong usuario = this.fachada.findByEmail(email);
+				return new ResponseEntity<UsuarioLong>(usuario, HttpStatus.OK);
 			} else {
 				logger.debug("PARAMETRO INVALIDO");
 				return new ResponseEntity<String>("EMAIL INVALIDO", HttpStatus.BAD_REQUEST);
@@ -128,7 +130,7 @@ public class Controller {
 	}
 
 	@RequestMapping(value = "/usuario/find/all", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Usuario> findByAllUser() {
+	public List<UsuarioLong> findByAllUser() {
 		return this.fachada.findAllUsuario();
 	}
 
@@ -346,7 +348,7 @@ public class Controller {
 		Usuario usuario = new Usuario();
 
 		try {
-			usuario = this.fachada.findByCpf(cpf);
+			usuario = UsuarioShort.toUsuario(this.fachada.findByCpf(cpf));
 
 			ingressos.add(this.fachada.findOneIngresso(idIngresso));
 

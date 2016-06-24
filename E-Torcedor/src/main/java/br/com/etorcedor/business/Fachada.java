@@ -18,6 +18,8 @@ import br.com.etorcedor.entity.odc.JogoShort;
 import br.com.etorcedor.entity.odc.SetorShort;
 import br.com.etorcedor.entity.odc.TimeLong;
 import br.com.etorcedor.entity.odc.TimeShort;
+import br.com.etorcedor.entity.odc.UsuarioLong;
+import br.com.etorcedor.entity.odc.UsuarioShort;
 import br.com.etorcedor.exception.DelitoExistenteException;
 import br.com.etorcedor.exception.DelitoNaoEncontradoException;
 import br.com.etorcedor.exception.EstadioExistenteException;
@@ -39,17 +41,17 @@ public interface Fachada extends Serializable {
 
 	// USUARIO
 
-	public void adicionarUsuario(Usuario u) throws UsuarioExistenteException;
+	public void adicionarUsuario(UsuarioShort u) throws UsuarioExistenteException;
 
-	public void atualizarUsuario(Usuario u) throws UsuarioInexistenteException;
+	public void atualizarUsuario(UsuarioShort u) throws UsuarioInexistenteException;
 
 	public void removerUsuario(Long id) throws UsuarioInexistenteException;
 
-	public Usuario findByCpf(String cpf) throws UsuarioInexistenteException;
+	public UsuarioShort findByCpf(String cpf) throws UsuarioInexistenteException;
 
-	public Usuario findByEmail(String email) throws UsuarioInexistenteException;
+	public UsuarioLong findByEmail(String email) throws UsuarioInexistenteException;
 
-	public List<Usuario> findAllUsuario();
+	public List<UsuarioLong> findAllUsuario();
 
 	// TOCIDA
 
