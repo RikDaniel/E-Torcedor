@@ -46,26 +46,25 @@ public class ServiceTimeImpl implements ServiceTime {
 	public void atualizarTime(TimeShort t) throws TimeInexistenteException {
 		TimePai old = findByOne(t.getId());
 		old.setNome(t.getNome());
-		old.setTorcidas(t.getTorcidas());
 		this.timeRep.save(TimeShort.toTime(old));
 	}
 
 	@Transactional(rollbackFor = TimeInexistenteException.class)
-	public void removerTime(Long t)
+	public void removerTime(Long idTime)
 			throws TimeInexistenteException, TorcidaInexistenteException, JogoInexistenteException {
-		TimePai old = findByOne(t);
-		List<Torcida> a = TimePai.toTime(old).getTorcidas();
-		List<Jogo> j = TimePai.toTime(old).getJogos();
-
+		TimePai old = this.findByOne(idTime);
+		List<Torcida> torcidas = TimePai.toTime(old).getTorcidas();
+		List<Jogo> jogos = TimePai.toTime(old).getJogos();
 		try {
-
-			for (Torcida to : a)
-				this.torcidaSer.removerTorcida(to.getId());
-
-			for (Jogo jo : j)
-				this.jogoSer.removerJogo(jo.getId());
-
-			this.timeRep.delete(TimePai.toTime(old));
+			if (torcidas != null) {
+				for (Torcida to : torcidas)
+					this.torcidaSer.removerTorcida(to.getId());
+			}
+			if (jogos != null) {
+				for (Jogo jo : jogos)
+					this.jogoSer.removerJogo(jo.getId());
+			}
+			this.timeRep.delete(old.getId());
 		} catch (Exception e) {
 			throw new TimeInexistenteException();
 		}

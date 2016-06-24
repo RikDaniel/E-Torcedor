@@ -77,7 +77,7 @@ public class ControllerAdm {
 	}
 
 	@RequestMapping(value = "/torcida/remov", method = RequestMethod.GET)
-	public ResponseEntity<?> removerTorcida(@RequestBody Long id) {
+	public ResponseEntity<?> removerTorcida(Long id) {
 		try {
 			if (id != null && id >= 1) {
 				this.fachada.removerTorcida(id);
@@ -105,11 +105,14 @@ public class ControllerAdm {
 		}
 	}
 
-	@RequestMapping(value = "/time/remov", method = RequestMethod.POST)
-	public ResponseEntity<?> removerTime(@RequestBody long time) {
+	@RequestMapping(value = "/time/remov")
+	public ResponseEntity<?> removerTime(Long id) {
 		try {
-			this.fachada.removerTime(time);
-			return new ResponseEntity<String>(HttpStatus.OK);
+			if(id != null && id >= 1) {
+				this.fachada.removerTime(id);
+				return new ResponseEntity<String>(HttpStatus.OK);
+			}
+			return new ResponseEntity<String>("ID NULO", HttpStatus.BAD_REQUEST);
 		} catch (TimeInexistenteException e) {
 			return new ResponseEntity<TimeInexistenteException>(e, HttpStatus.BAD_REQUEST);
 		} catch (TorcidaInexistenteException e) {
@@ -120,7 +123,8 @@ public class ControllerAdm {
 	}
 
 	@RequestMapping(value = "/time/att", method = RequestMethod.POST)
-	public ResponseEntity<?> atualizarTime(@RequestBody TimeShort time) {
+	public ResponseEntity<?> atualizarTime(@RequestBody  TimeShort time) {
+		logger.debug("\n\n\n\n\n" + time.getId()+ time.getNome());
 		try {
 			this.fachada.atualizarTime(time);
 			return new ResponseEntity<String>(HttpStatus.OK);
@@ -151,8 +155,8 @@ public class ControllerAdm {
 		}
 	}
 
-	@RequestMapping(value = "/jogo/remov", method = RequestMethod.POST)
-	public ResponseEntity<?> removerJogo(@RequestBody Long id) {
+	@RequestMapping(value = "/jogo/remov", method = RequestMethod.GET)
+	public ResponseEntity<?> removerJogo(Long id) {
 		try {
 			this.fachada.removerJogo(id);
 			return new ResponseEntity<String>(HttpStatus.OK);
@@ -205,7 +209,7 @@ public class ControllerAdm {
 		}
 	}
 
-	@RequestMapping(value = "/estadio/remov", method = RequestMethod.POST)
+	@RequestMapping(value = "/estadio/remov", method = RequestMethod.GET)
 	public ResponseEntity<?> removerEstadio(Long id) {
 		try {
 			this.fachada.removerEstadio(id);
@@ -218,7 +222,7 @@ public class ControllerAdm {
 	// SETOR
 	
 	@RequestMapping(value = "/setor/add", method = RequestMethod.POST)
-	public ResponseEntity<?> adicionarSetor(SetorShort setor) {
+	public ResponseEntity<?> adicionarSetor(@RequestBody SetorShort setor) {
 		try {
 			this.fachada.adicionarSetor(setor);
 			return new ResponseEntity<String>(HttpStatus.OK);
@@ -228,7 +232,7 @@ public class ControllerAdm {
 	}
 
 	@RequestMapping(value = "/setor/att", method = RequestMethod.POST)
-	public ResponseEntity<?> atualizarSetor(SetorShort setor) {
+	public ResponseEntity<?> atualizarSetor(@RequestBody SetorShort setor) {
 		try {
 			this.fachada.atualizarSetor(setor);
 			return new ResponseEntity<String>(HttpStatus.OK);
@@ -237,7 +241,7 @@ public class ControllerAdm {
 		}
 	}
 	
-	@RequestMapping(value = "/setor/remov", method = RequestMethod.POST)
+	@RequestMapping(value = "/setor/remov", method = RequestMethod.GET)
 	public ResponseEntity<?> removerSetor(Long id) {
 		try {
 			this.fachada.removerSetor(id);

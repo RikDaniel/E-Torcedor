@@ -3,8 +3,6 @@ package br.com.etorcedor.entity.odc;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.validation.constraints.Null;
-
 import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Setor;
 

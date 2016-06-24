@@ -10,19 +10,22 @@ import br.com.etorcedor.entity.Torcida;
 public class TimeLong extends TimePai {
 
 	private List<JogoShort> jogos;	
+	private List<TorcidaShort> torcidaShorts;
 	
 	public TimeLong() {
 		
 	}
 	
-	public TimeLong(Long id, String nome, List<TorcidaShort> torcidas, List<JogoShort> jogos) {
-		super(id, nome, torcidas);
+	public TimeLong(Long id, String nome, List<TorcidaShort> torcidaShorts, List<JogoShort> jogos) {
+		super(id, nome);
 		this.jogos =jogos;
+		this.torcidaShorts = torcidaShorts;
 	}
 
-	public TimeLong(String nome, List<TorcidaShort> torcidas, List<JogoShort> jogos) {
-		super(nome, torcidas);
+	public TimeLong(String nome, List<TorcidaShort> torcidaShorts, List<JogoShort> jogos) {
+		super(nome);
 		this.jogos =jogos;
+		this.torcidaShorts = torcidaShorts;
 	}
 
 	public static TimeLong toTimeLong(Time time) {
@@ -31,8 +34,7 @@ public class TimeLong extends TimePai {
 		List<TorcidaShort> torcidaShorts = new ArrayList<TorcidaShort>();
 
 		for(Jogo j : time.getJogos()) {
-			JogoShort jogoShort = new JogoShort();
-			jogoShorts.add(jogoShort.toJogoShort(j));
+			jogoShorts.add(JogoShort.toJogoShort(j));
 		}
 		for(Torcida torcida : time.getTorcidas()) {			
 			torcidaShorts.add(TorcidaShort.toTorcidaShort(torcida));
@@ -41,15 +43,32 @@ public class TimeLong extends TimePai {
 		timelong.setId(time.getId());
 		timelong.setNome(time.getNome());
 		timelong.setJogos(jogoShorts);
-		timelong.setTorcidas(torcidaShorts);
+		timelong.setTorcidaShorts(torcidaShorts);
 		return timelong;	
 	}
 	
+	public List<JogoShort> getJogos() {
+		return jogos;
+	}
+
+	public void setJogos(List<JogoShort> jogos) {
+		this.jogos = jogos;
+	}
+	
+	public List<TorcidaShort> getTorcidaShorts() {
+		return torcidaShorts;
+	}
+
+	public void setTorcidaShorts(List<TorcidaShort> torcidaShorts) {
+		this.torcidaShorts = torcidaShorts;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((jogos == null) ? 0 : jogos.hashCode());
+		result = prime * result + ((torcidaShorts == null) ? 0 : torcidaShorts.hashCode());
 		return result;
 	}
 	
@@ -67,19 +86,16 @@ public class TimeLong extends TimePai {
 				return false;
 		} else if (!jogos.equals(other.jogos))
 			return false;
+		if (torcidaShorts == null) {
+			if (other.torcidaShorts != null)
+				return false;
+		} else if (!torcidaShorts.equals(other.torcidaShorts))
+			return false;
 		return true;
-	}
-	
-	public List<JogoShort> getJogos() {
-		return jogos;
-	}
-
-	public void setJogos(List<JogoShort> jogos) {
-		this.jogos = jogos;
 	}
 	
 	@Override
 	public String toString() {
-		return "TimeLong [jogos=" + jogos + "]";
+		return "TimeLong [jogos=" + jogos + ", torcidaShorts=" + torcidaShorts + "]";
 	}
 }
