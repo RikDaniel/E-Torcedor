@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.etorcedor.business.Fachada;
-import br.com.etorcedor.entity.Ingresso;
-import br.com.etorcedor.entity.Torcida;
+import br.com.etorcedor.entity.odc.DelitoLong;
 import br.com.etorcedor.entity.odc.EstadioShort;
+import br.com.etorcedor.entity.odc.IngressoShort;
 import br.com.etorcedor.entity.odc.JogoLong;
 import br.com.etorcedor.entity.odc.SetorShort;
 import br.com.etorcedor.entity.odc.TimeShort;
+import br.com.etorcedor.entity.odc.TorcidaShort;
 import br.com.etorcedor.exception.EstadioExistenteException;
 import br.com.etorcedor.exception.EstadioInexistenteException;
 import br.com.etorcedor.exception.IngressoExistenteException;
@@ -47,7 +48,7 @@ public class ControllerAdm {
 
 	// TORCIDA
 	@RequestMapping(value = "/torcida/add", method = RequestMethod.POST)
-	public ResponseEntity<?> adicionarTorcida(@RequestBody Torcida t) {
+	public ResponseEntity<?> adicionarTorcida(@RequestBody TorcidaShort t) {
 		try {
 			if (t != null) {
 				this.fachada.adicionarTorcida(t);
@@ -62,7 +63,7 @@ public class ControllerAdm {
 	}
 
 	@RequestMapping(value = "/torcida/att", method = RequestMethod.POST)
-	public ResponseEntity<?> atualizarTorcida(@RequestBody Torcida t) {
+	public ResponseEntity<?> atualizarTorcida(@RequestBody TorcidaShort t) {
 		try {
 			if (t != null) {
 				this.fachada.atualizarTorcida(t);
@@ -168,7 +169,7 @@ public class ControllerAdm {
 	// INGRESSO
 
 	@RequestMapping(value = "/ingresso/add", method = RequestMethod.POST)
-	public ResponseEntity<?> adicionarIngreco(@RequestBody Ingresso i) {
+	public ResponseEntity<?> adicionarIngreco(@RequestBody IngressoShort i) {
 		try {
 			this.fachada.adicionarIngreco(i);
 			return new ResponseEntity<String>(HttpStatus.OK);
@@ -250,4 +251,16 @@ public class ControllerAdm {
 			return new ResponseEntity<SetorInexistenteException>(e, HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+	//DELITO
+	@RequestMapping(value = "/delito/add", method = RequestMethod.POST)
+	public ResponseEntity<?> adicionarDelito(@RequestBody DelitoLong delitoLong) {
+		try {
+			this.fachada.adicionarDelito(delitoLong);
+			return new ResponseEntity<String>(HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<Exception>(e, HttpStatus.BAD_REQUEST);
+		}
+	}
+	
 }

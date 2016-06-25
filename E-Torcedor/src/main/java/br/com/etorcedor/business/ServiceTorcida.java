@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import br.com.etorcedor.entity.Time;
-import br.com.etorcedor.entity.Torcida;
+import br.com.etorcedor.entity.odc.TorcidaShort;
 import br.com.etorcedor.exception.TorcidaExistenteException;
 import br.com.etorcedor.exception.TorcidaInexistenteException;
 
@@ -15,14 +15,14 @@ public interface ServiceTorcida extends Serializable {
 	 * @param t
 	 * @throws TorcidaExistenteException
 	 */
-	public void adicionarTorcida(Torcida t) throws TorcidaExistenteException;
+	public void adicionarTorcida(TorcidaShort t) throws TorcidaExistenteException;
 
 	/**
 	 * 
 	 * @param t
 	 * @throws TorcidaInexistenteException
 	 */
-	public void atualizarTorcida(Torcida t) throws TorcidaInexistenteException;
+	public void atualizarTorcida(TorcidaShort t) throws TorcidaInexistenteException;
 
 	/**
 	 * 
@@ -37,7 +37,7 @@ public interface ServiceTorcida extends Serializable {
 	 * @param nome
 	 * @return uma entidade do tipo Torcida
 	 */
-	public Torcida findByNome(String nome) throws TorcidaInexistenteException;
+	public TorcidaShort findByNome(String nome) throws TorcidaInexistenteException;
 
 	/**
 	 * Recupera todas as torcida pelo Time
@@ -45,12 +45,12 @@ public interface ServiceTorcida extends Serializable {
 	 * @param time
 	 * @return uma coleção de Torcida do tipo List
 	 */
-	public List<Torcida> findByTime(Time time);
+	public List<TorcidaShort> findByTime(Time time);
 
-	public Torcida findOneTorcida(Long id) throws TorcidaInexistenteException;
+	public TorcidaShort findOneTorcida(Long id) throws TorcidaInexistenteException;
 
 	/**
 	 * Retorna uma lista com todos os times
 	 */
-	public List<Torcida> findAllTorcida();
+	public List<TorcidaShort> findAllTorcida();
 }

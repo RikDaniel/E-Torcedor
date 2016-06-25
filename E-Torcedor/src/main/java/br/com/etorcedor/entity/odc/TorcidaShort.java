@@ -8,48 +8,50 @@ import br.com.etorcedor.entity.Torcida;
 public class TorcidaShort {
 
 	private Long id;
-	private int socios;
 	private String nome;
+	private TimeShort timeShort;
 
 	public TorcidaShort() {
 		
 	}
 	
-	public TorcidaShort(int socios, String nome) {
-		this.socios = socios;
+	public TorcidaShort(String nome) {
 		this.nome = nome;
 	}
-
-	public TorcidaShort(Long id, int socios, String nome) {
-		this.id = id;
-		this.socios = socios;
+	
+	public TorcidaShort(TimeShort timeShort, String nome) {
 		this.nome = nome;
+		this.timeShort = timeShort;
 	}
 	
 	public static TorcidaShort toTorcidaShort(Torcida torcida) {
 		TorcidaShort short1 = new TorcidaShort();
 		short1.setId(torcida.getId());
 		short1.setNome(torcida.getNome());
-		short1.setSocios(torcida.getSocios());
+		short1.setTimeShort(TimeShort.toTimeShort(torcida.getTime()));
 		return short1;
+	}
+	
+	public static List<TorcidaShort> toTorcidaShort(List<Torcida> torcidas) {
+		List<TorcidaShort> torcidashort = new ArrayList<TorcidaShort>();
+		for(Torcida torcida: torcidas) {
+			torcidashort.add(TorcidaShort.toTorcidaShort(torcida));
+		}
+		return torcidashort;
 	}
 	
 	public static Torcida toTorcida(TorcidaShort torcidashort) {
 		Torcida torcida = new Torcida();
 		torcida.setId(torcidashort.getId());
 		torcida.setNome(torcidashort.getNome());
-		torcida.setSocios(torcidashort.getSocios());
+		torcida.setTime(TimeShort.toTime(torcidashort.getTimeShort()));
 		return torcida;
 	}
 	
 	public static List<Torcida> toTorcida(List<TorcidaShort> torcidashort) {
-		Torcida torcida = new Torcida();
 		List<Torcida> torcidas = new ArrayList<Torcida>();
 		for(TorcidaShort short1: torcidashort) {
-			torcida.setId(short1.getId());
-			torcida.setNome(short1.getNome());
-			torcida.setSocios(short1.getSocios());
-			torcidas.add(torcida);
+			torcidas.add(TorcidaShort.toTorcida(short1));
 		}
 		return torcidas;
 	}
@@ -63,14 +65,6 @@ public class TorcidaShort {
 		this.id = id;
 	}
 
-	public int getSocios() {
-		return socios;
-	}
-
-	public void setSocios(int socios) {
-		this.socios = socios;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -79,13 +73,21 @@ public class TorcidaShort {
 		this.nome = nome;
 	}
 
+	public TimeShort getTimeShort() {
+		return timeShort;
+	}
+
+	public void setTimeShort(TimeShort timeShort) {
+		this.timeShort = timeShort;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + socios;
+		result = prime * result + ((timeShort == null) ? 0 : timeShort.hashCode());
 		return result;
 	}
 
@@ -108,14 +110,17 @@ public class TorcidaShort {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
-		if (socios != other.socios)
+		if (timeShort == null) {
+			if (other.timeShort != null)
+				return false;
+		} else if (!timeShort.equals(other.timeShort))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "TorcidaShort [id=" + id + ", socios=" + socios + ", nome=" + nome + "]";
+		return "TorcidaShort [id=" + id + ", nome=" + nome + ", timeShort=" + timeShort + "]";
 	}
 
 }

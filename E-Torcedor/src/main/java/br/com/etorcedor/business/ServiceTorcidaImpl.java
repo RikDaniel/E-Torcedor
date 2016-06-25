@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
+import br.com.etorcedor.entity.odc.TorcidaShort;
 import br.com.etorcedor.exception.TorcidaExistenteException;
 import br.com.etorcedor.exception.TorcidaInexistenteException;
 import br.com.etorcedor.persistence.RepositorioTorcida;
@@ -21,63 +22,61 @@ public class ServiceTorcidaImpl implements ServiceTorcida {
 	private RepositorioTorcida torcidaRep;
 
 	@Transactional(rollbackFor = TorcidaExistenteException.class)
-	public void adicionarTorcida(Torcida t) throws TorcidaExistenteException {
+	public void adicionarTorcida(TorcidaShort t) throws TorcidaExistenteException {
 		try {
-			Torcida torcida = this.findById(t.getId());
+			TorcidaShort torcida = this.findById(t.getId());
 			if (torcida != null)
 				throw new TorcidaExistenteException();
 		} catch (TorcidaInexistenteException e) {
-			torcidaRep.save(t);
+			this.torcidaRep.save(TorcidaShort.toTorcida(t));
 		}
 	}
 
 	@Transactional(rollbackFor = TorcidaInexistenteException.class)
-	public void atualizarTorcida(Torcida t) throws TorcidaInexistenteException {
-		Torcida old = findOneTorcida(t.getId());
+	public void atualizarTorcida(TorcidaShort t) throws TorcidaInexistenteException {
+		TorcidaShort old = this.findOneTorcida(t.getId());
 		old.setNome(t.getNome());
-		old.setSocios(t.getSocios());
-		old.setTime(t.getTime());
-		old.setTorcedores(t.getTorcedores());
-		torcidaRep.save(old);
+		old.setTimeShort(t.getTimeShort());
+		this.torcidaRep.save(TorcidaShort.toTorcida(old));
 	}
 
 	@Transactional(rollbackFor = TorcidaInexistenteException.class)
 	public void removerTorcida(Long id) throws TorcidaInexistenteException {
-		Torcida t = findOneTorcida(id);
+		TorcidaShort t = this.findOneTorcida(id);
 		if (t == null)
 			throw new TorcidaInexistenteException();
-		torcidaRep.delete(t);
+		this.torcidaRep.delete(TorcidaShort.toTorcida(t));
 	}
 
-	public Torcida findById(Long id) throws TorcidaInexistenteException {
-		Torcida i = torcidaRep.findOne(id);
+	public TorcidaShort findById(Long id) throws TorcidaInexistenteException {
+		Torcida i = this.torcidaRep.findOne(id);
 		if (i == null)
 			throw new TorcidaInexistenteException();
-		return i;
+		return TorcidaShort.toTorcidaShort(i);
 	}
 
-	public Torcida findOneTorcida(Long id) throws TorcidaInexistenteException {
-		Torcida t = torcidaRep.findOne(id);
+	public TorcidaShort findOneTorcida(Long id) throws TorcidaInexistenteException {
+		Torcida t = this.torcidaRep.findOne(id);
 		if (t == null)
 			throw new TorcidaInexistenteException();
-		return t;
+		return TorcidaShort.toTorcidaShort(t);
 	}
 
-	public Torcida findByNome(String nome) throws TorcidaInexistenteException {
-		Torcida t = torcidaRep.findByNome(nome);
+	public TorcidaShort findByNome(String nome) throws TorcidaInexistenteException {
+		Torcida t = this.torcidaRep.findByNome(nome);
 		if (t == null)
 			throw new TorcidaInexistenteException();
-		return t;
+		return TorcidaShort.toTorcidaShort(t);
 	}
 
-	public List<Torcida> findByTime(Time time) {
-		return this.torcidaRep.findByTime(time);
+	public List<TorcidaShort> findByTime(Time time) {
+		return  TorcidaShort.toTorcidaShort(this.torcidaRep.findByTime(time));
 	}
 
 	/**
 	 * Retorna uma lista com todos os times
 	 */
-	public List<Torcida> findAllTorcida() {
-		return (List<Torcida>) this.torcidaRep.findAll();
+	public List<TorcidaShort> findAllTorcida() {
+		return TorcidaShort.toTorcidaShort((List<Torcida>) this.torcidaRep.findAll());
 	}
 }

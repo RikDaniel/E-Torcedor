@@ -42,6 +42,16 @@ public class UsuarioShort extends UsuarioPai {
 		return usuario;
 	}
 	
+	public static List<Usuario> toUsuario(List<UsuarioShort> usuarioShorts) {
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		if(usuarioShorts != null) {
+			for(UsuarioShort usuarioShort : usuarioShorts) {
+				usuarios.add(UsuarioShort.toUsuario(usuarioShort));
+			}
+		}	
+		return usuarios;
+	}
+	
 	public static List<UsuarioShort> toUsuarioShort(List<Usuario> usuarios) {
 		List<UsuarioShort> usuarioShorts = new ArrayList<UsuarioShort>();
 		if(usuarios != null) {

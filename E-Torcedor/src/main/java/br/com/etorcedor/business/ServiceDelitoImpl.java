@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.etorcedor.entity.Delito;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.entity.odc.DelitoLong;
+import br.com.etorcedor.entity.odc.DelitoShort;
 import br.com.etorcedor.exception.DelitoNaoEncontradoException;
 import br.com.etorcedor.persistence.RepositorioDelito;
 
@@ -20,32 +22,37 @@ public class ServiceDelitoImpl implements ServiceDelito {
 	@Autowired
 	private RepositorioDelito repDelito;
 	
-	public Delito findByBo(long bo) throws DelitoNaoEncontradoException {
+	public void adicionarDelito(DelitoLong delitoLong) {
+		if(delitoLong != null) {
+			this.repDelito.save(DelitoLong.toDelito(delitoLong));
+		}
+	}
+	public DelitoLong findByBo(long bo) throws DelitoNaoEncontradoException {
 		Delito delito = this.repDelito.findByBo(bo);
 		if(delito == null) 
 			throw new DelitoNaoEncontradoException();
-		return delito ;
+		return DelitoLong.toDelitoLong(delito);
 	}
 	
 
 	@Transactional(rollbackFor = DelitoNaoEncontradoException.class)
 	public void removeDelito(long bo)throws DelitoNaoEncontradoException {
-		Delito delito = this.findByBo(bo);
+		Delito delito = DelitoLong.toDelito(this.findByBo(bo));
 		if(delito != null)
 			this.repDelito.delete(delito);
 		else
 			throw new DelitoNaoEncontradoException();
 	}
 
-	public List<Delito> findByDia(Date dia) {
-		return this.repDelito.findByDia(dia);
+	public List<DelitoShort> findByDia(Date dia) {
+		return DelitoShort.toDelitoShort(this.repDelito.findByDia(dia));
 	}
 
-	public List<Delito> findAll() {
-		return (List<Delito>) this.repDelito.findAll();
+	public List<DelitoShort> findAll() {
+		return DelitoShort.toDelitoShort((List<Delito>) this.repDelito.findAll());
 	}
 	
-	public List<Delito> findByUsuarios(List<Usuario> usuarios) {
-		return (List<Delito>) this.findByUsuarios(usuarios);
+	public List<DelitoShort> findByUsuarios(List<Usuario> usuarios) {
+		return DelitoShort.toDelitoShort((List<Delito>) this.repDelito.findByUsuarios(usuarios));
 	}
 }

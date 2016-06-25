@@ -7,19 +7,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.etorcedor.entity.Compra;
-import br.com.etorcedor.entity.Delito;
 import br.com.etorcedor.entity.Estadio;
-import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.entity.odc.DelitoLong;
+import br.com.etorcedor.entity.odc.DelitoShort;
 import br.com.etorcedor.entity.odc.EstadioShort;
+import br.com.etorcedor.entity.odc.IngressoShort;
 import br.com.etorcedor.entity.odc.JogoLong;
 import br.com.etorcedor.entity.odc.JogoShort;
 import br.com.etorcedor.entity.odc.SetorShort;
 import br.com.etorcedor.entity.odc.TimeLong;
 import br.com.etorcedor.entity.odc.TimeShort;
+import br.com.etorcedor.entity.odc.TorcidaShort;
 import br.com.etorcedor.entity.odc.UsuarioLong;
 import br.com.etorcedor.entity.odc.UsuarioShort;
 import br.com.etorcedor.exception.DelitoExistenteException;
@@ -105,11 +107,11 @@ public class FachadaImpl implements Fachada {
 
 	// TORCIDA
 
-	public void adicionarTorcida(Torcida t) throws TorcidaExistenteException {
+	public void adicionarTorcida(TorcidaShort t) throws TorcidaExistenteException {
 		this.torcidaServ.adicionarTorcida(t);
 	}
 
-	public void atualizarTorcida(Torcida t) throws TorcidaInexistenteException {
+	public void atualizarTorcida(TorcidaShort t) throws TorcidaInexistenteException {
 		this.torcidaServ.atualizarTorcida(t);
 	}
 
@@ -117,15 +119,15 @@ public class FachadaImpl implements Fachada {
 		this.torcidaServ.removerTorcida(id);
 	}
 
-	public Torcida torcidaFindByNome(String nome) throws TorcidaInexistenteException {
+	public TorcidaShort torcidaFindByNome(String nome) throws TorcidaInexistenteException {
 		return this.torcidaServ.findByNome(nome);
 	}
 
-	public List<Torcida> findByTime(Time time) {
+	public List<TorcidaShort> findByTime(Time time) {
 		return this.torcidaServ.findByTime(time);
 	}
 
-	public List<Torcida> findAllTorcida() {
+	public List<TorcidaShort> findAllTorcida() {
 		return this.torcidaServ.findAllTorcida();
 	}
 
@@ -187,7 +189,7 @@ public class FachadaImpl implements Fachada {
 	}
 
 	// INGRESSO
-	public void adicionarIngreco(Ingresso i) throws IngressoExistenteException {
+	public void adicionarIngreco(IngressoShort i) throws IngressoExistenteException {
 		this.jogoServ.adicionarIngresso(i);
 	}
 
@@ -195,23 +197,23 @@ public class FachadaImpl implements Fachada {
 		this.jogoServ.removerIngresso(i);
 	}
 
-	public List<Ingresso> findByJogo(Jogo jogo) {
+	public List<IngressoShort> findByJogo(Jogo jogo) {
 		return this.jogoServ.findByJogo(jogo);
 	}
 
-	public List<Ingresso> findByDataIngresso(Date data) {
+	public List<IngressoShort> findByDataIngresso(Date data) {
 		return this.jogoServ.findByDataIngresso(data);
 	}
 
-	public List<Ingresso> findByNumeroAcento(int numeroAcento) {
+	public List<IngressoShort> findByNumeroAcento(int numeroAcento) {
 		return this.jogoServ.findByNumeroAcento(numeroAcento);
 	}
 
-	public Ingresso findOneIngresso(Long id) throws IngressoInexistenteException {
+	public IngressoShort findOneIngresso(Long id) throws IngressoInexistenteException {
 		return this.jogoServ.findOneIngresso(id);
 	}
 
-	public List<Ingresso> findAllIngresso() {
+	public List<IngressoShort> findAllIngresso() {
 		return this.jogoServ.findAllIngresso();
 	}
 
@@ -273,15 +275,18 @@ public class FachadaImpl implements Fachada {
 
 	// DELITO
 
-	public Delito findByBo(long bo) throws DelitoNaoEncontradoException {
+	public void adicionarDelito(DelitoLong delitoLong) {
+		this.delitoServ.adicionarDelito(delitoLong);
+	}
+	public DelitoLong findByBo(long bo) throws DelitoNaoEncontradoException {
 		return this.delitoServ.findByBo(bo);
 	}
 
-	public List<Delito> findByDia(Date dia) {
+	public List<DelitoShort> findByDia(Date dia) {
 		return this.delitoServ.findByDia(dia);
 	}
 
-	public List<Delito> findAll() {
+	public List<DelitoShort> findAll() {
 		return this.delitoServ.findAll();
 	}
 

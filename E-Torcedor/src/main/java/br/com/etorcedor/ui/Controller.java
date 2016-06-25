@@ -18,17 +18,21 @@ import br.com.etorcedor.business.Fachada;
 import br.com.etorcedor.entity.Compra;
 import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
-import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.entity.odc.DelitoLong;
+import br.com.etorcedor.entity.odc.DelitoShort;
 import br.com.etorcedor.entity.odc.EstadioShort;
+import br.com.etorcedor.entity.odc.IngressoShort;
 import br.com.etorcedor.entity.odc.JogoLong;
 import br.com.etorcedor.entity.odc.JogoShort;
 import br.com.etorcedor.entity.odc.SetorShort;
 import br.com.etorcedor.entity.odc.TimeLong;
 import br.com.etorcedor.entity.odc.TimeShort;
+import br.com.etorcedor.entity.odc.TorcidaShort;
 import br.com.etorcedor.entity.odc.UsuarioLong;
 import br.com.etorcedor.entity.odc.UsuarioShort;
 import br.com.etorcedor.exception.DelitoExistenteException;
+import br.com.etorcedor.exception.DelitoNaoEncontradoException;
 import br.com.etorcedor.exception.EstadioInexistenteException;
 import br.com.etorcedor.exception.IngressoInexistenteException;
 import br.com.etorcedor.exception.JogoInexistenteException;
@@ -47,6 +51,8 @@ public class Controller {
 	@Autowired
 	private Fachada fachada;
 
+	//USUARIO
+	
 	@RequestMapping(value = "/usuario/add", method = RequestMethod.POST)
 	public ResponseEntity<?> adicionarUsuario(@RequestBody UsuarioShort u) {
 
@@ -133,13 +139,15 @@ public class Controller {
 	public List<UsuarioLong> findByAllUser() {
 		return this.fachada.findAllUsuario();
 	}
+	
+	//TORCIDA
 
 	@RequestMapping(value = "/torcida/find/nome", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> torcidaFindByNome(String nome) {
 		try {
 			if (nome != null) {
-				Torcida torcida = this.fachada.torcidaFindByNome(nome);
-				return new ResponseEntity<Torcida>(torcida, HttpStatus.OK);
+				TorcidaShort torcida = this.fachada.torcidaFindByNome(nome);
+				return new ResponseEntity<TorcidaShort>(torcida, HttpStatus.OK);
 			} else {
 				logger.debug("PARAMETRO NULO OU INVALIDO");
 				return new ResponseEntity<String>("NOME INVALIDO", HttpStatus.BAD_REQUEST);
@@ -150,7 +158,7 @@ public class Controller {
 	}
 
 	@RequestMapping(value = "/torcida/find/time", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Torcida> findByTime(String nomeTime) {
+	public List<TorcidaShort> findByTime(String nomeTime) {
 		if (nomeTime != null) {
 			try {
 				return this.fachada.findByTime(TimeShort.toTime(this.fachada.timeFindByNome(nomeTime)));
@@ -161,7 +169,7 @@ public class Controller {
 	}
 
 	@RequestMapping(value = "/torcida/find/all", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Torcida> findAllTorcida() {
+	public List<TorcidaShort> findAllTorcida() {
 		return this.fachada.findAllTorcida();
 	}
 
@@ -238,7 +246,7 @@ public class Controller {
 	// INGRESSO
 
 	@RequestMapping(value = "/ingresso/find/jogo", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Ingresso> findByJogo(Jogo jogo) {
+	public List<IngressoShort> findByJogo(Jogo jogo) {
 		if (jogo != null)
 			return this.fachada.findByJogo(jogo);
 		else
@@ -246,7 +254,7 @@ public class Controller {
 	}
 
 	@RequestMapping(value = "/ingresso/find/data", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Ingresso> findByDataIngresso(Date data) {
+	public List<IngressoShort> findByDataIngresso(Date data) {
 		if (data != null)
 			return this.fachada.findByDataIngresso(data);
 		else
@@ -254,7 +262,7 @@ public class Controller {
 	}
 
 	@RequestMapping(value = "/ingresso/find/acento", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<Ingresso> findByNumeroAcento(int numeroAcento) {
+	public List<IngressoShort> findByNumeroAcento(int numeroAcento) {
 		if (numeroAcento >= 1)
 			return this.fachada.findByNumeroAcento(numeroAcento);
 		else
@@ -265,8 +273,8 @@ public class Controller {
 	public ResponseEntity<?> findOneIngresso(Long id) {
 		try {
 			if (id != null && id >= 1) {
-				Ingresso ingresso = this.fachada.findOneIngresso(id);
-				return new ResponseEntity<Ingresso>(ingresso, HttpStatus.OK);
+				IngressoShort ingresso = this.fachada.findOneIngresso(id);
+				return new ResponseEntity<IngressoShort>(ingresso, HttpStatus.OK);
 			} else {
 				return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 			}
@@ -338,7 +346,7 @@ public class Controller {
 		return this.fachada.findAllSetores();
 	}
 
-	// INGRESSO
+	// COMPRA
 
 	@RequestMapping(value = "/compra/ingresso")
 	public ResponseEntity<?> compraIngresso(String cpf, Long idIngresso) {
@@ -350,7 +358,7 @@ public class Controller {
 		try {
 			usuario = UsuarioShort.toUsuario(this.fachada.findByCpf(cpf));
 
-			ingressos.add(this.fachada.findOneIngresso(idIngresso));
+			ingressos.add(IngressoShort.toIngresso(this.fachada.findOneIngresso(idIngresso)));
 
 			compra = new Compra(dia, usuario, ingressos);
 			this.fachada.adicionarComprar(compra);
@@ -364,5 +372,28 @@ public class Controller {
 		} catch (JogoInexistenteException e) {
 			return new ResponseEntity<JogoInexistenteException>(e, HttpStatus.BAD_REQUEST);
 		}
+	}
+	
+	//DELITO
+	
+	@RequestMapping(value = "/delito/find/bo", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> findByBo(long bo) {
+		
+		try {
+			DelitoLong delitLong = this.fachada.findByBo(bo);
+			return new ResponseEntity<DelitoLong>(delitLong, HttpStatus.OK);			
+		} catch (DelitoNaoEncontradoException e) {
+			return new ResponseEntity<DelitoNaoEncontradoException>(e, HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	@RequestMapping(value = "/delito/find/dia", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<DelitoShort> findByDia(Date dia) {
+		return this.fachada.findByDia(dia);		
+	}
+
+	@RequestMapping(value = "/delito/find/all", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<DelitoShort> findAll() {
+		return this.fachada.findAll();
 	}
 }

@@ -104,42 +104,42 @@ public class ServiceJogoImpl implements ServiceJogo {
 	// INGRESSO
 
 	@Transactional(rollbackFor = IngressoExistenteException.class)
-	public void adicionarIngresso(Ingresso i) throws IngressoExistenteException {
+	public void adicionarIngresso(IngressoShort i) throws IngressoExistenteException {
 		try {
-			findOneIngresso(i.getId());
+			this.findOneIngresso(i.getId());
 			throw new IngressoExistenteException();
 		} catch (IngressoInexistenteException ei) {
-			ingressoRep.save(i);
+			this.ingressoRep.save(IngressoShort.toIngresso(i));
 		}
 	}
 
 	@Transactional(rollbackFor = IngressoInexistenteException.class)
 	public void removerIngresso(Long i) throws IngressoInexistenteException {
-		Ingresso old = findOneIngresso(i);
-		ingressoRep.delete(old);
+		IngressoShort old = this.findOneIngresso(i);
+		this.ingressoRep.delete(old.getId());
 	}
 
-	public Ingresso findOneIngresso(Long id) throws IngressoInexistenteException {
-		Ingresso i = ingressoRep.findOne(id);
+	public IngressoShort findOneIngresso(Long id) throws IngressoInexistenteException {
+		Ingresso i = this.ingressoRep.findOne(id);
 		if (i == null) {
 			throw new IngressoInexistenteException();
 		}
-		return i;
+		return IngressoShort.toIngressoShort(i);
 	}
 
-	public List<Ingresso> findByJogo(Jogo jogo) {
-		return ingressoRep.findByJogo(jogo);
+	public List<IngressoShort> findByJogo(Jogo jogo) {
+		return IngressoShort.toIngressoShort(this.ingressoRep.findByJogo(jogo));
 	}
 
-	public List<Ingresso> findByDataIngresso(Date data) {
-		return ingressoRep.findByData(data);
+	public List<IngressoShort> findByDataIngresso(Date data) {
+		return IngressoShort.toIngressoShort(this.ingressoRep.findByData(data));
 	}
 
-	public List<Ingresso> findByNumeroAcento(int numeroAcento) {
-		return ingressoRep.findByNumeroAcento(numeroAcento);
+	public List<IngressoShort> findByNumeroAcento(int numeroAcento) {
+		return IngressoShort.toIngressoShort(this.ingressoRep.findByNumeroAcento(numeroAcento));
 	}
 
-	public List<Ingresso> findAllIngresso() {
-		return (List<Ingresso>) this.ingressoRep.findAll();
+	public List<IngressoShort> findAllIngresso() {
+		return IngressoShort.toIngressoShort((List<Ingresso>) this.ingressoRep.findAll());
 	}
 }

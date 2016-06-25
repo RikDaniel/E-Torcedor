@@ -5,7 +5,6 @@ import java.util.List;
 
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
-import br.com.etorcedor.entity.Usuario;
 import br.com.etorcedor.entity.odc.UsuarioLong;
 import br.com.etorcedor.entity.odc.UsuarioShort;
 import br.com.etorcedor.exception.UsuarioExistenteException;

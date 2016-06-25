@@ -5,19 +5,20 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.etorcedor.entity.Compra;
-import br.com.etorcedor.entity.Delito;
 import br.com.etorcedor.entity.Estadio;
-import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.entity.Time;
-import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
+import br.com.etorcedor.entity.odc.DelitoLong;
+import br.com.etorcedor.entity.odc.DelitoShort;
 import br.com.etorcedor.entity.odc.EstadioShort;
+import br.com.etorcedor.entity.odc.IngressoShort;
 import br.com.etorcedor.entity.odc.JogoLong;
 import br.com.etorcedor.entity.odc.JogoShort;
 import br.com.etorcedor.entity.odc.SetorShort;
 import br.com.etorcedor.entity.odc.TimeLong;
 import br.com.etorcedor.entity.odc.TimeShort;
+import br.com.etorcedor.entity.odc.TorcidaShort;
 import br.com.etorcedor.entity.odc.UsuarioLong;
 import br.com.etorcedor.entity.odc.UsuarioShort;
 import br.com.etorcedor.exception.DelitoExistenteException;
@@ -55,17 +56,17 @@ public interface Fachada extends Serializable {
 
 	// TOCIDA
 
-	public void adicionarTorcida(Torcida t) throws TorcidaExistenteException;
+	public void adicionarTorcida(TorcidaShort t) throws TorcidaExistenteException;
 
-	public void atualizarTorcida(Torcida t) throws TorcidaInexistenteException;
+	public void atualizarTorcida(TorcidaShort t) throws TorcidaInexistenteException;
 
 	public void removerTorcida(Long id) throws TorcidaInexistenteException;
 
-	public Torcida torcidaFindByNome(String nome) throws TorcidaInexistenteException;
+	public TorcidaShort torcidaFindByNome(String nome) throws TorcidaInexistenteException;
 
-	public List<Torcida> findByTime(Time time);
+	public List<TorcidaShort> findByTime(Time time);
 
-	public List<Torcida> findAllTorcida();
+	public List<TorcidaShort> findAllTorcida();
 
 	// TIME
 
@@ -100,19 +101,19 @@ public interface Fachada extends Serializable {
 
 	// INGRESSO
 
-	public void adicionarIngreco(Ingresso i) throws IngressoExistenteException;
+	public void adicionarIngreco(IngressoShort i) throws IngressoExistenteException;
 
 	public void removerIngreco(Long i) throws IngressoInexistenteException;
 
-	public List<Ingresso> findByJogo(Jogo jogo);
+	public List<IngressoShort> findByJogo(Jogo jogo);
 
-	public List<Ingresso> findByDataIngresso(Date data);
+	public List<IngressoShort> findByDataIngresso(Date data);
 
-	public List<Ingresso> findByNumeroAcento(int numeroAcento);
+	public List<IngressoShort> findByNumeroAcento(int numeroAcento);
 
-	public Ingresso findOneIngresso(Long id) throws IngressoInexistenteException;
+	public IngressoShort findOneIngresso(Long id) throws IngressoInexistenteException;
 
-	public List<Ingresso> findAllIngresso();
+	public List<IngressoShort> findAllIngresso();
 
 	// ESTADIO
 
@@ -145,11 +146,13 @@ public interface Fachada extends Serializable {
 
 	// DELITO
 
-	public Delito findByBo(long bo) throws DelitoNaoEncontradoException;
+	public void adicionarDelito(DelitoLong delitoLong);
+	
+	public DelitoLong findByBo(long bo) throws DelitoNaoEncontradoException;
 
-	public List<Delito> findByDia(Date dia);
+	public List<DelitoShort> findByDia(Date dia);
 
-	public List<Delito> findAll();
+	public List<DelitoShort> findAll();
 
 	// COMPRA
 	public void adicionarComprar(Compra compra) throws DelitoExistenteException, JogoInexistenteException;

@@ -7,6 +7,7 @@ import java.util.List;
 import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
+import br.com.etorcedor.entity.odc.IngressoShort;
 import br.com.etorcedor.entity.odc.JogoLong;
 import br.com.etorcedor.entity.odc.JogoShort;
 import br.com.etorcedor.exception.IngressoExistenteException;
@@ -75,7 +76,7 @@ public interface ServiceJogo extends Serializable {
 	 * @param i
 	 * @throws IngressoExistenteException
 	 */
-	public void adicionarIngresso(Ingresso i) throws IngressoExistenteException;
+	public void adicionarIngresso(IngressoShort i) throws IngressoExistenteException;
 
 	/**
 	 * 
@@ -90,7 +91,7 @@ public interface ServiceJogo extends Serializable {
 	 * @param jogo
 	 * @return Uma coleção do tipo List de Ingresso.
 	 */
-	public List<Ingresso> findByJogo(Jogo jogo);
+	public List<IngressoShort> findByJogo(Jogo jogo);
 
 	/**
 	 * Recupera todos os ingressos de uma data.
@@ -98,7 +99,7 @@ public interface ServiceJogo extends Serializable {
 	 * @param data
 	 * @return Uma coleção do tipo List de Ingresso.
 	 */
-	public List<Ingresso> findByDataIngresso(Date data);
+	public List<IngressoShort> findByDataIngresso(Date data);
 
 	/**
 	 * Recupera todos os ingressos pelo numero do acento.
@@ -106,7 +107,7 @@ public interface ServiceJogo extends Serializable {
 	 * @param numeroAcento
 	 * @return Uma coleção do tipo List de Ingresso.
 	 */
-	public List<Ingresso> findByNumeroAcento(int numeroAcento);
+	public List<IngressoShort> findByNumeroAcento(int numeroAcento);
 
 	/**
 	 * 
@@ -114,7 +115,11 @@ public interface ServiceJogo extends Serializable {
 	 * @return
 	 * @throws IngressoInexistenteException
 	 */
-	public Ingresso findOneIngresso(Long id) throws IngressoInexistenteException;
+	public IngressoShort findOneIngresso(Long id) throws IngressoInexistenteException;
 
-	public List<Ingresso> findAllIngresso();
+	/**
+	 * 
+	 * @return
+	 */
+	public List<IngressoShort> findAllIngresso();
 }
