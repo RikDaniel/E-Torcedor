@@ -74,7 +74,7 @@ public class Controller {
 	}
 
 	@RequestMapping(value = "/usuario/att", method = RequestMethod.POST)
-	public ResponseEntity<?> atualizarUsuario(UsuarioShort u) {
+	public ResponseEntity<?> atualizarUsuario(@RequestBody UsuarioShort u) {
 		logger.debug(Log.traits(u.toString().length()) + "ATUALIZANDO O USUARIO: \n" + u.toString()
 				+ Log.traits(u.toString().length()));
 		try {

@@ -1,5 +1,6 @@
 package br.com.etorcedor.business;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
