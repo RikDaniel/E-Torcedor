@@ -34,8 +34,16 @@ public class UsuarioLong extends UsuarioPai {
 	
 	public static UsuarioLong toUsuarioLong(Usuario usuario) {
 		UsuarioLong usuariolong = new UsuarioLong();
+		UsuarioPai usuarioPai = toUsuarioPai(usuario);
 		if(usuario != null) {
-			toUsuarioPai(usuario);
+			usuariolong.setId(usuarioPai.getId());
+			usuariolong.setCpf(usuarioPai.getCpf());
+			usuariolong.setNome(usuarioPai.getNome());
+			usuariolong.setGenero(usuarioPai.getGenero());
+			usuariolong.setTelefone(usuarioPai.getTelefone());
+			usuariolong.setEmail(usuarioPai.getEmail());
+			usuariolong.setDataNascimento(usuarioPai.getDataNascimento());
+			usuariolong.setClube(usuarioPai.getClube());		
 			usuariolong.setTorcidaShort(TorcidaShort.toTorcidaShort(usuario.getTorcida()));
 			usuariolong.setDelitos(DelitoShort.toDelitoShort(usuario.getDelitos()));
 			usuariolong.setCompras(CompraShort.toCompraShort(usuario.getCompras()));

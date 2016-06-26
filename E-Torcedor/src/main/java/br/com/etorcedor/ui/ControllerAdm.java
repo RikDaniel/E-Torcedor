@@ -49,6 +49,7 @@ public class ControllerAdm {
 	// TORCIDA
 	@RequestMapping(value = "/torcida/add", method = RequestMethod.POST)
 	public ResponseEntity<?> adicionarTorcida(@RequestBody TorcidaShort t) {
+		logger.debug("\n\n\n\n\n\n\n\n" + t.getNome() +t.getId());
 		try {
 			if (t != null) {
 				this.fachada.adicionarTorcida(t);

@@ -159,7 +159,7 @@ public interface Fachada extends Serializable {
 
 	public Compra findByOneCompra(Long id);
 
-	public List<Compra> findByUsuario(Usuario usuario);
+	public List<Compra> findByUsuario(Long id);
 
 	public List<Compra> findByAllCompras();
 

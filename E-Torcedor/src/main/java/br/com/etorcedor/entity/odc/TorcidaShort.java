@@ -26,9 +26,12 @@ public class TorcidaShort {
 	
 	public static TorcidaShort toTorcidaShort(Torcida torcida) {
 		TorcidaShort short1 = new TorcidaShort();
-		short1.setId(torcida.getId());
-		short1.setNome(torcida.getNome());
-		short1.setTimeShort(TimeShort.toTimeShort(torcida.getTime()));
+		if(torcida != null) {
+			short1.setId(torcida.getId());
+			short1.setNome(torcida.getNome());
+			short1.setTimeShort(TimeShort.toTimeShort(torcida.getTime()));
+			
+		}
 		return short1;
 	}
 	

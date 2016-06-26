@@ -15,7 +15,7 @@ public interface ServiceCompra extends Serializable {
 	public void removerCompras(Compra compra);
 	public Compra findByOneCompra(Long id);
 	public List<Compra> findByDia(Date dia);
-	public List<Compra> findByUsuario(Usuario usuario);
+	public List<Compra> findByUsuario(Long id);
 	public List<Compra> findByAllCompras();
 	
 }

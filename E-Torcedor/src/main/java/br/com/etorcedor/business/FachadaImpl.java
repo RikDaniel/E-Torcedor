@@ -300,11 +300,11 @@ public class FachadaImpl implements Fachada {
 		return this.compraServ.findByOneCompra(id);
 	}
 
-	public List<Compra> findByUsuario(Usuario usuario) {
-		return this.compraServ.findByUsuario(usuario);
+	public List<Compra> findByUsuario(Long id) {
+		return this.compraServ.findByUsuario(id);
 	}
 
 	public List<Compra> findByAllCompras() {
-		return this.findByAllCompras();
+		return this.compraServ.findByAllCompras();
 	}
 }

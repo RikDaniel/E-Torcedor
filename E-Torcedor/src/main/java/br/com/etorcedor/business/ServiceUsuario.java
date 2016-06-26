@@ -72,6 +72,8 @@ public interface ServiceUsuario extends Serializable {
 	 */
 	public List<UsuarioShort> findByClubeOrderByNomeAsc(Time clube);
 
+	
+	public UsuarioShort findOneUsuario(Long id);
 	/**
 	 * 
 	 * Procura todos os usuarios que estejam em uma Torcida, ordenando de forma

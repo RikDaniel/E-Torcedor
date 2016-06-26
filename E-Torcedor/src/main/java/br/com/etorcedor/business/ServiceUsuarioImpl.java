@@ -36,10 +36,10 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 	public void adicionarUsuario(UsuarioShort u) throws UsuarioExistenteException {
 		try {
 			UsuarioShort usuario = this.findByCpf(u.getCpf());
-			if (usuario != null)
+			if (usuario.getNome() != null)
 				throw new UsuarioExistenteException();
 		} catch (UsuarioInexistenteException e) {
-			usuarioRep.save(UsuarioShort.toUsuario(u));
+			this.usuarioRep.save(UsuarioShort.toUsuario(u));
 		}
 	}
 
@@ -85,7 +85,7 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 
 	public UsuarioShort findByCpf(String cpf) throws UsuarioInexistenteException {
 		UsuarioShort usuario = UsuarioShort.toUsuarioShort(this.usuarioRep.findByCpf(cpf));
-		if (usuario == null)
+		if (usuario.getNome() == null)
 			throw new UsuarioInexistenteException();
 		return usuario;
 	}
@@ -104,6 +104,10 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 
 	public List<UsuarioShort> findByTorcidaOrderByNomeAsc(Torcida torcida) {
 		return UsuarioShort.toUsuarioShort(this.usuarioRep.findByTorcidaOrderByNomeAsc(torcida));
+	}
+	
+	public UsuarioShort findOneUsuario(Long id) {
+		return UsuarioShort.toUsuarioShort(this.usuarioRep.findOne(id));
 	}
 
 	/**

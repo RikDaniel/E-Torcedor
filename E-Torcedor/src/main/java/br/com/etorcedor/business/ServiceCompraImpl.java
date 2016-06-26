@@ -14,6 +14,7 @@ import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.entity.Usuario;
 import br.com.etorcedor.entity.odc.JogoLong;
+import br.com.etorcedor.entity.odc.UsuarioShort;
 import br.com.etorcedor.exception.DelitoExistenteException;
 import br.com.etorcedor.exception.JogoInexistenteException;
 import br.com.etorcedor.persistence.RepositorioCompra;
@@ -28,6 +29,9 @@ public class ServiceCompraImpl implements ServiceCompra {
 	
 	@Autowired
 	private ServiceJogo jogoServ;
+	
+	@Autowired
+	private ServiceUsuario usuarioServ;
 	
 	@Transactional(rollbackOn = DelitoExistenteException.class)
 	public void adicionarComprar(Compra compra)throws DelitoExistenteException, JogoInexistenteException{
@@ -60,8 +64,8 @@ public class ServiceCompraImpl implements ServiceCompra {
 		return this.findByDia(dia);
 	}
 
-	public List<Compra> findByUsuario(Usuario usuario) {
-		return this.repCompra.findByUsuario(usuario);
+	public List<Compra> findByUsuario(Long id) {
+		return this.repCompra.findByUsuario(UsuarioShort.toUsuario(this.usuarioServ.findOneUsuario(id)));
 	}
 
 	public List<Compra> findByAllCompras() {

@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.etorcedor.business.Fachada;
@@ -51,8 +52,8 @@ public class Controller {
 	@Autowired
 	private Fachada fachada;
 
-	//USUARIO
-	
+	// USUARIO
+
 	@RequestMapping(value = "/usuario/add", method = RequestMethod.POST)
 	public ResponseEntity<?> adicionarUsuario(@RequestBody UsuarioShort u) {
 
@@ -60,8 +61,8 @@ public class Controller {
 				+ Log.traits(u.toString().length()));
 		try {
 			if (u.getNome() != null)
-
 				this.fachada.adicionarUsuario(u);
+
 			else {
 				logger.debug("PARAMETRO NULO OU INEXISTENTE");
 				return new ResponseEntity<String>("CAMPOS EM BRANCO", HttpStatus.BAD_REQUEST);
@@ -120,15 +121,19 @@ public class Controller {
 		}
 	}
 
-	@RequestMapping(value = "/usuario/find/email", produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/usuario/find/email", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.GET)
 	public ResponseEntity<?> findByEmail(String email) {
+		logger.debug("\n\n\n\n\n" + email);
 		try {
-			if (email.contains("@")) {
-				UsuarioLong usuario = this.fachada.findByEmail(email);
-				return new ResponseEntity<UsuarioLong>(usuario, HttpStatus.OK);
-			} else {
-				logger.debug("PARAMETRO INVALIDO");
-				return new ResponseEntity<String>("EMAIL INVALIDO", HttpStatus.BAD_REQUEST);
+			if (email != null) {
+				if (email.contains("@")) {
+					UsuarioLong usuario = this.fachada.findByEmail(email);
+					return new ResponseEntity<UsuarioLong>(usuario, HttpStatus.OK);
+				} else {
+					return new ResponseEntity<String>("EMAIL INVALIDO", HttpStatus.BAD_REQUEST);
+				}
+			}else {
+				return new ResponseEntity<String>("EMAIL NULO", HttpStatus.BAD_REQUEST);			
 			}
 		} catch (UsuarioInexistenteException e) {
 			return new ResponseEntity<UsuarioInexistenteException>(e, HttpStatus.BAD_REQUEST);
@@ -139,8 +144,8 @@ public class Controller {
 	public List<UsuarioLong> findByAllUser() {
 		return this.fachada.findAllUsuario();
 	}
-	
-	//TORCIDA
+
+	// TORCIDA
 
 	@RequestMapping(value = "/torcida/find/nome", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> torcidaFindByNome(String nome) {
@@ -153,7 +158,7 @@ public class Controller {
 				return new ResponseEntity<String>("NOME INVALIDO", HttpStatus.BAD_REQUEST);
 			}
 		} catch (TorcidaInexistenteException e) {
-			return new ResponseEntity<TorcidaInexistenteException>(e, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<String>("TORCIDA INEXISTENTE", HttpStatus.OK);
 		}
 	}
 
@@ -373,15 +378,31 @@ public class Controller {
 			return new ResponseEntity<JogoInexistenteException>(e, HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	//DELITO
-	
+
+	@RequestMapping(value = "/compra/find/id", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> findByOneCompra(Long id) {
+		Compra compra = this.fachada.findByOneCompra(id);
+		return new ResponseEntity<Compra>(compra, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/compra/find/usuario", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Compra> findByUsuario(Long id) {
+		return this.fachada.findByUsuario(id);
+	}
+
+	@RequestMapping(value = "/compra/find/all", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<Compra> findByAllCompras() {
+		return this.fachada.findByAllCompras();
+	}
+
+	// DELITO
+
 	@RequestMapping(value = "/delito/find/bo", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> findByBo(long bo) {
-		
+
 		try {
 			DelitoLong delitLong = this.fachada.findByBo(bo);
-			return new ResponseEntity<DelitoLong>(delitLong, HttpStatus.OK);			
+			return new ResponseEntity<DelitoLong>(delitLong, HttpStatus.OK);
 		} catch (DelitoNaoEncontradoException e) {
 			return new ResponseEntity<DelitoNaoEncontradoException>(e, HttpStatus.BAD_REQUEST);
 		}
@@ -389,7 +410,7 @@ public class Controller {
 
 	@RequestMapping(value = "/delito/find/dia", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<DelitoShort> findByDia(Date dia) {
-		return this.fachada.findByDia(dia);		
+		return this.fachada.findByDia(dia);
 	}
 
 	@RequestMapping(value = "/delito/find/all", produces = MediaType.APPLICATION_JSON_VALUE)
