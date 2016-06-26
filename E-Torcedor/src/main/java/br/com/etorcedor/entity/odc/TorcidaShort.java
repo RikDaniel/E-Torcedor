@@ -12,53 +12,59 @@ public class TorcidaShort {
 	private TimeShort timeShort;
 
 	public TorcidaShort() {
-		
+
 	}
-	
+
 	public TorcidaShort(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public TorcidaShort(TimeShort timeShort, String nome) {
 		this.nome = nome;
 		this.timeShort = timeShort;
 	}
-	
+
 	public static TorcidaShort toTorcidaShort(Torcida torcida) {
 		TorcidaShort short1 = new TorcidaShort();
-		if(torcida != null) {
+		if (torcida != null) {
 			short1.setId(torcida.getId());
 			short1.setNome(torcida.getNome());
 			short1.setTimeShort(TimeShort.toTimeShort(torcida.getTime()));
-			
+
 		}
 		return short1;
 	}
-	
+
 	public static List<TorcidaShort> toTorcidaShort(List<Torcida> torcidas) {
 		List<TorcidaShort> torcidashort = new ArrayList<TorcidaShort>();
-		for(Torcida torcida: torcidas) {
-			torcidashort.add(TorcidaShort.toTorcidaShort(torcida));
+		if (torcidas != null) {
+			for (Torcida torcida : torcidas) {
+				torcidashort.add(TorcidaShort.toTorcidaShort(torcida));
+			}
 		}
 		return torcidashort;
 	}
-	
+
 	public static Torcida toTorcida(TorcidaShort torcidashort) {
+
 		Torcida torcida = new Torcida();
-		torcida.setId(torcidashort.getId());
-		torcida.setNome(torcidashort.getNome());
-		torcida.setTime(TimeShort.toTime(torcidashort.getTimeShort()));
+		if (torcidashort != null) {
+			torcida.setId(torcidashort.getId());
+			torcida.setNome(torcidashort.getNome());
+			torcida.setTime(TimeShort.toTime(torcidashort.getTimeShort()));
+		}
 		return torcida;
 	}
-	
+
 	public static List<Torcida> toTorcida(List<TorcidaShort> torcidashort) {
 		List<Torcida> torcidas = new ArrayList<Torcida>();
-		for(TorcidaShort short1: torcidashort) {
-			torcidas.add(TorcidaShort.toTorcida(short1));
+		if (torcidashort != null) {
+			for (TorcidaShort short1 : torcidashort) {
+				torcidas.add(TorcidaShort.toTorcida(short1));
+			}
 		}
 		return torcidas;
 	}
-	
 
 	public Long getId() {
 		return id;

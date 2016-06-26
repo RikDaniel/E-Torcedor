@@ -17,16 +17,16 @@ import br.com.etorcedor.persistence.RepositorioTorcida;
 public class ServiceTorcidaImpl implements ServiceTorcida {
 
 	private static final long serialVersionUID = 5184754998130052128L;
-	
+
 	@Autowired
 	private RepositorioTorcida torcidaRep;
 
 	@Transactional(rollbackFor = TorcidaExistenteException.class)
 	public void adicionarTorcida(TorcidaShort t) throws TorcidaExistenteException {
 		try {
-			TorcidaShort torcida = this.findById(t.getId());
-			if (torcida != null)
-				throw new TorcidaExistenteException();
+				TorcidaShort torcida = this.findByNome(t.getNome());
+				if (torcida != null)
+					throw new TorcidaExistenteException();
 		} catch (TorcidaInexistenteException e) {
 			this.torcidaRep.save(TorcidaShort.toTorcida(t));
 		}
@@ -70,7 +70,7 @@ public class ServiceTorcidaImpl implements ServiceTorcida {
 	}
 
 	public List<TorcidaShort> findByTime(Time time) {
-		return  TorcidaShort.toTorcidaShort(this.torcidaRep.findByTime(time));
+		return TorcidaShort.toTorcidaShort(this.torcidaRep.findByTime(time));
 	}
 
 	/**
