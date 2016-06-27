@@ -21,6 +21,7 @@ import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.entity.Usuario;
 import br.com.etorcedor.entity.odc.DelitoLong;
 import br.com.etorcedor.entity.odc.DelitoShort;
+import br.com.etorcedor.entity.odc.EstadioLong;
 import br.com.etorcedor.entity.odc.EstadioShort;
 import br.com.etorcedor.entity.odc.IngressoShort;
 import br.com.etorcedor.entity.odc.JogoLong;
@@ -292,8 +293,8 @@ public class Controller {
 	public ResponseEntity<?> findOneEstadio(Long id) {
 		try {
 			if (id != null && id >= 1) {
-				EstadioShort estadio = this.fachada.findOneEstadio(id);
-				return new ResponseEntity<EstadioShort>(estadio, HttpStatus.OK);
+				EstadioLong estadio = this.fachada.findOneEstadio(id);
+				return new ResponseEntity<EstadioLong>(estadio, HttpStatus.OK);
 			} else
 				return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
 		} catch (EstadioInexistenteException e) {

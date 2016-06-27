@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Setor;
+import br.com.etorcedor.entity.odc.EstadioLong;
 import br.com.etorcedor.entity.odc.EstadioShort;
 import br.com.etorcedor.entity.odc.SetorShort;
 import br.com.etorcedor.exception.EstadioExistenteException;
@@ -29,46 +31,46 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 
 	@Transactional(rollbackFor = EstadioExistenteException.class)
 	public void adicionarEstadio(EstadioShort e) throws EstadioExistenteException {
-		Estadio estadio = null;
 		try {
-			estadio = EstadioShort.toEstadio(this.findOneEstadio(e.getId()));
-			if (estadio != null)
+			if (this.findByNomeEstadio(e.getNome()) != null) {
 				throw new EstadioExistenteException();
+			}
 		} catch (EstadioInexistenteException ei) {
+			Estadio estadio = EstadioShort.toEstadio(e);
 			this.estadioRep.save(estadio);
 		}
 	}
 
 	@Transactional(rollbackFor = EstadioInexistenteException.class)
-	public void atualizarEstadio(EstadioShort e) throws EstadioInexistenteException {
-		EstadioShort old = this.findOneEstadio(e.getId());
+	public void atualizarEstadio(@RequestBody EstadioLong e) throws EstadioInexistenteException {
+		EstadioLong old = this.findOneEstadio(e.getId());
 		old.setApelido(e.getApelido());
 		old.setId(e.getId());
 		old.setNome(e.getNome());
-		old.setSetorShort(e.getSetorShort());
-		this.estadioRep.save(EstadioShort.toEstadio(old));
+	    old.setSetorShorts(e.getSetorShorts());
+		this.estadioRep.save(EstadioLong.toEstadio(old));
 	}
 
 	@Transactional(rollbackFor = EstadioInexistenteException.class)
 	public void removerEstadio(Long id) throws EstadioInexistenteException {
-		EstadioShort old = this.findOneEstadio(id);
+		EstadioLong old = this.findOneEstadio(id);
 		try {
-			List<SetorShort> s = old.getSetorShort();
-			for (SetorShort r : s) {
-				this.removerSetor(r.getId());
+			List<SetorShort> setores = old.getSetorShorts();
+			for (SetorShort setor : setores) {
+				this.removerSetor(setor.getId());
 			}
-			this.estadioRep.delete(EstadioShort.toEstadio(old));
+			this.estadioRep.delete(id);
 		} catch (Exception e2) {
 			throw new EstadioInexistenteException();
 		}
 	}
 
-	public EstadioShort findOneEstadio(Long id) throws EstadioInexistenteException {
+	public EstadioLong findOneEstadio(Long id) throws EstadioInexistenteException {
 		Estadio estadio = this.estadioRep.findOne(id);
 		if (estadio == null) {
 			throw new EstadioInexistenteException();
 		}
-		return EstadioShort.toEstadioShort(estadio);
+		return EstadioLong.toEstadioLong(estadio);
 	}
 
 	public EstadioShort findByNomeEstadio(String nome) throws EstadioInexistenteException {
@@ -95,10 +97,10 @@ public class ServiceEstadioImpl implements ServiceEstadio {
 
 	@Transactional(rollbackFor = SetorExistenteException.class)
 	public void adicionarSetor(SetorShort e) throws SetorExistenteException {
-		EstadioShort estadio;
+		EstadioLong estadio;
 		try {
 			estadio = this.findOneEstadio(e.getEstadioShortId());
-			for (SetorShort ss : estadio.getSetorShort()) {
+			for (SetorShort ss : estadio.getSetorShorts()) {
 				if (ss.getNome() == e.getNome()) {
 					throw new SetorExistenteException();
 				}

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.etorcedor.business.Fachada;
 import br.com.etorcedor.entity.odc.DelitoLong;
+import br.com.etorcedor.entity.odc.EstadioLong;
 import br.com.etorcedor.entity.odc.EstadioShort;
 import br.com.etorcedor.entity.odc.IngressoShort;
 import br.com.etorcedor.entity.odc.JogoLong;
@@ -192,7 +193,8 @@ public class ControllerAdm {
 	// ESTADIO
 
 	@RequestMapping(value = "/estadio/add", method = RequestMethod.POST)
-	public ResponseEntity<?> adicionarEstadio(EstadioShort estadio) {
+	public ResponseEntity<?> adicionarEstadio(@RequestBody EstadioShort estadio) {
+		logger.debug("\n\n\n\n\n\n\n" + estadio.getNome() + estadio.getApelido());
 		try {
 			this.fachada.adicionarEstadio(estadio);
 			return new ResponseEntity<String>(HttpStatus.OK);
@@ -202,7 +204,7 @@ public class ControllerAdm {
 	}
 
 	@RequestMapping(value = "/estadio/att", method = RequestMethod.POST)
-	public ResponseEntity<?> atualizarEstadio(EstadioShort estadio) {
+	public ResponseEntity<?> atualizarEstadio(EstadioLong estadio) {
 		try {
 			this.fachada.atualizarEstadio(estadio);
 			return new ResponseEntity<String>(HttpStatus.OK);

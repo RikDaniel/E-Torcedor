@@ -11,9 +11,9 @@ import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
-import br.com.etorcedor.entity.Usuario;
 import br.com.etorcedor.entity.odc.DelitoLong;
 import br.com.etorcedor.entity.odc.DelitoShort;
+import br.com.etorcedor.entity.odc.EstadioLong;
 import br.com.etorcedor.entity.odc.EstadioShort;
 import br.com.etorcedor.entity.odc.IngressoShort;
 import br.com.etorcedor.entity.odc.JogoLong;
@@ -223,7 +223,7 @@ public class FachadaImpl implements Fachada {
 		this.estadioServ.adicionarEstadio(estadio);
 	}
 
-	public void atualizarEstadio(EstadioShort estadio) throws EstadioInexistenteException {
+	public void atualizarEstadio(EstadioLong estadio) throws EstadioInexistenteException {
 		this.estadioServ.atualizarEstadio(estadio);
 	}
 
@@ -231,7 +231,7 @@ public class FachadaImpl implements Fachada {
 		this.estadioServ.removerEstadio(id);;
 	}
 
-	public EstadioShort findOneEstadio(Long id) throws EstadioInexistenteException {
+	public EstadioLong findOneEstadio(Long id) throws EstadioInexistenteException {
 		return this.estadioServ.findOneEstadio(id);
 	}
 

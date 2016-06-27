@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import br.com.etorcedor.entity.Setor;
+import br.com.etorcedor.entity.odc.EstadioLong;
 import br.com.etorcedor.entity.odc.EstadioShort;
 import br.com.etorcedor.entity.odc.SetorShort;
 import br.com.etorcedor.exception.EstadioExistenteException;
@@ -27,7 +28,7 @@ public interface ServiceEstadio extends Serializable {
 	 * @param e
 	 * @throws EstadioInexistenteException
 	 */
-	public void atualizarEstadio(EstadioShort e) throws EstadioInexistenteException;
+	public void atualizarEstadio(EstadioLong e) throws EstadioInexistenteException;
 
 	/**
 	 * 
@@ -41,7 +42,7 @@ public interface ServiceEstadio extends Serializable {
 	 * @param id
 	 * @return
 	 */
-	public EstadioShort findOneEstadio(Long id) throws EstadioInexistenteException;
+	public EstadioLong findOneEstadio(Long id) throws EstadioInexistenteException;
 
 	/**
 	 * 
