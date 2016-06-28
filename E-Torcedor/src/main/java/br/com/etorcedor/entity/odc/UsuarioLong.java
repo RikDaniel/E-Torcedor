@@ -9,27 +9,25 @@ import br.com.etorcedor.entity.Usuario;
 public class UsuarioLong extends UsuarioPai {
 	
 	private TorcidaShort torcidaShort;
-	private List<DelitoShort> delitos;
 	private List<CompraShort> compras;
 	
 	public UsuarioLong() {
 	
 	}
 	
-	public UsuarioLong(TorcidaShort torcidaShort, List<DelitoShort> delitos, List<CompraShort> compras) {
+	public UsuarioLong(TorcidaShort torcidaShort, List<CompraShort> compras) {
 		this.torcidaShort = torcidaShort;
-		this.delitos = delitos;
 		this.compras = compras;
 	}
 
 	public UsuarioLong(Long id, String cpf, String nome, String genero, String telefone, String email,
-			Date dataNascimento, TimeShort clube) {
-		super(id, cpf, nome, genero, telefone, email, dataNascimento, clube);
+			Date dataNascimento, TimeShort clube, boolean suspenso) {
+		super(id, cpf, nome, genero, telefone, email, dataNascimento, clube,suspenso);
 	}
 
 	public UsuarioLong(String cpf, String nome, String genero, String telefone, String email, Date dataNascimento,
-			TimeShort clube) {
-		super(cpf, nome, genero, telefone, email, dataNascimento, clube);
+			TimeShort clube, boolean suspenso) {
+		super(cpf, nome, genero, telefone, email, dataNascimento, clube,suspenso);
 	}
 	
 	public static UsuarioLong toUsuarioLong(Usuario usuario) {
@@ -44,8 +42,8 @@ public class UsuarioLong extends UsuarioPai {
 			usuariolong.setEmail(usuarioPai.getEmail());
 			usuariolong.setDataNascimento(usuarioPai.getDataNascimento());
 			usuariolong.setClube(usuarioPai.getClube());		
+			usuariolong.setSuspenso(usuario.isSuspenso());
 			usuariolong.setTorcidaShort(TorcidaShort.toTorcidaShort(usuario.getTorcida()));
-			usuariolong.setDelitos(DelitoShort.toDelitoShort(usuario.getDelitos()));
 			usuariolong.setCompras(CompraShort.toCompraShort(usuario.getCompras()));
 		}
 		return usuariolong;
@@ -67,12 +65,6 @@ public class UsuarioLong extends UsuarioPai {
 	public void setTorcidaShort(TorcidaShort torcidaShort) {
 		this.torcidaShort = torcidaShort;
 	}
-	public List<DelitoShort> getDelitos() {
-		return delitos;
-	}
-	public void setDelitos(List<DelitoShort> delitos) {
-		this.delitos = delitos;
-	}
 	public List<CompraShort> getCompras() {
 		return compras;
 	}
@@ -86,7 +78,6 @@ public class UsuarioLong extends UsuarioPai {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((compras == null) ? 0 : compras.hashCode());
-		result = prime * result + ((delitos == null) ? 0 : delitos.hashCode());
 		result = prime * result + ((torcidaShort == null) ? 0 : torcidaShort.hashCode());
 		return result;
 	}
@@ -105,11 +96,6 @@ public class UsuarioLong extends UsuarioPai {
 				return false;
 		} else if (!compras.equals(other.compras))
 			return false;
-		if (delitos == null) {
-			if (other.delitos != null)
-				return false;
-		} else if (!delitos.equals(other.delitos))
-			return false;
 		if (torcidaShort == null) {
 			if (other.torcidaShort != null)
 				return false;
@@ -119,6 +105,6 @@ public class UsuarioLong extends UsuarioPai {
 	}
 	@Override
 	public String toString() {
-		return "UsuarioLong [torcidaShort=" + torcidaShort + ", delitos=" + delitos + ", compras=" + compras + "]";
+		return "UsuarioLong [torcidaShort=" + torcidaShort + ", compras=" + compras + "]";
 	}
 }

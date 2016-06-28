@@ -1,6 +1,5 @@
 package br.com.etorcedor.business;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +7,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.etorcedor.entity.Compra;
-import br.com.etorcedor.entity.Delito;
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
 import br.com.etorcedor.entity.Usuario;
 import br.com.etorcedor.entity.odc.UsuarioLong;
 import br.com.etorcedor.entity.odc.UsuarioShort;
-import br.com.etorcedor.exception.DelitoNaoEncontradoException;
 import br.com.etorcedor.exception.UsuarioExistenteException;
 import br.com.etorcedor.exception.UsuarioInexistenteException;
 import br.com.etorcedor.persistence.RepositorioUsuario;
@@ -26,9 +23,6 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 
 	@Autowired
 	private RepositorioUsuario usuarioRep;
-		
-	@Autowired
-	private ServiceDelito delitoServ;
 	
 	@Autowired
 	private ServiceCompra compraServ;
@@ -65,18 +59,12 @@ public class ServiceUsuarioImpl implements ServiceUsuario {
 		
 		if(old != null) {
 			List<Compra> compras = old.getCompras();
-			List<Delito> delito = old.getDelitos();
 			try {
 				for (Compra c : compras) {
 					this.compraServ.removerCompras(c);
 				}
-				if(delito != null) {
-					for(Delito d : delito) {
-						this.delitoServ.removeDelito(d.getBo());
-					}
-				}
 				this.usuarioRep.delete(old);
-			} catch (DelitoNaoEncontradoException e1) {
+			} catch (Exception e1) {
 				throw new UsuarioInexistenteException();
 			}
 		}

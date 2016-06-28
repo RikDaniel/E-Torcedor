@@ -23,7 +23,7 @@ public interface ServiceJogo extends Serializable {
 	 * @param j
 	 * @throws JogoExistenteException
 	 */
-	public void adicionarJogo(JogoLong j) throws JogoExistenteException;
+	public void adicionarJogo(Jogo j) throws JogoExistenteException;
 
 	/**
 	 * 

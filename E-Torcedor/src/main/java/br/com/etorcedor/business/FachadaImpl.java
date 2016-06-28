@@ -11,8 +11,6 @@ import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.entity.Time;
 import br.com.etorcedor.entity.Torcida;
-import br.com.etorcedor.entity.odc.DelitoLong;
-import br.com.etorcedor.entity.odc.DelitoShort;
 import br.com.etorcedor.entity.odc.EstadioLong;
 import br.com.etorcedor.entity.odc.EstadioShort;
 import br.com.etorcedor.entity.odc.IngressoShort;
@@ -60,9 +58,6 @@ public class FachadaImpl implements Fachada {
 
 	@Autowired
 	private ServiceEstadio estadioServ;
-
-	@Autowired
-	private ServiceDelito delitoServ;
 
 	@Autowired
 	private ServiceCompra compraServ;
@@ -160,7 +155,7 @@ public class FachadaImpl implements Fachada {
 
 	// JOGO
 
-	public void adicionarJogo(JogoLong jogo) throws JogoExistenteException {
+	public void adicionarJogo(Jogo jogo) throws JogoExistenteException {
 		this.jogoServ.adicionarJogo(jogo);
 	}
 
@@ -271,23 +266,6 @@ public class FachadaImpl implements Fachada {
 	
 	public List<SetorShort> findAllSetores() {
 		return this.estadioServ.findAllSetores();
-	}
-
-	// DELITO
-
-	public void adicionarDelito(DelitoLong delitoLong) {
-		this.delitoServ.adicionarDelito(delitoLong);
-	}
-	public DelitoLong findByBo(long bo) throws DelitoNaoEncontradoException {
-		return this.delitoServ.findByBo(bo);
-	}
-
-	public List<DelitoShort> findByDia(Date dia) {
-		return this.delitoServ.findByDia(dia);
-	}
-
-	public List<DelitoShort> findAll() {
-		return this.delitoServ.findAll();
 	}
 
 	// COMPRA

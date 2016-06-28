@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -27,24 +26,25 @@ public class Usuario implements Serializable {
 	private Date dataNascimento;
 	private Torcida torcida;
 	private Time clube;
-	private List<Delito> delitos;
+	private boolean suspenso;
 	private List<Compra> compras;
 
 	public Usuario() {
 
 	}
 
-	public Usuario(String cpf, String nome, String genero, String telefone, String email, Date dataNascimento) {
+	public Usuario(String cpf, String nome, String genero, String telefone, String email, Date dataNascimento, boolean suspenso) {
 		this.cpf = cpf;
 		this.nome = nome;
 		this.genero = genero;
 		this.telefone = telefone;
 		this.email = email;
 		this.dataNascimento = dataNascimento;
+		this.suspenso = suspenso;
 	}
 
 	public Usuario(Long id, String cpf, String nome, String genero, String telefone, String email, Date dataNascimento,
-			Torcida torcida, Time clube, List<Delito> delitos, List<Compra> compras) {
+			Torcida torcida, Time clube, List<Compra> compras, boolean suspenso) {
 		this.id = id;
 		this.cpf = cpf;
 		this.nome = nome;
@@ -55,6 +55,7 @@ public class Usuario implements Serializable {
 		this.torcida = torcida;
 		this.clube = clube;
 		this.compras = compras;
+		this.suspenso = suspenso;
 	}
 
 	@Id
@@ -131,15 +132,6 @@ public class Usuario implements Serializable {
 	public void setClube(Time clube) {
 		this.clube = clube;
 	}
-
-	@ManyToMany(mappedBy = "usuarios", fetch = FetchType.EAGER)
-	public List<Delito> getDelitos() {
-		return delitos;
-	}
-
-	public void setDelitos(List<Delito> delitos) {
-		this.delitos = delitos;
-	}
 	
 	@OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
 	public List<Compra> getCompras() {
@@ -150,6 +142,14 @@ public class Usuario implements Serializable {
 		this.compras = compras;
 	}
 
+	public boolean isSuspenso() {
+		return suspenso;
+	}
+
+	public void setSuspenso(boolean suspenso) {
+		this.suspenso = suspenso;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -158,11 +158,11 @@ public class Usuario implements Serializable {
 		result = prime * result + ((compras == null) ? 0 : compras.hashCode());
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
 		result = prime * result + ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
-		result = prime * result + ((delitos == null) ? 0 : delitos.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((genero == null) ? 0 : genero.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + (suspenso ? 1231 : 1237);
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
 		result = prime * result + ((torcida == null) ? 0 : torcida.hashCode());
 		return result;
@@ -197,11 +197,6 @@ public class Usuario implements Serializable {
 				return false;
 		} else if (!dataNascimento.equals(other.dataNascimento))
 			return false;
-		if (delitos == null) {
-			if (other.delitos != null)
-				return false;
-		} else if (!delitos.equals(other.delitos))
-			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
@@ -222,6 +217,8 @@ public class Usuario implements Serializable {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
+		if (suspenso != other.suspenso)
+			return false;
 		if (telefone == null) {
 			if (other.telefone != null)
 				return false;
@@ -239,6 +236,6 @@ public class Usuario implements Serializable {
 	public String toString() {
 		return "Usuario [id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", genero=" + genero + ", telefone=" + telefone
 				+ ", email=" + email + ", dataNascimento=" + dataNascimento + ", torcida=" + torcida + ", clube="
-				+ clube + ", delitos=" + delitos + ", compras=" + compras + "]";
+				+ clube + ", suspenso=" + suspenso + ", compras=" + compras + "]";
 	}
 }

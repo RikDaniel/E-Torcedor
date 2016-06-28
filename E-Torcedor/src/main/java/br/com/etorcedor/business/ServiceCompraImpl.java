@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.etorcedor.entity.Compra;
-import br.com.etorcedor.entity.Delito;
 import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.entity.Usuario;
@@ -36,10 +35,6 @@ public class ServiceCompraImpl implements ServiceCompra {
 	@Transactional(rollbackOn = DelitoExistenteException.class)
 	public void adicionarComprar(Compra compra)throws DelitoExistenteException, JogoInexistenteException{
 		
-		for(Delito d : compra.getUsuario().getDelitos()) {
-			if(d != null) 
-				throw new DelitoExistenteException();
-		}
 		
 		for(Ingresso i : compra.getIngressos()) {
 			JogoLong jogo = this.jogoServ.findOneJogo(i.getJogo().getId());

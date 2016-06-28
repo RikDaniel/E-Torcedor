@@ -36,7 +36,7 @@ public class UsuarioShort extends UsuarioPai {
 			usuario.setTelefone(usuarioShort.getTelefone());
 			usuario.setEmail(usuarioShort.getEmail());
 			usuario.setDataNascimento(usuarioShort.getDataNascimento());
-			usuario.setClube(TimeShort.toTime(usuarioShort.getClube()));	
+		//	usuario.setClube(TimeShort.toTime(usuarioShort.getClube()));	
 		}
 		
 		return usuario;

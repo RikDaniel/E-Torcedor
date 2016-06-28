@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.etorcedor.business.Fachada;
-import br.com.etorcedor.entity.odc.DelitoLong;
+import br.com.etorcedor.entity.Jogo;
+import br.com.etorcedor.entity.Usuario;
 import br.com.etorcedor.entity.odc.EstadioLong;
 import br.com.etorcedor.entity.odc.EstadioShort;
 import br.com.etorcedor.entity.odc.IngressoShort;
@@ -139,7 +140,7 @@ public class ControllerAdm {
 	// JOGO
 
 	@RequestMapping(value = "/jogo/add", method = RequestMethod.POST)
-	public ResponseEntity<?> adicionarJogo(@RequestBody JogoLong jogo) {
+	public ResponseEntity<?> adicionarJogo(@RequestBody Jogo jogo) {
 		try {
 			this.fachada.adicionarJogo(jogo);
 			return new ResponseEntity<String>(HttpStatus.OK);
@@ -253,17 +254,5 @@ public class ControllerAdm {
 		} catch (SetorInexistenteException e) {
 			return new ResponseEntity<SetorInexistenteException>(e, HttpStatus.BAD_REQUEST);
 		}
-	}
-	
-	//DELITO
-	@RequestMapping(value = "/delito/add", method = RequestMethod.POST)
-	public ResponseEntity<?> adicionarDelito(@RequestBody DelitoLong delitoLong) {
-		try {
-			this.fachada.adicionarDelito(delitoLong);
-			return new ResponseEntity<String>(HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<Exception>(e, HttpStatus.BAD_REQUEST);
-		}
-	}
-	
+	}	
 }

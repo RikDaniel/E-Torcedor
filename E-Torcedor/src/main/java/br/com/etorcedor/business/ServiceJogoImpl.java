@@ -1,11 +1,13 @@
 package br.com.etorcedor.business;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import br.com.etorcedor.entity.Estadio;
 import br.com.etorcedor.entity.Ingresso;
@@ -31,15 +33,8 @@ public class ServiceJogoImpl implements ServiceJogo {
 	private RepositorioIngresso ingressoRep;
 
 	@Transactional(rollbackFor = JogoExistenteException.class)
-	public void adicionarJogo(JogoLong j) throws JogoExistenteException {
-		JogoLong jogo = new JogoLong();
-		try {
-			 jogo = this.findOneJogo(j.getId());
-			if (jogo != null)
-				throw new JogoExistenteException();
-		} catch (JogoInexistenteException e) {
-			this.jogoRep.save(JogoLong.toJogo(j));
-		}
+	public void adicionarJogo(Jogo j) throws JogoExistenteException {
+			this.jogoRep.save(j);
 	}
 
 	@Transactional(rollbackFor = JogoInexistenteException.class)
@@ -78,7 +73,7 @@ public class ServiceJogoImpl implements ServiceJogo {
 	}
 
 	public List<JogoShort> findByDataJogo(Date data) {
-		List<JogoShort> js = null;
+		List<JogoShort> js = new ArrayList<JogoShort>();
 		for(Jogo jogo : this.jogoRep.findByData(data)) {
 			js.add(JogoShort.toJogoShort(jogo));
 		}
@@ -86,7 +81,7 @@ public class ServiceJogoImpl implements ServiceJogo {
 	}
 
 	public List<JogoShort> findByEstadio(Estadio estadio) {
-		List<JogoShort> js = null;
+		List<JogoShort> js = new ArrayList<JogoShort>();
 		for(Jogo jogo : this.jogoRep.findByEstadio(estadio)) {
 			js.add(JogoShort.toJogoShort(jogo));
 		}
@@ -94,7 +89,7 @@ public class ServiceJogoImpl implements ServiceJogo {
 	}
 
 	public List<JogoShort> findAllJogo() {
-		List<JogoShort> js = null;
+		List<JogoShort> js = new ArrayList<JogoShort>();
 		for(Jogo jogo : (List<Jogo>) this.jogoRep.findAll()) {
 			js.add(JogoShort.toJogoShort(jogo));
 		}
@@ -104,13 +99,10 @@ public class ServiceJogoImpl implements ServiceJogo {
 	// INGRESSO
 
 	@Transactional(rollbackFor = IngressoExistenteException.class)
-	public void adicionarIngresso(IngressoShort i) throws IngressoExistenteException {
-		try {
-			this.findOneIngresso(i.getId());
-			throw new IngressoExistenteException();
-		} catch (IngressoInexistenteException ei) {
-			this.ingressoRep.save(IngressoShort.toIngresso(i));
-		}
+	public void adicionarIngresso(@RequestBody IngressoShort i) throws IngressoExistenteException {
+			//if (this.findByNumeroAcento(i.getNumeroAcento()) == null) {
+				this.ingressoRep.save(IngressoShort.toIngresso(i));
+		//	}
 	}
 
 	@Transactional(rollbackFor = IngressoInexistenteException.class)

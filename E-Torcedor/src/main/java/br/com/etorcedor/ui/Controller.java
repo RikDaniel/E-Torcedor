@@ -19,8 +19,6 @@ import br.com.etorcedor.entity.Compra;
 import br.com.etorcedor.entity.Ingresso;
 import br.com.etorcedor.entity.Jogo;
 import br.com.etorcedor.entity.Usuario;
-import br.com.etorcedor.entity.odc.DelitoLong;
-import br.com.etorcedor.entity.odc.DelitoShort;
 import br.com.etorcedor.entity.odc.EstadioLong;
 import br.com.etorcedor.entity.odc.EstadioShort;
 import br.com.etorcedor.entity.odc.IngressoShort;
@@ -247,6 +245,12 @@ public class Controller {
 			return null;
 		}
 	}
+	
+	@RequestMapping(value = "/jogo/find/all", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<JogoShort> findAllJogo() {
+		return this.fachada.findAllJogo();
+		
+	}
 
 	// INGRESSO
 
@@ -393,28 +397,5 @@ public class Controller {
 	@RequestMapping(value = "/compra/find/all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<Compra> findByAllCompras() {
 		return this.fachada.findByAllCompras();
-	}
-
-	// DELITO
-
-	@RequestMapping(value = "/delito/find/bo", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> findByBo(long bo) {
-
-		try {
-			DelitoLong delitLong = this.fachada.findByBo(bo);
-			return new ResponseEntity<DelitoLong>(delitLong, HttpStatus.OK);
-		} catch (DelitoNaoEncontradoException e) {
-			return new ResponseEntity<DelitoNaoEncontradoException>(e, HttpStatus.BAD_REQUEST);
-		}
-	}
-
-	@RequestMapping(value = "/delito/find/dia", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<DelitoShort> findByDia(Date dia) {
-		return this.fachada.findByDia(dia);
-	}
-
-	@RequestMapping(value = "/delito/find/all", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<DelitoShort> findAll() {
-		return this.fachada.findAll();
 	}
 }

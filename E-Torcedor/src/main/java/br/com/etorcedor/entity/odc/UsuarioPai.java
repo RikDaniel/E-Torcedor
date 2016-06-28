@@ -15,6 +15,7 @@ public abstract class UsuarioPai {
 	private String telefone;
 	private String email;
 	private Date dataNascimento;
+	private boolean suspenso;
 	private TimeShort clube;
 	
 	public UsuarioPai() {
@@ -22,7 +23,7 @@ public abstract class UsuarioPai {
 	}
 	
 	public UsuarioPai(String cpf, String nome, String genero, String telefone, String email,
-			Date dataNascimento, TimeShort clube) {
+			Date dataNascimento, TimeShort clube, boolean suspenso) {
 		
 		this.cpf = cpf;
 		this.nome = nome;
@@ -31,10 +32,11 @@ public abstract class UsuarioPai {
 		this.email = email;
 		this.dataNascimento = dataNascimento;
 		this.clube = clube;
+		this.suspenso = suspenso;
 	}
 	
 	public UsuarioPai(Long id, String cpf, String nome, String genero, String telefone, String email,
-			Date dataNascimento, TimeShort clube) {
+			Date dataNascimento, TimeShort clube, boolean suspenso) {
 		
 		this.id = id;
 		this.cpf = cpf;
@@ -44,6 +46,7 @@ public abstract class UsuarioPai {
 		this.email = email;
 		this.dataNascimento = dataNascimento;
 		this.clube = clube;
+		this.suspenso = suspenso;
 	}
 	
 	public static UsuarioPai toUsuarioPai(Usuario usuario) {
@@ -55,6 +58,7 @@ public abstract class UsuarioPai {
 			usuarioPai.setGenero(usuario.getGenero());
 			usuarioPai.setTelefone(usuario.getTelefone());
 			usuarioPai.setEmail(usuario.getEmail());
+			usuarioPai.setSuspenso(usuario.isSuspenso());
 			usuarioPai.setDataNascimento(usuario.getDataNascimento());
 			usuarioPai.setClube(TimeShort.toTimeShort(usuario.getClube()));			
 		}
@@ -119,6 +123,15 @@ public abstract class UsuarioPai {
 	public void setClube(TimeShort clube) {
 		this.clube = clube;
 	}
+	
+	public boolean isSuspenso() {
+		return suspenso;
+	}
+
+	public void setSuspenso(boolean suspenso) {
+		this.suspenso = suspenso;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -130,6 +143,7 @@ public abstract class UsuarioPai {
 		result = prime * result + ((genero == null) ? 0 : genero.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		result = prime * result + (suspenso ? 1231 : 1237);
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
 		return result;
 	}
@@ -177,6 +191,8 @@ public abstract class UsuarioPai {
 				return false;
 		} else if (!nome.equals(other.nome))
 			return false;
+		if (suspenso != other.suspenso)
+			return false;
 		if (telefone == null) {
 			if (other.telefone != null)
 				return false;
@@ -188,6 +204,7 @@ public abstract class UsuarioPai {
 	@Override
 	public String toString() {
 		return "UsuarioPai [id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", genero=" + genero + ", telefone="
-				+ telefone + ", email=" + email + ", dataNascimento=" + dataNascimento + ", clube=" + clube + "]";
+				+ telefone + ", email=" + email + ", dataNascimento=" + dataNascimento + ", suspenso=" + suspenso
+				+ ", clube=" + clube + "]";
 	}
 }
